@@ -1,4 +1,5 @@
-import "@/styles/globals.css";
+import "@/styles/globals.scss";
+import "@/styles/home.scss";
 import Layout from "layout/Layout";
 
 const App = ({ Component, pageProps }) => {

@@ -1,0 +1,58 @@
+@import "../styles/globals.scss";
+
+.home__hero {
+  @apply flex items-center justify-between gap-10 min-h-[90vh] container section;
+}
+
+.home__hero__searchfield {
+  @apply my-auto;
+}
+
+.home__hero__s_heading {
+  @apply text-[48px] leading-[55px] font-bold;
+}
+
+.home__hero__s_h__span {
+  @apply text-[#0891B2];
+}
+
+.home__hero__s_input_field {
+    @apply mt-10 flex items-center justify-start gap-3;
+}
+
+.home__hero_s_i_f__input_box {
+    @apply border outline-0 rounded-md px-3 py-3 text-[18px] text-gray-400 shadow-md;
+}
+
+.home__hero_s_i_f__input_box:focus {
+    @apply text-gray-800;
+}
+
+.home__hero_s_i_f__search_button {
+    @apply py-[14px] px-4 bg-[#0991b2] rounded-md text-white;
+}
+
+.home__hero__image_section {
+    @apply relative;
+}
+
+.home__hero__i_s__image {
+    animation: 1.5s infinite alternate floating_up_down;
+}
+
+@keyframes floating_up_down {
+    0% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(15px);
+    }
+}
+
+// home gallary styles 
+.home__gallary {
+    @apply section;
+}
+.home__gallary__heading {
+    @apply text-[36px] font-bold leading-[40px] text-center container section; 
+}

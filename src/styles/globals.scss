@@ -11,6 +11,10 @@
     "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+body {
+  @apply overflow-x-hidden;
+}
+
 .container {
   @apply px-[190px];
 }
