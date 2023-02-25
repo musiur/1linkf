@@ -5,7 +5,7 @@ import Button from "./Button";
 const Navbar = () => {
   const Router = useRouter();
   return (
-    <nav className="container">
+    <nav className="">
       <div className="flex items-center justify-between gap-5 py-[23px]">
         <div className="flex items-center justify-start gap-[48px]">
           <button className="h-[60px] pl-1 pr-2 flex items-center justify-center bg-gradient-to-b from-[#202D3D] to-[#0B91AF] text-[20px] font-bold leading-[28px] text-white cursor-pointer" onClick={() => Router.push("/")}>
