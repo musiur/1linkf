@@ -1,11 +1,11 @@
 @import "../styles/globals.scss";
 
 .home__hero {
-  @apply flex items-center justify-between gap-10 min-h-[90vh] container section;
+  @apply flex items-center justify-between gap-10 min-h-[90vh];
 }
 
 .home__hero__searchfield {
-  @apply my-auto;
+  @apply m-auto;
 }
 
 .home__hero__s_heading {
@@ -33,7 +33,15 @@
 }
 
 .home__hero__image_section {
-    @apply relative;
+    @apply relative m-auto max-w-[400px];
+}
+
+.home__hero__guide_image_section {
+    @apply relative ml-auto max-w-[737px];
+}
+
+.home__hero__guide__image {
+   @apply w-full;
 }
 
 .home__hero__i_s__image {
@@ -54,5 +62,5 @@
     @apply section;
 }
 .home__gallary__heading {
-    @apply text-[36px] font-bold leading-[40px] text-center container section; 
+    @apply text-[36px] font-bold leading-[40px]  section; 
 }
