@@ -29,7 +29,7 @@ const Navbar = () => {
         </li>
       </ul>
       <nav className="bg-[#F9FAFB]">
-        <div className="flex items-center justify-between gap-5 p-[23px]">
+        <div className="flex items-center justify-between gap-5 p-[10px] lg:p-[23px]">
           <div className="flex items-center justify-start gap-[48px]">
             <button className="h-[60px] pl-1 pr-2 flex items-center justify-center bg-gradient-to-b from-[#202D3D] to-[#0B91AF] text-[20px] font-bold leading-[28px] text-white cursor-pointer" onClick={() => Router.push("/")}>
               1link
