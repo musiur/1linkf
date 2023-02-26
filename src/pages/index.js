@@ -164,9 +164,9 @@ export default function Home() {
                 guideLine.map((item) => {
                   return (
                     <li key={item.id} className="flex items-start justify-start gap-3 mb-4">
-                      <div className="min-h-[35px] min-w-[35px] bg-[#0991b2] rounded-full text-white flex items-center justify-center">{item.id + 1}</div>
+                      <div className="min-h-[30px] min-w-[30px] bg-[#0991b2] rounded-full text-white flex items-center justify-center">{item.id + 1}</div>
                       <div>
-                        <h4 className="text-[18px] font-bold text-gray-700">{item.title}</h4>
+                        <h4 className="text-[16px] lg:text-[18px] font-bold text-gray-700">{item.title}</h4>
                         <p className="text-gray-400">{item.subtitle}</p>
                       </div>
                     </li>
@@ -194,7 +194,7 @@ export default function Home() {
         <div id="pricing">
           <h2 className="home__gallary__heading text-center">Get a beautiful 1link for<br />
             your profile, at a  <span className="home__hero__s_h__span">fair price.</span></h2>
-          <p className="text-[24px] text-gray-400 text-center">Basic features are free for your first book.</p>
+          <p className="text-[16px] md:text-[20px]  lg:text-[24px] text-gray-400 text-center">Basic features are free for your first book.</p>
 
           <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 items-center justify-center pt-[80px]">
             {
@@ -263,7 +263,7 @@ const FaqItem = ({ item }) => {
   const { title, description } = item;
   const [openDesc, setOpenDesc] = useState(false);
   return (
-    <div className="text-[18px] mb-5 flex items-start justify-start gap-3">
+    <div className="text-[14] lg:text-[18px] mb-5 flex items-start justify-start gap-3">
       <div>
         <TickIcon />
       </div>

@@ -7,8 +7,14 @@ const Navbar = () => {
   const Router = useRouter();
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <div style={{zIndex: "9999"}} className="sticky top-0 overflow-hidden">
+    <div style={{ zIndex: "9999" }} className="sticky top-0 overflow-hidden">
       <ul className={`flex flex-col md:hidden items-center justify-start gap-7 text-[18px] text-[#0891B2] shadow-lg py-8 ${openMenu ? "translate-y-0 h-auto flex" : "-translate-y-[1000px] h-0 hidden"} transition easin-in-out duration-300 z-0 bg-[#F9FAFB]`}>
+        <li className="flex flex-col md:hidden items-center justify-end gap-5">
+          <Button type="white" onClick={() => Router.push("/signin")}>
+            Sign in
+          </Button>
+          <Button onClick={() => Router.push("/signup")}>Sign up</Button>
+        </li>
         <li className="cursor-pointer">
           <a href="#discover">Discover</a>
         </li>
@@ -44,10 +50,12 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="flex items-center justify-end gap-5">
-            <Button type="white" onClick={() => Router.push("/signin")}>
-              Sign in
-            </Button>
-            <Button onClick={() => Router.push("/signup")}>Sign up</Button>
+            <div className="hidden md:flex items-center justify-end gap-5">
+              <Button type="white" onClick={() => Router.push("/signin")}>
+                Sign in
+              </Button>
+              <Button onClick={() => Router.push("/signup")}>Sign up</Button>
+            </div>
             <div className="flex md:hidden cursor-pointer" onClick={() => setOpenMenu(!openMenu)}>
               {
                 openMenu ? <CloseIcon /> : <MenuIcon />
@@ -56,7 +64,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      
+
     </div>
   );
 };
