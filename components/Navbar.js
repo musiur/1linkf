@@ -1,33 +1,37 @@
 
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 
 const Navbar = () => {
   const Router = useRouter();
   const [openMenu, setOpenMenu] = useState(false);
+
+  useEffect(() => {
+    setOpenMenu(false);
+  }, [Router.pathname])
   return (
     <div style={{ zIndex: "9999" }} className="sticky top-0 overflow-hidden">
-      <ul className={`flex flex-col md:hidden items-center justify-start gap-7 text-[18px] text-[#0891B2] shadow-lg py-8 ${openMenu ? "translate-y-0 h-auto flex" : "-translate-y-[1000px] h-0 hidden"} transition easin-in-out duration-300 z-0 bg-[#F9FAFB]`}>
-        <li className="flex flex-col md:hidden items-center justify-end gap-5">
-          <Button type="white" onClick={() => Router.push("/signin")}>
-            Sign in
-          </Button>
-          <Button onClick={() => Router.push("/signup")}>Sign up</Button>
-        </li>
-        <li className="cursor-pointer">
-          <a href="#discover">Discover</a>
-        </li>
-        <li className="cursor-pointer">
-          <a href="#how_it_works">How it works</a>
-        </li>
-        <li className="cursor-pointer">
-          <a href="#pricing">Pricing</a>
-        </li>
-        <li className="cursor-pointer">
-          <a href="#faq">FAQ</a>
-        </li>
-      </ul>
+      <ul className={`flex flex-col md:hidden items-center justify-start gap-7 text-[18px] text-[#0891B2] shadow-lg  ${openMenu ? "translate-x-0 h-auto py-8" : "-translate-x-[100%] h-0 p-0"} transition easin-in-out duration-300 z-0 bg-[#F9FAFB]`}>
+          <li className="flex flex-col md:hidden items-center justify-end gap-5">
+            <Button type="white" onClick={() => Router.push("/signin")}>
+              Sign in
+            </Button>
+            <Button onClick={() => Router.push("/signup")}>Sign up</Button>
+          </li>
+          <li className="cursor-pointer">
+            <a href="#discover">Discover</a>
+          </li>
+          <li className="cursor-pointer">
+            <a href="#how_it_works">How it works</a>
+          </li>
+          <li className="cursor-pointer">
+            <a href="#pricing">Pricing</a>
+          </li>
+          <li className="cursor-pointer">
+            <a href="#faq">FAQ</a>
+          </li>
+        </ul>
       <nav className="bg-[#F9FAFB]">
         <div className="flex items-center justify-between gap-5 p-[10px] lg:p-[23px]">
           <div className="flex items-center justify-start gap-[48px]">
