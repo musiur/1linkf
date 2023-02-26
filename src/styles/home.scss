@@ -1,7 +1,7 @@
 @import "../styles/globals.scss";
 
 .home__hero {
-  @apply flex items-center justify-between gap-10 min-h-[90vh];
+  @apply flex flex-col lg:flex-row items-center justify-between gap-10 min-h-[90vh];
 }
 
 .home__hero__searchfield {

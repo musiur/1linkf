@@ -7,7 +7,21 @@ const Navbar = () => {
   const Router = useRouter();
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <div style={{zIndex: "9999"}}>
+    <div style={{zIndex: "9999"}} className="sticky top-0 overflow-hidden">
+      <ul className={`flex flex-col md:hidden items-center justify-start gap-7 text-[18px] text-[#0891B2] shadow-lg py-8 ${openMenu ? "translate-y-0 h-auto flex" : "-translate-y-[1000px] h-0 hidden"} transition easin-in-out duration-300 z-0 bg-[#F9FAFB]`}>
+        <li className="cursor-pointer">
+          <a href="#discover">Discover</a>
+        </li>
+        <li className="cursor-pointer">
+          <a href="#how_it_works">How it works</a>
+        </li>
+        <li className="cursor-pointer">
+          <a href="#pricing">Pricing</a>
+        </li>
+        <li className="cursor-pointer">
+          <a href="#faq">FAQ</a>
+        </li>
+      </ul>
       <nav className="bg-[#F9FAFB]">
         <div className="flex items-center justify-between gap-5 p-[23px]">
           <div className="flex items-center justify-start gap-[48px]">
@@ -16,16 +30,16 @@ const Navbar = () => {
             </button>
             <ul className="hidden md:flex items-center justify-start gap-7 text-[18px] text-[#0891B2]">
               <li className="cursor-pointer">
-                <a to="#discover">Discover</a>
+                <a href="#discover">Discover</a>
               </li>
               <li className="cursor-pointer">
-                <a to="#how_it_works">How it works</a>
+                <a href="#how_it_works">How it works</a>
               </li>
               <li className="cursor-pointer">
-                <a to="#pricing">Pricing</a>
+                <a href="#pricing">Pricing</a>
               </li>
               <li className="cursor-pointer">
-                <a to="#faq">FAQ</a>
+                <a href="#faq">FAQ</a>
               </li>
             </ul>
           </div>
@@ -42,20 +56,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <ul className={`flex flex-col md:hidden items-center justify-start gap-7 text-[18px] text-[#0891B2] bg-white shadow-lg py-8 ${openMenu ? "translate-x-0" : "translate-x-[600px]"} transition easin-in-out duration-300 z-0`}>
-        <li className="cursor-pointer">
-          <a to="#discover">Discover</a>
-        </li>
-        <li className="cursor-pointer">
-          <a to="#how_it_works">How it works</a>
-        </li>
-        <li className="cursor-pointer">
-          <a to="#pricing">Pricing</a>
-        </li>
-        <li className="cursor-pointer">
-          <a to="#faq">FAQ</a>
-        </li>
-      </ul>
+      
     </div>
   );
 };

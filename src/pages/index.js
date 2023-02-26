@@ -108,7 +108,7 @@ export default function Home() {
     },
   ]
   return (
-    <div className="bg-[#F9FAFB]">
+    <div className="bg-[#F9FAFB] max-w-[100vw] overflow-x-hidden">
       <div className="container section ">
         <div className="home__hero">
           <div className="home__hero__searchfield">
@@ -132,7 +132,7 @@ export default function Home() {
         </div>
 
         {/* gallary  */}
-        <div className="home__gallary">
+        <div id="discover" className="home__gallary">
           <h2 className="home__gallary__heading text-center">Showcase your books on a page with <br /> the<span className="home__hero__s_h__span"> colors and style</span> you want.</h2>
           <div className="flex items-start justify-between">
             {
@@ -155,7 +155,7 @@ export default function Home() {
         </div>
 
         {/* guide section  */}
-        <div className="home__hero">
+        <div id="how_it_works" className="home__hero">
           <div className="home__hero__searchfield">
             <h2 className="home__gallary__heading">{"You're"} just a few steps <br />
               away from your  <span className="home__hero__s_h__span">1link</span></h2>
@@ -191,12 +191,12 @@ export default function Home() {
         </div>
 
         {/* pricing  */}
-        <div>
+        <div id="pricing">
           <h2 className="home__gallary__heading text-center">Get a beautiful 1link for<br />
             your profile, at a  <span className="home__hero__s_h__span">fair price.</span></h2>
           <p className="text-[24px] text-gray-400 text-center">Basic features are free for your first book.</p>
 
-          <div className="flex items-center justify-center pt-[80px]">
+          <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 items-center justify-center pt-[80px]">
             {
               pricingData.map((item) => {
                 return (
@@ -242,7 +242,7 @@ export default function Home() {
         </div>
 
         {/* faq  */}
-        <div className="section">
+        <div className="section" id="faq">
           <h2 className="home__gallary__heading text-center">Frequently asked questions</h2>
           <div className="max-w-[600px] mx-auto">
             {
