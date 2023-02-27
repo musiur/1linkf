@@ -41,7 +41,7 @@ const SignUp = () => {
     const CallAPI = async () => {
         try {
             setSpinner(true)
-            const api = `http://${process.env.API_HOST}/api/auth/signup`;
+            const api = `${process.env.API_HOST}/api/auth/signup`;
             const response = await axios.post(api, { ...formData, role: ["user"] });
             console.log(response);
             if (response.status === 200) {

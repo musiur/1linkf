@@ -5,7 +5,8 @@ const nextConfig = {
     domains: ['images.unsplash.com', '1link.st'],
   },
   env: {
-    API_HOST: "dark-ruby-llama-ring.cyclic.app"
+    API_HOST: "https://dark-ruby-llama-ring.cyclic.app"
+    // API_HOST: "http://localhost:8080"
   }
 }
 
