@@ -1,9 +1,18 @@
+import { UserContext } from "context/UserProvider";
 import Private from "layout/Private";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 
 const Dashboard = ({ children }) => {
-    const tabs = ["Profile", "Editor", "My page", "Manage users", "Add moderator"];
+    const { userdata, setUserdata } = useContext(UserContext);
+    let tabs = ["Profile", "Editor", "My page"];
+    if (userdata?.roles?.includes("ROLE_ADMIN")) {
+        tabs = ["Profile", "Editor", "My page", "Manage users", "Add moderator"];
+    }
+    if (userdata?.roles?.includes("ROLE_MODERATOR")) {
+        tabs = ["Profile", "Editor", "My page", "Manage users"];
+    }
     const Router = useRouter();
     return (
         <Private>
@@ -18,7 +27,7 @@ const Dashboard = ({ children }) => {
                         })
                     }
                 </div>
-                <div className="col-span-10 p-5">
+                <div className="col-span-10">
                     {children}
                 </div>
             </div>
