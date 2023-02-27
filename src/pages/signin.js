@@ -4,10 +4,12 @@ import axios from "axios";
 import Spinner from "components/icons/Spinner";
 import Link from "next/link";
 import { UserContext } from "context/UserProvider";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
-    const {userdata, setUserdata} = useContext(UserContext);
-    const [formData, setFormData] = useState({ email: "", password: "" });
+    const Router = useRouter();
+    const { userdata, setUserdata } = useContext(UserContext);
+    const [formData, setFormData] = useState({ username: "", password: "" });
     const [errorMessage, setErrorMessage] = useState(formData);
     const [message, setMessage] = useState(null);
     const [spinner, setSpinner] = useState(false);
@@ -25,8 +27,8 @@ const SignIn = () => {
 
     const validate = (data) => {
         let obj = {};
-        if (!data.email.trim()) {
-            obj.email = "Email is required!";
+        if (!data.username.trim()) {
+            obj.username = "Username is required!";
         }
         if (!data.password.trim()) {
             obj.password = "Password is required!";
@@ -39,10 +41,12 @@ const SignIn = () => {
             setSpinner(true);
             const api = "http://localhost:8080/api/auth/signin";
             const response = await axios.post(api, {
-                username: "abul",
-                email: "abul@gmail.com",
-                password: "abul@gmail.com",
-                role: ["user"]
+                username: "sami",
+                password: "sami@gmail.com",
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
             console.log(response);
             if (response.status === 200) {
@@ -53,6 +57,13 @@ const SignIn = () => {
                 sessionStorage.setItem("access_token", response.data.accessToken);
                 setUserdata(response.data);
                 document.getElementById("sign_up_form").reset();
+
+                const from = sessionStorage.getItem("from");
+                if (from) {
+                    Router.push(from);
+                } else {
+                    Router.push("/dashboard/profile");
+                }
             } else {
                 setMessage({
                     type: false,
@@ -89,10 +100,10 @@ const SignIn = () => {
                 }
                 <h3 className="text-[1rem] font-bold text-[#0891B2] text-center">Welcome to 1link</h3>
                 <form id="sign_up_form">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name="email" placeholder="Email" onChange={handleOnChange} id="email" />
+                <label htmlFor="username">Username</label>
+                    <input type="text" name="username" placeholder="Username" onChange={handleOnChange} id="username" />
                     {
-                        errorMessage?.email ? <span>{errorMessage.email}</span> : null
+                        errorMessage?.username ? <span>{errorMessage.username}</span> : null
                     }
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" placeholder="Password" onChange={handleOnChange} id="password" />

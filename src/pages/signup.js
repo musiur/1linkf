@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "components/icons/Spinner";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SignUp = () => {
+    const Router = useRouter();
     const [formData, setFormData] = useState({ username: "", email: "", password: "" });
     const [errorMessage, setErrorMessage] = useState(formData);
     const [message, setMessage] = useState(null);
@@ -48,7 +50,9 @@ const SignUp = () => {
                     message: "Registration successfull!"
                 });
                 document.getElementById("sign_up_form").reset();
+                Router.push("/signin");
             } else {
+                console.log(response)
                 setMessage({
                     type: false,
                     message: response.response.data.message
