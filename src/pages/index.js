@@ -2,10 +2,12 @@
 
 import Button from 'components/Button'
 import Image from 'next/image'
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 
 export default function Home() {
+  const Router = useRouter();
 
   const onChangeHandler = (e) => {
     console.log(e.target.value);
@@ -81,7 +83,8 @@ export default function Home() {
         "Showcase one book",
         "Unlimited links"
       ],
-      btn_text: "Sign up for free"
+      btn_text: "Sign up for free",
+      btn_link: "/signup"
     },
     {
       id: 1,
@@ -94,7 +97,8 @@ export default function Home() {
         "Unlimited links",
         "Remove 1link icon"
       ],
-      btn_text: "Sign up with premium features"
+      btn_text: "Sign up with premium features",
+      btn_link: "/signup"
     },
     {
       id: 2,
@@ -104,7 +108,8 @@ export default function Home() {
         "Want to create pages for your clients?",
         "Get in touch for a custom solution."
       ],
-      btn_text: "contact us"
+      btn_text: "contact us",
+      btn_link: "/contact-us"
     },
   ]
   return (
@@ -204,7 +209,7 @@ export default function Home() {
                     {
                       item.id === 1 ? <div className="absolute top-0 right-0 w-full"><p className="px-4 py-[3px] rounded-full bg-[#0991b2] text-white w-[120px] text-center mx-auto -mt-[16px]">Launch deal</p></div> : null
                     }
-                    <h5 className="text-[24px] font-bold text-center">Premium</h5>
+                    <h5 className="text-[24px] font-bold text-center">{item.title}</h5>
                     <p className="flex items-center justify-center gap-2">
                       {
                         item.id === 1 ? <span className="text-[18px] font-bold text-gray-400">{item.subheading[1]}</span> : null
@@ -230,7 +235,9 @@ export default function Home() {
                     </ul>
                     <div className="flex justify-center">
                       {
-                        item.id === 1 ? <Button>{item.btn_text}</Button> : <button type="white" className="text-[#0991b2] bg-[#ECFEFF] hover:bg-[#CFFAFE] px-3 py-1 rounded-md">{item.btn_text}</button>
+                        item.id === 1 ? <Button onClick={() => Router.push(item.btn_link
+                        )}>{item.btn_text}</Button> : <button onClick={() => Router.push(item.btn_link
+                        )} type="white" className="text-[#0991b2] bg-[#ECFEFF] hover:bg-[#CFFAFE] px-3 py-1 rounded-md">{item.btn_text}</button>
                       }
                     </div>
                   </div>

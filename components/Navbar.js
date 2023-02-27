@@ -48,20 +48,22 @@ const Navbar = () => {
             <button className="h-[60px] pl-1 pr-2 flex items-center justify-center bg-gradient-to-b from-[#202D3D] to-[#0B91AF] text-[20px] font-bold leading-[28px] text-white cursor-pointer" onClick={() => Router.push("/")}>
               1link
             </button>
-            <ul className="hidden md:flex items-center justify-start gap-7 text-[18px] text-[#0891B2]">
-              <li className="cursor-pointer">
-                <a href="#discover">Discover</a>
-              </li>
-              <li className="cursor-pointer">
-                <a href="#how_it_works">How it works</a>
-              </li>
-              <li className="cursor-pointer">
-                <a href="#pricing">Pricing</a>
-              </li>
-              <li className="cursor-pointer">
-                <a href="#faq">FAQ</a>
-              </li>
-            </ul>
+            {
+              Router.pathname === "/" ? <ul className="hidden md:flex items-center justify-start gap-7 text-[18px] text-[#0891B2]">
+                <li className="cursor-pointer">
+                  <a href="#discover">Discover</a>
+                </li>
+                <li className="cursor-pointer">
+                  <a href="#how_it_works">How it works</a>
+                </li>
+                <li className="cursor-pointer">
+                  <a href="#pricing">Pricing</a>
+                </li>
+                <li className="cursor-pointer">
+                  <a href="#faq">FAQ</a>
+                </li>
+              </ul> : null
+            }
           </div>
           <div className="flex items-center justify-end gap-5">
             {

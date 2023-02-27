@@ -40,14 +40,7 @@ const SignIn = () => {
         try {
             setSpinner(true);
             const api = "http://localhost:8080/api/auth/signin";
-            const response = await axios.post(api, {
-                username: "sami",
-                password: "sami@gmail.com",
-            }, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            const response = await axios.post(api, formData);
             console.log(response);
             if (response.status === 200) {
                 setMessage({
@@ -93,8 +86,8 @@ const SignIn = () => {
         }
     }, [errorMessage]);
     return (
-        <div className="container section">
-            <div className="max-w-[380px] min-w-[310px] m-5 p-5 rounded-md shadow-xl border mx-auto">
+        <div className="container section min-h-[80vh]">
+            <div className="max-w-[380px] min-w-[310px] p-5 rounded-md shadow-xl border m-auto">
                 {
                     message ? <div className={`${message.type ? "bg-green-400" : "bg-red-600"} text-white px-2 py-[4px] rounded-md mb-2 text-center`}>{message.message}</div> : null
                 }

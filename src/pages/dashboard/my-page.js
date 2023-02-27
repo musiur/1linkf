@@ -1,4 +1,5 @@
-import Dashboard from ".";
+import Dashboard from "layout/Dashboard";
+
 
 const MyPage = () => {
     return (

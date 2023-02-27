@@ -1,4 +1,5 @@
-const { default: Dashboard } = require(".")
+import Dashboard from "layout/Dashboard";
+
 
 const AddModerator = () => {
     return (

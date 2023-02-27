@@ -1,4 +1,5 @@
-import Dashboard from "./index";
+import Dashboard from "layout/Dashboard";
+
 
 const Editor = () => {
     return (
