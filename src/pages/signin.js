@@ -1,10 +1,12 @@
 import Button from "components/Button";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "components/icons/Spinner";
 import Link from "next/link";
+import { UserContext } from "context/UserProvider";
 
 const SignIn = () => {
+    const {userdata, setUserdata} = useContext(UserContext);
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [errorMessage, setErrorMessage] = useState(formData);
     const [message, setMessage] = useState(null);
@@ -34,8 +36,7 @@ const SignIn = () => {
 
     const CallAPI = async () => {
         try {
-            setSpinner(true)
-            console.log(formData)
+            setSpinner(true);
             const api = "http://localhost:8080/api/auth/signin";
             const response = await axios.post(api, {
                 username: "abul",
@@ -50,6 +51,7 @@ const SignIn = () => {
                     message: "Login successfull!"
                 });
                 sessionStorage.setItem("access_token", response.data.accessToken);
+                setUserdata(response.data);
                 document.getElementById("sign_up_form").reset();
             } else {
                 setMessage({
@@ -63,7 +65,6 @@ const SignIn = () => {
                 setMessage(null);
             }, 5000);
         } catch (error) {
-            console.log("Error:", error)
             setSpinner(false)
             setMessage({
                 type: false,
