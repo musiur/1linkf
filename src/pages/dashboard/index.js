@@ -1,6 +1,6 @@
+import Private from "layout/Private";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Private from "./Private";
 
 const Dashboard = ({ children }) => {
     const tabs = ["Profile", "Editor", "My page", "Manage users", "Add moderator"];

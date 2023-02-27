@@ -39,7 +39,7 @@ const SignIn = () => {
     const CallAPI = async () => {
         try {
             setSpinner(true);
-            const api = "http://localhost:8080/api/auth/signin";
+            const api = `http://${process.env.API_HOST}/api/auth/signin`;
             const response = await axios.post(api, formData);
             console.log(response);
             if (response.status === 200) {
@@ -72,7 +72,7 @@ const SignIn = () => {
             setSpinner(false)
             setMessage({
                 type: false,
-                message: error.response.data.message
+                message: "Something went wrong!"
             });
         }
 

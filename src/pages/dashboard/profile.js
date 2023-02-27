@@ -1,11 +1,10 @@
 import { UserContext } from "context/UserProvider";
-import Dashboard from "layout/Dashboard";
+import Dashboard from "@/pages/dashboard";
 import { useContext } from "react";
 
 const Profile = () => {
     const {userdata, setUserdata} = useContext(UserContext);
     const {username, email, role} = userdata;
-    console.log(userdata)
     return (
         <Dashboard>
             <div>

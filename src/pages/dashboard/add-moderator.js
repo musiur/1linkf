@@ -1,4 +1,4 @@
-import Dashboard from "layout/Dashboard";
+import Dashboard from "@/pages/dashboard";
 
 
 const AddModerator = () => {

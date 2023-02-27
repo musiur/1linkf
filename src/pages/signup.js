@@ -41,7 +41,7 @@ const SignUp = () => {
     const CallAPI = async () => {
         try {
             setSpinner(true)
-            const api = "http://localhost:8080/api/auth/signup";
+            const api = `http://${process.env.API_HOST}/api/auth/signup`;
             const response = await axios.post(api, { ...formData, role: ["user"] });
             console.log(response);
             if (response.status === 200) {
@@ -68,7 +68,7 @@ const SignUp = () => {
             setSpinner(false)
             setMessage({
                 type: false,
-                message: error.response.data.message
+                message: "Something went wrong!"
             });
         }
 
