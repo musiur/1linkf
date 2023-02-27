@@ -72,7 +72,7 @@ const SignIn = () => {
             setSpinner(false)
             setMessage({
                 type: false,
-                message: "Something went wrong!"
+                message: error.response.data ? error.response.data.message : "Something went wrong!"
             });
         }
 
