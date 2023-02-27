@@ -29,6 +29,10 @@
   @apply border px-3 py-1 rounded-md;
 }
 
+#sign_up_form input:focus {
+  @apply outline-0 border-[#0991b2];
+}
+
 #sign_up_form label {
   @apply mt-3 text-gray-600 font-medium;
 }
