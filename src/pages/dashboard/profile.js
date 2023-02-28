@@ -4,7 +4,8 @@ import { useContext } from "react";
 
 const Profile = () => {
     const { userdata, setUserdata } = useContext(UserContext);
-    const { username, email, role } = userdata;
+    const { username, email } = userdata;
+
     return (
         <Dashboard>
             <div className="p-5">
@@ -12,7 +13,6 @@ const Profile = () => {
                 <div>
                     <p>Name: {username}</p>
                     <p>Email: {email}</p>
-                    <p>Role: {role}</p>
                 </div>
             </div>
         </Dashboard>

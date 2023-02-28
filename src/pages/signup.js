@@ -68,7 +68,7 @@ const SignUp = () => {
             setSpinner(false)
             setMessage({
                 type: false,
-                message: error.response.data ? error.response.data.message : "Something went wrong!"
+                message: error.response ? error.response.data.message : "Something went wrong!"
             });
         }
 
