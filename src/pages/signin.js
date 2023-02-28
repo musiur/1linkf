@@ -72,7 +72,7 @@ const SignIn = () => {
             setSpinner(false)
             setMessage({
                 type: false,
-                message: error.response.data ? error.response.data.message : "Something went wrong!"
+                message: error.response ? error.response.data.message : "Something went wrong!"
             });
         }
 
@@ -93,7 +93,7 @@ const SignIn = () => {
                 }
                 <h3 className="text-[1rem] font-bold text-[#0891B2] text-center">Welcome to 1link</h3>
                 <form id="sign_up_form">
-                <label htmlFor="username">Username</label>
+                    <label htmlFor="username">Username</label>
                     <input type="text" name="username" placeholder="Username" onChange={handleOnChange} id="username" />
                     {
                         errorMessage?.username ? <span>{errorMessage.username}</span> : null

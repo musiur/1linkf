@@ -4,7 +4,9 @@ import Dashboard from "@/pages/dashboard";
 const AddModerator = () => {
     return (
         <Dashboard>
-            Add Moderator
+            <div className="p-5">
+                coming soon
+            </div>
         </Dashboard>
     )
 }
