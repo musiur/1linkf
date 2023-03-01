@@ -4,7 +4,6 @@ import { useContext } from "react";
 import BookCardButtonOptions from "./BookCardButtonOptions";
 
 const BookCardButtons = ({ props, id }) => {
-    console.log({ props })
     const { editordata, setEditordata } = useContext(EditorContext);
 
     const handleOnChange = (e) => {
@@ -109,13 +108,13 @@ const BookCardButtons = ({ props, id }) => {
         }
     }
 
+    
     const MoveDownHandler = (ID) => {
         let tempEditorData = editordata.books.find(item => item.id === id).bookbuttons;
-        console.log(tempEditorData.length >= 2)
         // checking if bookbuttons have more than 2 items
         if (tempEditorData.length >= 2) {
             for (let i = 0; i < tempEditorData.length; i++) {
-                if (tempEditorData[i].id === ID && tempEditorData.length - 1) {
+                if (tempEditorData[i].id === ID && i < tempEditorData.length - 1) {
                     let tempbookbuttons = [...tempEditorData];
 
                     // swaping values
@@ -156,7 +155,7 @@ const BookCardButtons = ({ props, id }) => {
                                     <br />
                                     <div className="p-1 border bg-white rounded-md">
                                         <span className="font-normal px-2 py-1 font-medium">Dropdown options</span>
-                                        <BookCardButtonOptions props={item.options} id={item.id} />
+                                        <BookCardButtonOptions props={item.options} idb={id} ido={item.id} />
                                         <div className="flex items-center justify-start gap-1">
                                             <Button type="white" onClick={() => handleRemove(item.id)}>Remove</Button>
                                             <Button type="white" onClick={() => MoveUpHandler(item.id)}>Move up</Button>
