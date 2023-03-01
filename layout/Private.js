@@ -6,11 +6,18 @@ const Private = ({ children }) => {
     const { userdata, setUserdata } = useContext(UserContext);
     const Router = useRouter();
 
+    // useEffect(() => {
+    //     if (!userdata.username) {
+    //         Router.push("/signin");
+    //     }
+    // }, [userdata])
     useEffect(() => {
-        if (!userdata.username) {
-            Router.push("/signin");
+        const data = sessionStorage.getItem("user_info");
+        if (!data) {
+            Router.push("/signin")
         }
     }, [])
+
     return userdata.username ? (
         <>
             {children}

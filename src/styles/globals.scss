@@ -34,7 +34,10 @@
 }
 
 #sign_up_form label {
-  @apply mt-3 text-gray-600 font-medium;
+  @apply mt-3 text-gray-800;
+}
+#editor_header_form label {
+  @apply mt-3 text-gray-800 font-medium;
 }
 
 #sign_up_form button {
@@ -44,4 +47,12 @@
 
 #sign_up_form span {
   @apply bg-red-100 text-red-600 px-2 py-[2px] rounded-md inline-block;
+}
+
+input {
+  @apply border;
+}
+
+input:focus {
+  @apply outline-0 scale-[1.01] shadow;
 }

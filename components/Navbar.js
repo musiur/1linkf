@@ -15,9 +15,10 @@ const Navbar = () => {
     setOpenMenu(false);
   }, [Router.pathname])
 
-  const Logout = () => {
+  const SignOut = () => {
     setUserdata({});
-    sessionStorage.removeItem("access_token");
+    // sessionStorage.removeItem("access_token");
+    sessionStorage.clear();
     Router.push("/")
   }
   return (
@@ -88,7 +89,7 @@ const Navbar = () => {
         {
           openSubmenu ? <div className="absolute top-[80px] right-0 min-w-[200px] border flex flex-col items-end justify-start gap-1 rounded-md bg-white py-1 mr-5" onClick={() => setOpenSubmenu(false)}>
             <Link href="/dashboard/profile" className="hover:bg-gray-100 rounded-md w-full text-right cursor-pointer px-3 py-1">Profile</Link>
-            <button onClick={Logout} className="hover:bg-red-100 text-red-400 rounded-md w-full text-right cursor-pointer px-3 py-1">Logout</button>
+            <button onClick={SignOut} className="hover:bg-red-100 text-red-400 rounded-md w-full text-right cursor-pointer px-3 py-1">Sign out</button>
           </div> : null
         }
       </nav>

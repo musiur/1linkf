@@ -6,7 +6,7 @@ import Header from "components/editor/Header";
 import Links from "components/editor/Links";
 import SocialLinks from "components/editor/SocialLinks";
 import { EditorContext } from "context/EditorProvider";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 
 const Editor = () => {
@@ -16,14 +16,15 @@ const Editor = () => {
         "Books",
         "Appearance"];
     const [currentTab, setCurrentTab] = useState("Header");
-    const { editordata, setEditordata } = useContext(EditorContext);
+    const { editordata } = useContext(EditorContext);
+    
     console.log(editordata)
     return (
         <Dashboard>
             <div className="p-5 bg-[#F1F2F3]">
                 <h1 className="text-lg lg:text-xl font-bold mb-5">Editor</h1>
-                <div className="flex flex-wrap items-start justify-between gap-10 ">
-                    <div className="bg-white rounded-md p-5">
+                <div className="flex flex-wrap items-start justify-start gap-10 ">
+                    <div className="bg-white rounded-md p-5 min-w-[600px]">
                         <div className="flex items-center justify-between gap-[50px]">
                             <div className="flex items-center justify-start gap-4">
                                 {
@@ -39,7 +40,12 @@ const Editor = () => {
                             <button className="bg-[#0891B2] text-white px-4 py-1 rounded-md hover:bg-[#0891B295]">Save</button>
                         </div>
                         {
-                            currentTab === "Header" ? <Header /> : currentTab === "Social links" ? <SocialLinks /> : currentTab === "Links" ? <Links /> : currentTab === "Books" ? <Books /> : currentTab === "Appearance" ? <Appearance /> : null
+                            currentTab === "Header" ? <Header /> : 
+                            currentTab === "Social links" ? <SocialLinks /> : 
+                            currentTab === "Links" ? <Links /> : 
+                            currentTab === "Books" ? <Books /> :
+                            currentTab === "Appearance" ? <Appearance /> : 
+                            null
                         }
                     </div>
                     <div className="min-w-[500px] min-h-[800px] rounded-xl shadow-xl border bg-white"></div>
