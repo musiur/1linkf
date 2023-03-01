@@ -48,6 +48,7 @@ const SignIn = () => {
                     message: "Login successfull!"
                 });
                 sessionStorage.setItem("access_token", response.data.accessToken);
+                sessionStorage.setItem("user_info", JSON.stringify(response.data));
                 setUserdata(response.data);
                 document.getElementById("sign_up_form").reset();
 

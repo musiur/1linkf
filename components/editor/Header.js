@@ -7,9 +7,7 @@ const Header = () => {
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
-        console.log(e)
         setEditordata({ ...editordata, ["headers"]: { ...editordata.headers, [name]: value } });
-        console.log(editordata)
     }
 
     return (

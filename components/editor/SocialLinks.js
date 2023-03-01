@@ -5,12 +5,26 @@ import { useContext } from "react";
 const SocialLinks = () => {
     const { editordata, setEditordata } = useContext(EditorContext);
 
-    const linksList = ["Facebook", "Twitter", "Linkedin", "Instagram", "TitTok", "Youtube", "Spotify", "Amazon", "Email", "Pinterest", "Paypal", "Google Play"];
+    const linksList = ["...", "Facebook", "Twitter", "Linkedin", "Instagram", "TitTok", "Youtube", "Spotify", "Amazon", "Email", "Pinterest", "Paypal", "Google Play"];
 
     // adding new form
     const handleAddNew = () => {
+        let IDs = 1;
+        if (editordata.socialLinks.length) {
+            if(editordata.socialLinks.length === 1){
+                IDs = editordata.socialLinks[0].id + 1;
+            }else{
+                {
+                    for (let i = 0; i < editordata.socialLinks.length; i++) {
+                        if(editordata.socialLinks[i].id >= IDs){
+                            IDs = editordata.socialLinks[i].id + 1;
+                        }
+                    }
+                }
+            }
+        }
         const newLink = {
-            id: editordata.socialLinks.length ? editordata.socialLinks[editordata.socialLinks.length - 1].id + 1 : 0,
+            id: IDs,
             label: "",
             url: ""
         }

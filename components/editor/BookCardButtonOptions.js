@@ -1,8 +1,9 @@
-import Button from "components/Button";
 import { EditorContext } from "context/EditorProvider";
 import { useContext } from "react";
 
-const Links = () => {
+const { default: Button } = require("components/Button")
+
+const BookCardButtonOptions = ({props}) => {
     const { editordata, setEditordata } = useContext(EditorContext);
 
    
@@ -97,14 +98,15 @@ const Links = () => {
         }
     }
     return (
-        <div className="pt-5">
+        <div>
             {
-                editordata.links.length ? <div>
+                props.length ? <div>
                     {
-                        editordata.links.map((item) => {
+                        props.map(item => {
                             return (
                                 <div key={item.id} className="grid gird-cols-1 border mb-2 rounded-md">
                                     <input type="text" name={"label-" + item.id} placeholder="Label" className="px-3 py-1 rounded-t-md" onChange={handleOnChange} defaultValue={item?.label} />
+                                    {/* // option adder  */}
                                     <input type="text" name={"url-" + item.id} placeholder="URL" className="border-y px-3 py-1" onChange={handleOnChange} defaultValue={item?.url} />
                                     <div className="flex items-center justify-start gap-1">
                                         <Button type="white" onClick={() => handleRemove(item.id)}>Remove</Button>
@@ -117,9 +119,9 @@ const Links = () => {
                     }
                 </div> : null
             }
-            <Button onClick={handleAddNew}>Add new link</Button>
+            <Button onClick={handleAddNew}>Add new Option</Button>
         </div>
     )
 }
 
-export default Links;
+export default BookCardButtonOptions;

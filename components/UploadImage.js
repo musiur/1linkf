@@ -2,8 +2,8 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 
 const UploadImage = ({ type, func, name, defaultValue, label }) => {
-    const [selectedFile, setSelectedFile] = useState(defaultValue ? defaultValue : "")
-    const [preview, setPreview] = useState()
+    const [selectedFile, setSelectedFile] = useState(defaultValue ? defaultValue : "");
+    const [preview, setPreview] = useState();
 
     // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
@@ -37,7 +37,7 @@ const UploadImage = ({ type, func, name, defaultValue, label }) => {
     }
     return (
         <div>
-            {selectedFile ? <div className={`relative ${type === "profile" ? "rounded-full w-[100px] h-[100px]" : "rounded-md w-full min-h-[200px] h-auto"}`}>
+            {selectedFile && preview ? <div className={`relative ${type === "profile" ? "rounded-full w-[100px] h-[100px]" : "rounded-md w-full min-h-[200px] h-auto"}`}>
                 <Image src={preview} alt="profile" fill style={{objectFit:"cover"}} className={type === "profile" ? "rounded-full border" : "rounded-md border"} />
             </div> : null}
             <div className="relative border px-3 py-1 rounded-md mt-2 shadow-md">
