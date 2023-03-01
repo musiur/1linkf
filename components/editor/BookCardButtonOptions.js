@@ -3,40 +3,60 @@ import { useContext } from "react";
 
 const { default: Button } = require("components/Button")
 
-const BookCardButtonOptions = ({props}) => {
+const BookCardButtonOptions = ({ props, idb, ido }) => {
     const { editordata, setEditordata } = useContext(EditorContext);
 
-   
+
 
     // adding new form
     const handleAddNew = () => {
         let IDs = 1;
-        if (editordata.links.length) {
-            if(editordata.links.length === 1){
-                IDs = editordata.links[0].id + 1;
-            }else{
+        if (props.length) {
+            if (props.length === 1) {
+                IDs = props[0].id + 1;
+            } else {
                 {
-                    for (let i = 0; i < editordata.links.length; i++) {
-                        if(editordata.links[i].id >= IDs){
-                            IDs = editordata.links[i].id + 1;
+                    for (let i = 0; i < props.length; i++) {
+                        if (props[i].id >= IDs) {
+                            IDs = props[i].id + 1;
                         }
                     }
                 }
             }
         }
-        const newLink = {
+        const newOption = {
             id: IDs,
-            label: "",
-            url: ""
+            label: "Example",
+            url: "example.com"
         }
 
-        setEditordata({ ...editordata, ["links"]: [...editordata.links, newLink] });
+
+        for (let i = 0; i < editordata.books.length; i++) {
+            if (editordata.books[i].id === idb) {
+                for (let j = 0; j < editordata.books[i].bookbuttons.length; j++) {
+                    if (editordata.books[i].bookbuttons[j].id === ido) {
+                        const tempBBoptions = { ...editordata };
+                        tempBBoptions.books[i].bookbuttons[j].options = [...tempBBoptions.books[i].bookbuttons[j].options, newOption];
+                        setEditordata(tempBBoptions)
+                    }
+                }
+            }
+        }
     }
 
     // removing form
     const handleRemove = (id) => {
-        const newList = editordata.links.filter(item => item.id !== id);
-        editordata.links.length && setEditordata({ ...editordata, ["links"]: newList })
+        for (let i = 0; i < editordata.books.length; i++) {
+            if (editordata.books[i].id === idb) {
+                for (let j = 0; j < editordata.books[i].bookbuttons.length; j++) {
+                    if (editordata.books[i].bookbuttons[j].id === ido) {
+                        const tempBBoptions = { ...editordata };
+                        tempBBoptions.books[i].bookbuttons[j].options = [...tempBBoptions.books[i].bookbuttons[j].options.filter(item => item.id !== id)];
+                        setEditordata(tempBBoptions)
+                    }
+                }
+            }
+        }
     }
 
     // handling on change event
@@ -46,31 +66,43 @@ const BookCardButtonOptions = ({props}) => {
         const label = nameParts[0];
         const id = parseInt(nameParts[1]);
 
-        let item = { ...editordata };
-
-        for (let i = 0; i < item.links.length; i++) {
-            if (item.links[i].id === id) {
-                item.links[i] = { ...item.links[i], [label]: value }
+        for (let i = 0; i < editordata.books.length; i++) {
+            if (editordata.books[i].id === idb) {
+                for (let j = 0; j < editordata.books[i].bookbuttons.length; j++) {
+                    if (editordata.books[i].bookbuttons[j].id === ido) {
+                        for (let k = 0; k < editordata.books[i].bookbuttons[j].options.length; k++) {
+                            if (editordata.books[i].bookbuttons[j].options[k].id === id) {
+                                let tempED = { ...editordata }
+                                tempED.books[i].bookbuttons[j].options[k] = { ...tempED.books[i].bookbuttons[j].options[k], [label]: value };
+                                setEditordata(tempED);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+                break;
             }
         }
-
-        setEditordata(item)
     }
     const MoveUpHandler = (id) => {
-        // checking if links have more than 2 items
-        if (editordata.links.length >= 2) {
-            let item = { ...editordata };
-            for (let i = 0; i < item.links.length; i++) {
-                if (item.links[i].id === id && i >= 1) {
-                    let tempLinks = [...item.links];
+        let tempEditorData = editordata.books.find(item => item.id === idb).bookbuttons.find(item => item.id === ido).options;
+
+        // checking if bookbuttons have more than 2 items
+        if (tempEditorData.length >= 2) {
+            for (let i = 0; i < tempEditorData.length; i++) {
+                if (tempEditorData[i].id === id && i >= 1) {
+                    let tempbookbuttons = [...tempEditorData];
 
                     // swaping values
-                    let tempVar = tempLinks[i - 1];
-                    tempLinks[i - 1] = tempLinks[i];
-                    tempLinks[i] = tempVar;
+                    let tempVar = tempbookbuttons[i - 1];
+                    tempbookbuttons[i - 1] = tempbookbuttons[i];
+                    tempbookbuttons[i] = tempVar;
 
                     // setting output
-                    setEditordata({ ...editordata, ["links"]: tempLinks });
+                    let tempEData = { ...editordata };
+                    tempEData.books.find(item => item.id === idb).bookbuttons.find(item => item.id === ido).options = tempbookbuttons;
+                    setEditordata(tempEData);
                     break;
                 }
             }
@@ -78,20 +110,23 @@ const BookCardButtonOptions = ({props}) => {
     }
 
     const MoveDownHandler = (id) => {
-        // checking if links have more than 2 items
-        if (editordata.links.length >= 2) {
-            let item = { ...editordata };
-            for (let i = 0; i < item.links.length; i++) {
-                if (item.links[i].id === id && i < item.links.length - 1) {
-                    let tempLinks = [...item.links];
+        let tempEditorData = editordata.books.find(item => item.id === idb).bookbuttons.find(item => item.id === ido).options;
+
+        // checking if bookbuttons have more than 2 items
+        if (tempEditorData.length >= 2) {
+            for (let i = 0; i < tempEditorData.length; i++) {
+                if (tempEditorData[i].id === id && i < tempEditorData.length - 1) {
+                    let tempbookbuttons = [...tempEditorData];
 
                     // swaping values
-                    let tempVar = tempLinks[i + 1];
-                    tempLinks[i + 1] = tempLinks[i];
-                    tempLinks[i] = tempVar;
+                    let tempVar = tempbookbuttons[i + 1];
+                    tempbookbuttons[i + 1] = tempbookbuttons[i];
+                    tempbookbuttons[i] = tempVar;
 
                     // setting output
-                    setEditordata({ ...editordata, ["links"]: tempLinks });
+                    let tempEData = { ...editordata };
+                    tempEData.books.find(item => item.id === idb).bookbuttons.find(item => item.id === ido).options = tempbookbuttons;
+                    setEditordata(tempEData);
                     break;
                 }
             }
@@ -102,7 +137,7 @@ const BookCardButtonOptions = ({props}) => {
             {
                 props.length ? <div>
                     {
-                        props.map(item => {
+                        props.map((item) => {
                             return (
                                 <div key={item.id} className="grid gird-cols-1 border mb-2 rounded-md">
                                     <input type="text" name={"label-" + item.id} placeholder="Label" className="px-3 py-1 rounded-t-md" onChange={handleOnChange} defaultValue={item?.label} />

@@ -34,19 +34,7 @@ const Books = () => {
                     type: "link",
                     label: "Purchase",
                     url: "example.com"
-                },
-                // {
-                //     id: 2,
-                //     type: "dropdown",
-                //     label: "Purchase",
-                //     options: [
-                //         {
-                //             id: 1,
-                //             label: "Example",
-                //             url: "example.com"
-                //         }
-                //     ]
-                // }
+                }
             ]
         }
 
