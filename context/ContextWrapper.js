@@ -1,10 +1,13 @@
 
+import EditorProvider from "./EditorProvider";
 import UserProvider from "./UserProvider";
 
 const ContextWrapper = ({ children }) => {
     return (
         <UserProvider>
-            {children}
+            <EditorProvider>
+                {children}
+            </EditorProvider>
         </UserProvider>
     )
 }
