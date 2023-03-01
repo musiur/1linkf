@@ -39,7 +39,12 @@ const Editor = () => {
                             <button className="bg-[#0891B2] text-white px-4 py-1 rounded-md hover:bg-[#0891B295]">Save</button>
                         </div>
                         {
-                            currentTab === "Header" ? <Header /> : currentTab === "Social links" ? <SocialLinks /> : currentTab === "Links" ? <Links /> : currentTab === "Books" ? <Books /> : currentTab === "Appearance" ? <Appearance /> : null
+                            currentTab === "Header" ? <Header /> : 
+                            currentTab === "Social links" ? <SocialLinks /> : 
+                            currentTab === "Links" ? <Links /> : 
+                            currentTab === "Books" ? <Books /> :
+                            currentTab === "Appearance" ? <Appearance /> : 
+                            null
                         }
                     </div>
                     <div className="min-w-[500px] min-h-[800px] rounded-xl shadow-xl border bg-white"></div>

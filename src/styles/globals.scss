@@ -33,8 +33,8 @@
   @apply outline-0 border-[#0991b2];
 }
 
-#sign_up_form label {
-  @apply mt-3 text-gray-600 font-medium;
+#sign_up_form, #editor_header_form label {
+  @apply mt-3 text-gray-800 font-medium;
 }
 
 #sign_up_form button {
