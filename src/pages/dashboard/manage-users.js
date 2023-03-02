@@ -36,14 +36,14 @@ const ManageUsers = () => {
 
     return (
         <Dashboard>
-            <div className="relative p-5">
+            <div className="relative p-5 h-full">
                 <h1 className="text-lg lg:text-xl font-bold mb-5">Manage Users</h1>
                 {
-                    users.length ? <div className="grid grid-cols-4 gap-4">
+                    users.length ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
                         {
                             users.map((item) => {
                                 return (
-                                    <div key={item._id} className="border rounded-md p-5 hover:border-[#0991b2]">
+                                    <div key={item._id} className="border rounded-md p-5 hover:border-[#0991b2] bg-white">
                                         <p className="font-medium">Username: {item.username}</p>
                                         <p>Email: {item.email}</p>
                                         <div className="flex items-center justify-start gap-1 mt-4">

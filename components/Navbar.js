@@ -24,12 +24,7 @@ const Navbar = () => {
   return (
     <div style={{ zIndex: "9999" }} className="sticky top-0">
       <ul className={`flex flex-col md:hidden items-center justify-start gap-7 text-[18px] text-[#0891B2] shadow-lg  ${openMenu ? "translate-x-0 h-auto py-8" : "-translate-x-[100%] h-0 p-0"} transition easin-in-out duration-300 z-0 bg-[#F9FAFB]`}>
-        <li className="flex flex-col md:hidden items-center justify-end gap-5">
-          <Button type="white" onClick={() => Router.push("/signin")}>
-            Sign in
-          </Button>
-          <Button onClick={() => Router.push("/signup")}>Sign up</Button>
-        </li>
+
         <li className="cursor-pointer">
           <a href="#discover">Discover</a>
         </li>
@@ -42,6 +37,19 @@ const Navbar = () => {
         <li className="cursor-pointer">
           <a href="#faq">FAQ</a>
         </li>
+        {
+          userdata.username ? <li className="flex flex-col gap-5">
+            <Link href="/dashboard/profile" className="text-center">Profile</Link>
+            <button onClick={SignOut} className="text-red-400 text-center">Sign out</button>
+          </li> : <li className="flex flex-col md:hidden items-center justify-end gap-5">
+            <Button type="white" onClick={() => Router.push("/signin")}>
+              Sign in
+            </Button>
+            <Button onClick={() => Router.push("/signup")}>Sign up</Button>
+          </li>
+        }
+
+
       </ul>
       <nav className="bg-[#F9FAFB] relative">
         <div className="flex items-center justify-between gap-5 p-[10px] lg:p-[23px]">

@@ -139,7 +139,7 @@ export default function Home() {
         {/* gallary  */}
         <div id="discover" className="home__gallary">
           <h2 className="home__gallary__heading text-center">Showcase your books on a page with <br /> the<span className="home__hero__s_h__span"> colors and style</span> you want.</h2>
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between  min-w-[100vw] lg:min-w-[1500px] overflow-auto">
             {
               [1, 2, 3, 4, 5, 6].map((i) => {
                 return (
