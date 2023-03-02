@@ -24,7 +24,7 @@ const Editor = () => {
             <div className="p-5 bg-[#F1F2F3]">
                 <h1 className="text-lg lg:text-xl font-bold mb-5">Editor</h1>
                 <div className="flex flex-wrap items-start justify-start gap-10 ">
-                    <div className="bg-white rounded-md p-5 min-w-[600px]">
+                    <div className="bg-white rounded-md p-5 min-w-[600px] w-full lg:w-auto">
                         <div className="flex items-center justify-between gap-[50px]">
                             <div className="flex items-center justify-start gap-4">
                                 {
@@ -48,7 +48,7 @@ const Editor = () => {
                             null
                         }
                     </div>
-                    <div className="min-w-[500px] min-h-[800px] rounded-xl shadow-xl border bg-white"></div>
+                    <div className="min-w-[500px] min-h-[800px] rounded-xl shadow-xl border bg-white w-full lg:w-auto"></div>
                 </div>
             </div>
         </Dashboard>
