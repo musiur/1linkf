@@ -25,6 +25,7 @@ const LinkPath = () => {
   const [editordata, setEditordata] = useState(null)
   const [gcolor, setGcolor] = useState()
   const [fetchSuccess, setFetchSuccess] = useState(null)
+  const [username, setUsername] = useState(null)
 
   useEffect(() => {
     if (editordata) {
@@ -45,9 +46,9 @@ const LinkPath = () => {
     }
   }, [editordata])
 
-  const FetchEditorDataFromDatabase = async () => {
+  const FetchEditorDataFromDatabase = async (username) => {
     try {
-      const API_LINK = `${process.env.API_HOST}/api/editor/` + linkPath
+      const API_LINK = `${process.env.API_HOST}/api/editor/` + username
       const response = await axios.get(API_LINK)
       console.log(response)
       if (response.status === 200) {
@@ -62,19 +63,41 @@ const LinkPath = () => {
     }
   }
 
-  console.log(editordata)
+  const FetchUserName = async () => {
+    try {
+      const API_LINK = `${process.env.API_HOST}/api/links/` + linkPath
+      const response = await axios.get(API_LINK)
+      console.log(response)
+      if (response.status === 200) {
+        setUsername(response.data.result[0].username)
+        FetchEditorDataFromDatabase(response.data.result[0].username)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     if (sessionStorage) {
-      linkPath && FetchEditorDataFromDatabase()
+      linkPath && FetchUserName()
     }
   }, [linkPath])
 
   return editordata ? (
     <div
-      className={`min-h-[800px] bg-white w-full lg:w-auto p-5 flex items-center justify-center`}
+      className={`min-h-[800px] bg-white w-full lg:w-auto p-5 flex flex-col items-center justify-center`}
       style={{ background: gcolor }}
     >
+      <div className="py-10">
+        My Link:
+        <a
+          href={`https://1link.vercel.app/` + linkPath}
+          target="_blank"
+          className="text-blue-600 px-3"
+        >
+          Visit
+        </a>
+      </div>
       <div>
         <div className="max-w-[600px] min-w-[310px] m-auto">
           <img
@@ -142,7 +165,7 @@ const LinkPath = () => {
                           {item.bookbuttons.map((btn) => {
                             const btnStyle = {
                               ...editordata.appearance.buttonConfig
-                                .buttonStyleFor
+                                .buttonStyleFor,
                             }
                             return (
                               <div key={btn.id}>
@@ -199,7 +222,7 @@ const LinkPath = () => {
           {editordata.links.length
             ? editordata.links.map((item) => {
                 const btnStyle = {
-                  ...editordata.appearance.buttonConfig.buttonStyleFor
+                  ...editordata.appearance.buttonConfig.buttonStyleFor,
                 }
                 return (
                   <a

@@ -56,7 +56,7 @@ const SignIn = () => {
                 if (from) {
                     Router.push(from);
                 } else {
-                    Router.push("/dashboard/profile");
+                    Router.push("/dashboard/editor");
                 }
             } else {
                 setMessage({

@@ -6,12 +6,12 @@ import { useContext } from "react";
 
 const Dashboard = ({ children }) => {
     const { userdata, setUserdata } = useContext(UserContext);
-    let tabs = ["Profile", "Editor", "My page"];
+    let tabs = ["Editor", "Profile", "My page"];
     if (userdata?.roles?.includes("ROLE_ADMIN")) {
-        tabs = ["Profile", "Editor", "My page", "Manage users", "Add moderator"];
+        tabs = ["Editor", "Profile", "My page", "Manage users", "Add moderator"];
     }
     if (userdata?.roles?.includes("ROLE_MODERATOR")) {
-        tabs = ["Profile", "Editor", "My page", "Manage users"];
+        tabs = ["Editor", "Profile", "My page", "Manage users"];
     }
     const Router = useRouter();
     return (
