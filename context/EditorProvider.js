@@ -1,10 +1,14 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 
 export const EditorContext = createContext({})
 
 const EditorProvider = ({ children }) => {
   const [editordata, setEditordata] = useState({
-    headers: {},
+    headers: {
+      name: "Your name",
+      outline: "A short description of yourself, of anything you want to say!",
+      hide1link: false
+    },
     socialLinks: [],
     links: [],
     books: [],
@@ -31,10 +35,10 @@ const EditorProvider = ({ children }) => {
           border: '1px solid ' + '#125FAD',
           color: 'white',
         },
-        buttonRoundness: "rounded-l-full",
-        buttonRoundnessFor: 3
+        buttonRoundness: 'rounded-l-full',
+        buttonRoundnessFor: 3,
       },
-      iconStyle: "#125FAD"
+      iconStyle: '#125FAD',
     },
   })
 

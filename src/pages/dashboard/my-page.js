@@ -1,10 +1,14 @@
-import Dashboard from "@/pages/dashboard";
-
+import Dashboard from '@/pages/dashboard'
+import EditorPreview from 'components/editor/EditorPreview'
 
 const MyPage = () => {
-    return (
-        <Dashboard>My Page</Dashboard>
-    )
+  return (
+    <Dashboard>
+      <div className="flex items-center justify-center mt-10">
+        <EditorPreview />
+      </div>
+    </Dashboard>
+  )
 }
 
-export default MyPage;
+export default MyPage
