@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['images.unsplash.com', '1link.st'],
+    domains: ['images.unsplash.com', '1link.st', 'www.google.com'],
   },
   env: {
     API_HOST: "https://dark-ruby-llama-ring.cyclic.app"

@@ -14,7 +14,7 @@
 }
 
 .container {
-  @apply max-w-[1500px] mx-auto p-5;
+  @apply max-w-[1700px] mx-auto p-5;
 }
 
 .section {
@@ -55,4 +55,28 @@ input {
 
 input:focus {
   @apply outline-0 scale-[1.01] shadow;
+}
+
+
+// scrollbar style
+
+/* width */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

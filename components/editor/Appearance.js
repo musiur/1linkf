@@ -346,52 +346,56 @@ const Appearance = () => {
       <div>
         <p>Icon style</p>
         <div className="flex items-center justify-start gap-1">
-          {[1, 2].map((item) => {
-            return (
-              <div
-                key={item}
-                className={`border-2 rounded-md ${
-                  iconStyle !== 'white' && item === 1
-                    ? 'border-orange-600'
-                    : iconStyle === 'white' && item === 2
-                    ? 'border-orange-600'
-                    : 'border-white'
-                }`}
-              >
-                {editordata ? (
+          {iconStyle
+            ? [1, 2].map((item) => {
+                return (
                   <div
-                    className="h-[50px] w-[50px] border rounded cursor-pointer flex items-center justify-center"
-                    style={{ background: gcolor }}
-                    onClick={() => {
-                      setIconStyle(
-                        item === 1
-                          ? editordata.appearance.buttonConfig.buttonBackground
-                          : 'white'
-                      )
-                      let tempED = { ...editordata }
-                      tempED.appearance.iconStyle =
-                        item === 1
-                          ? editordata.appearance.buttonConfig.buttonBackground
-                          : 'white'
-                      setEditordata(tempED)
-                    }}
+                    key={item}
+                    className={`border-2 rounded-md ${
+                      iconStyle !== 'white' && item === 1
+                        ? 'border-orange-600'
+                        : iconStyle === 'white' && item === 2
+                        ? 'border-orange-600'
+                        : 'border-white'
+                    }`}
                   >
-                    <FontAwesomeIcon
-                      icon={brands('twitter')}
-                      style={{
-                        color:
-                          item === 1
-                            ? editordata.appearance.buttonConfig
-                                .buttonBackground
-                            : 'white',
-                      }}
-                      className="text-2xl"
-                    />
+                    {editordata ? (
+                      <div
+                        className="h-[50px] w-[50px] border rounded cursor-pointer flex items-center justify-center"
+                        style={{ background: gcolor }}
+                        onClick={() => {
+                          setIconStyle(
+                            item === 1
+                              ? editordata.appearance.buttonConfig
+                                  .buttonBackground
+                              : 'white'
+                          )
+                          let tempED = { ...editordata }
+                          tempED.appearance.iconStyle =
+                            item === 1
+                              ? editordata.appearance.buttonConfig
+                                  .buttonBackground
+                              : 'white'
+                          setEditordata(tempED)
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={brands('twitter')}
+                          style={{
+                            color:
+                              item === 1
+                                ? editordata.appearance.buttonConfig
+                                    .buttonBackground
+                                : 'white',
+                          }}
+                          className="text-2xl"
+                        />
+                      </div>
+                    ) : null}
                   </div>
-                ) : null}
-              </div>
-            )
-          })}
+                )
+              })
+            : null}
         </div>
       </div>
     </div>
