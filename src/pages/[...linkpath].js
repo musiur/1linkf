@@ -142,10 +142,7 @@ const LinkPath = () => {
                           {item.bookbuttons.map((btn) => {
                             const btnStyle = {
                               ...editordata.appearance.buttonConfig
-                                .buttonStyleFor,
-                              background:
-                                editordata.appearance.buttonConfig
-                                  .buttonBackground,
+                                .buttonStyleFor
                             }
                             return (
                               <div key={btn.id}>
@@ -202,9 +199,7 @@ const LinkPath = () => {
           {editordata.links.length
             ? editordata.links.map((item) => {
                 const btnStyle = {
-                  ...editordata.appearance.buttonConfig.buttonStyleFor,
-                  background:
-                    editordata.appearance.buttonConfig.buttonBackground,
+                  ...editordata.appearance.buttonConfig.buttonStyleFor
                 }
                 return (
                   <a
