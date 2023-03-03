@@ -57,11 +57,11 @@ const Editor = () => {
     }
   }
 
-  useEffect(() => {
-    if (sessionStorage) {
-      handleEditorDataPost()
-    }
-  }, [editordata])
+  // useEffect(() => {
+  //   if (sessionStorage) {
+  //     handleEditorDataPost()
+  //   }
+  // }, [editordata])
 
   const FetchEditorDataFromDatabase = async () => {
     try {
