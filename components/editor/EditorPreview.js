@@ -38,7 +38,7 @@ const EditorPreview = () => {
   console.log(editordata)
   return (
     <div
-      className={`min-w-[500px] min-h-[800px] rounded-xl shadow-xl border bg-white w-full lg:w-auto p-5`}
+      className={`min-h-[800px] rounded-xl shadow-xl border bg-white w-full lg:w-auto p-5`}
       style={{ background: gcolor }}
     >
       <div>
@@ -83,7 +83,7 @@ const EditorPreview = () => {
               return (
                 <div
                   key={item.id}
-                  className="flex items-start justify-start gap-10 p-5 bg-[#ffffff97] rounded-lg backdrop-blur-sm shadow-xl"
+                  className="flex flex-col md:flex-row items-start justify-start gap-10 p-5 bg-[#ffffff97] rounded-lg backdrop-blur-sm shadow-xl"
                 >
                   <div>
                     <img

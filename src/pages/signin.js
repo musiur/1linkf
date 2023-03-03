@@ -88,7 +88,7 @@ const SignIn = () => {
     }, [errorMessage]);
     return (
         <div className="container section min-h-[80vh]">
-            <div className="max-w-[380px] min-w-[310px] p-5 rounded-md shadow-xl border m-auto">
+            <div className="max-w-[380px] p-5 rounded-md shadow-xl border m-auto">
                 {
                     message ? <div className={`${message.type ? "bg-green-400" : "bg-red-600"} text-white px-2 py-[4px] rounded-md mb-2 text-center`}>{message.message}</div> : null
                 }

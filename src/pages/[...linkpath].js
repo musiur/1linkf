@@ -72,11 +72,11 @@ const LinkPath = () => {
 
   return editordata ? (
     <div
-      className={`min-w-[500px] min-h-[800px] bg-white w-full lg:w-auto p-5 flex items-center justify-center`}
+      className={`min-h-[800px] bg-white w-full lg:w-auto p-5 flex items-center justify-center`}
       style={{ background: gcolor }}
     >
       <div>
-        <div className="max-w-[600px] min-[310px] m-auto">
+        <div className="max-w-[600px] min-w-[310px] m-auto">
           <img
             src={editordata.headers.profilePicture}
             alt=""
@@ -118,7 +118,7 @@ const LinkPath = () => {
                 return (
                   <div
                     key={item.id}
-                    className="flex items-start justify-start gap-10 p-5 bg-[#ffffff97] rounded-lg backdrop-blur-sm shadow-xl"
+                    className="flex flex-col md:flex-row items-start justify-start gap-10 p-5 bg-[#ffffff97] rounded-lg backdrop-blur-sm shadow-xl"
                   >
                     <div>
                       <img
