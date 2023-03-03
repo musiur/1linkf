@@ -115,7 +115,7 @@ const Editor = () => {
                   onClick={handleEditorDataPost}
                 >
                   {saveState === 'spin' ? (
-                    <div className="px-3 py-1 rounded-md flex gap-1 items-center max-w-[130px]">
+                    <div className="px-3 rounded-md flex gap-1 items-center max-w-[130px]">
                       <Spinner /> Saving...
                     </div>
                   ) : saveState === 'Saved' ? (

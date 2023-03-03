@@ -108,9 +108,9 @@ const EditorPreview = () => {
                           const btnStyle = {
                             ...editordata.appearance.buttonConfig
                               .buttonStyleFor,
-                            background:
-                              editordata.appearance.buttonConfig
-                                .buttonBackground,
+                            // background:
+                            //   editordata.appearance.buttonConfig
+                            //     .buttonBackground,
                           }
                           return (
                             <div key={btn.id}>
@@ -168,7 +168,7 @@ const EditorPreview = () => {
           ? editordata.links.map((item) => {
               const btnStyle = {
                 ...editordata.appearance.buttonConfig.buttonStyleFor,
-                background: editordata.appearance.buttonConfig.buttonBackground,
+                // background: editordata.appearance.buttonConfig.buttonBackground,
               }
               return (
                 <a
