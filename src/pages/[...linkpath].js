@@ -91,7 +91,7 @@ const LinkPath = () => {
       <div className="py-10">
         My Link:
         <a
-          href={`https://1link.vercel.app/` + linkPath}
+          href={`https://1linkf.vercel.app/` + linkPath}
           target="_blank"
           className="text-blue-600 px-3"
         >
