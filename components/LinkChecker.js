@@ -73,9 +73,9 @@ const LinkChecker = () => {
 
   const CreateLink = async () => {
     if (!userdata.username) {
-      Router.push("/dashboard/editor");
+      Router.push('/dashboard/editor')
     }
-    if (linkAvailable && pathname) {
+    if (linkAvailable && pathname && userdata.username) {
       try {
         const api = `${process.env.API_HOST}/api/links/create`
         const response = await axios.post(
@@ -93,7 +93,7 @@ const LinkChecker = () => {
           tempED.headers.url = pathname
           setEditordata(tempED)
           handleEditorDataPost()
-          Router.push("/dashboard/editor");
+          Router.push('/dashboard/editor')
         }
       } catch (error) {
         console.log(error)
