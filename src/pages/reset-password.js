@@ -34,6 +34,7 @@ const ResetPassword = () => {
   const FetchAPI = async () => {
     try {
       setSpin(true)
+      console.log({ formData })
       const { username, token } = Router.query
       const api = `${process.env.API_HOST}/api/test/user/reset-password/${username}/${token}`
       const response = await axios.post(api, formData)
@@ -41,7 +42,7 @@ const ResetPassword = () => {
       if (response.status === 200) {
         setMessage({
           type: true,
-          message: 'Verification link sent to your mail!',
+          message: 'Password updated successfully!',
         })
       } else {
         setMessage({
