@@ -75,13 +75,13 @@ const ForgetPassword = () => {
     }
   }, [errorMessage])
   return (
-    <div className="container section flex items-center justify-center gap-3">
+    <div className="container section flex items-center justify-center gap-3 min-h-[80vh]">
       <div className="max-w-[400px] w-[300px] rounded-md border p-5">
         {message ? (
           <div
             className={`${
               message.type ? 'bg-green-600' : 'bg-red-600'
-            } rounded-md text-center text-white`}
+            } rounded-md text-center text-white px-3 py-[3px] mb-5`}
           >
             {message.message}
           </div>

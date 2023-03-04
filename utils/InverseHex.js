@@ -1,3 +1,11 @@
+/**
+ * author: musiur alam opu
+ * description: this function is for converting HEX file into Inverse HEX
+ * 
+ */
+
+
+
 export function InverseHex(hex) {
     if (hex.indexOf('#') === 0) {
         hex = hex.slice(1);
