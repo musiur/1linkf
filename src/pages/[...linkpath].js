@@ -14,9 +14,9 @@ import {
   faTiktok,
   faTwitter,
   faYoutube,
-  faEnvelope,
 } from '@fortawesome/free-brands-svg-icons'
 import Spinner from 'components/icons/Spinner'
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 
 const LinkPath = () => {
   const Router = useRouter()
@@ -91,9 +91,7 @@ const LinkPath = () => {
       <div className="py-10">
         My Link:
         <a
-<<<<<<< HEAD
-          href={`https://1linkf.vercel.app/` + linkPath}
-=======
+          // href={`https://1linkf.vercel.app/` + linkPath}
           href={
             `${
               window.location.host.includes('localhost')
@@ -104,7 +102,6 @@ const LinkPath = () => {
             '/' +
             linkPath
           }
->>>>>>> c67ee39c8b4916483acfc420205c4547dcda8f71
           target="_blank"
           className="text-blue-600 px-3"
         >
