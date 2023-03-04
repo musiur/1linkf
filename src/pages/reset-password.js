@@ -1,10 +1,12 @@
 import axios from 'axios'
 import Button from 'components/Button'
 import Spinner from 'components/icons/Spinner'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-const ForgetPassword = () => {
-  const [formData, setFormData] = useState({ username: '', email: '' })
+const ResetPassword = () => {
+  const Router = useRouter()
+  const [formData, setFormData] = useState({ password: '' })
   const [errorMessage, setErrorMessage] = useState(formData)
   const [spin, setSpin] = useState(false)
   const [message, setMessage] = useState(null)
@@ -22,11 +24,8 @@ const ForgetPassword = () => {
   const validator = (data) => {
     let err = {}
 
-    if (!data.username.trim()) {
-      err.username = 'Username is required!'
-    }
-    if (!data.email.trim()) {
-      err.email = 'Email is required!'
+    if (!data.password.trim()) {
+      err.password = 'Password is required!'
     }
 
     return err
@@ -35,9 +34,9 @@ const ForgetPassword = () => {
   const FetchAPI = async () => {
     try {
       setSpin(true)
-      const host = window.location.host
-      const api = `${process.env.API_HOST}/api/test/user/forget-password`
-      const response = await axios.post(api, { ...formData, host })
+      const { username, token } = Router.query
+      const api = `${process.env.API_HOST}/api/test/user/reset-password/${username}/${token}`
+      const response = await axios.post(api, formData)
       console.log(response)
       if (response.status === 200) {
         setMessage({
@@ -87,31 +86,19 @@ const ForgetPassword = () => {
           </div>
         ) : null}
         <h1 className="text-xl text-center font-semibold mb-5">
-          Forget password
+          Reset password
         </h1>
         <div className="grid grid-cols-1 gap-2">
           <input
             type="text"
-            name="username"
+            name="password"
             onChange={handleOnChange}
-            placeholder="Username"
+            placeholder="New password"
             className="rounded-md px-3 py-1"
           />
-          {errorMessage.username ? (
+          {errorMessage.password ? (
             <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
-              {errorMessage.username}
-            </div>
-          ) : null}
-          <input
-            type="email"
-            name="email"
-            onChange={handleOnChange}
-            placeholder="Email to send verification link"
-            className="rounded-md px-3 py-1"
-          />
-          {errorMessage.email ? (
-            <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
-              {errorMessage.email}
+              {errorMessage.password}
             </div>
           ) : null}
         </div>
@@ -119,10 +106,10 @@ const ForgetPassword = () => {
           <Button onClick={handleSubmit}>
             {spin ? (
               <>
-                <Spinner /> Sending
+                <Spinner /> updating
               </>
             ) : (
-              'Send request'
+              'Update'
             )}
           </Button>
         </div>
@@ -131,4 +118,4 @@ const ForgetPassword = () => {
   )
 }
 
-export default ForgetPassword
+export default ResetPassword
