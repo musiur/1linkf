@@ -91,11 +91,29 @@ const LinkPath = () => {
       <div className="py-10">
         My Link:
         <a
+<<<<<<< HEAD
           href={`https://1linkf.vercel.app/` + linkPath}
+=======
+          href={
+            `${
+              window.location.host.includes('localhost')
+                ? 'http://'
+                : 'https://'
+            }` +
+            window.location.host +
+            '/' +
+            linkPath
+          }
+>>>>>>> c67ee39c8b4916483acfc420205c4547dcda8f71
           target="_blank"
           className="text-blue-600 px-3"
         >
-          Visit
+          {`${
+            window.location.host.includes('localhost') ? 'http://' : 'https://'
+          }` +
+            window.location.host +
+            '/' +
+            linkPath}
         </a>
       </div>
       <div>
