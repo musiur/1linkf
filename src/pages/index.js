@@ -1,78 +1,25 @@
+/**
+ * author: musiur alam opu
+ * title: home page
+ * description: link generator and subscription
+ * flow: link generation (LinkChecker)
+ */
+
 import Button from 'components/Button'
 import LinkChecker from 'components/LinkChecker'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import faqItems from "../../data/home/faqItems.json"
+import guideLine from "../../data/home/guideline.json"
 
+// main function of this component
 export default function Home() {
+
+  // router
   const Router = useRouter()
 
-  const faqItems = [
-    {
-      id: '0',
-      title: 'How is 1link better than Linktree?',
-      description:
-        'With 1link, you can showcase what is the most important for your readers: your books. Linktree is designed for as many people as possible, whereas 1link is specifically designed for authors who want to showcase their books.',
-    },
-    {
-      id: '1',
-      title: 'Is 1link free to use?',
-      description:
-        "Yes, you can get a 1link page for free and showcase one book. You'll have access to all customization features.",
-    },
-    {
-      id: '2',
-      title: 'Can I customize colors with a free 1link account?',
-      description:
-        'Yes, you can choose any color your want for your page background and for the buttons.',
-    },
-    {
-      id: '3',
-      title: 'What does the Premium subscription offer?',
-      description:
-        "With a Premium subscription, you can showcase more than one book, and add a banner picture to your profile. If you want to, you can also remove the 1link logo from your page's footer.",
-    },
-    {
-      id: '4',
-      title: 'Can I cancel my Premium subscription anytime?',
-      description:
-        "Yes! In your account settings, you can cancel your Premium subscription. You'll continue benefiting from Premium features until the end of billing period.",
-    },
-    {
-      id: '5',
-      title: "I purchases the Premium subscription and I'm not satisfied…",
-      description:
-        'If you cancel your subscription during the first month, just send us an email and we will refund the first month.',
-    },
-    {
-      id: '6',
-      title: 'I have another question…',
-      description: 'Contact us by email or find us on Twitter!',
-    },
-  ]
-
-  const guideLine = [
-    {
-      id: 0,
-      title: 'Create your account for free',
-      subtitle: 'Access all features right now.',
-    },
-    {
-      id: 1,
-      title: 'Add your books and your links',
-      subtitle: "Don't forget the links to your social media.",
-    },
-    {
-      id: 2,
-      title: 'Customize colors and style',
-      subtitle: 'Your readers will see a page that looks like you!',
-    },
-    {
-      id: 3,
-      title: 'Share your 1link everywhere!',
-      subtitle: 'On Twitter, Instagram, TikTok, and why not in your books?',
-    },
-  ]
+  
 
   const pricingData = [
     {

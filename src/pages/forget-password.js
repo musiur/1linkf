@@ -1,24 +1,39 @@
+/**
+ * author: musiur alam opu
+ * title: forget password page
+ * description: forget password handlers
+ * flow: userinput (handleOnChange) -> input validation (handleOnSubmit) -> apifetching (CallAPI)
+ */
+
+
 import axios from 'axios'
 import Button from 'components/Button'
 import Spinner from 'components/icons/Spinner'
 import { useEffect, useState } from 'react'
 
+// main function of this component
 const ForgetPassword = () => {
+  // form management states
   const [formData, setFormData] = useState({ username: '', email: '' })
   const [errorMessage, setErrorMessage] = useState(formData)
+
+  // api feedback handlers
   const [spin, setSpin] = useState(false)
   const [message, setMessage] = useState(null)
 
+  // input handler depending on onChange event
   const handleOnChange = (e) => {
     const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+    setFormData({ ...formData, [name]: value }) // dynamic setting values ot formdata
   }
 
+  // validation on submit
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrorMessage(validator(formData))
   }
 
+  // user input validator
   const validator = (data) => {
     let err = {}
 
@@ -29,16 +44,22 @@ const ForgetPassword = () => {
       err.email = 'Email is required!'
     }
 
+    // returning error object
     return err
   }
 
+  // api handler function for requesting for resetting password
   const FetchAPI = async () => {
     try {
       setSpin(true)
+
+      // current host name (example: location:3000 in development)
       const host = window.location.host
+
+      // api request
       const api = `${process.env.API_HOST}/api/test/user/forget-password`
       const response = await axios.post(api, { ...formData, host })
-      console.log(response)
+      
       if (response.status === 200) {
         setMessage({
           type: true,
@@ -56,7 +77,8 @@ const ForgetPassword = () => {
         setMessage(null)
       }, 5000)
     } catch (error) {
-      console.log(error)
+
+      // error response interaction
       setSpin(false)
       setMessage({
         type: false,
@@ -67,6 +89,8 @@ const ForgetPassword = () => {
       }, 5000)
     }
   }
+
+  // calling forget password api each time errorMessage changes
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
       FetchAPI()
@@ -74,9 +98,12 @@ const ForgetPassword = () => {
       console.log(errorMessage)
     }
   }, [errorMessage])
+
   return (
     <div className="container section flex items-center justify-center gap-3 min-h-[80vh]">
       <div className="max-w-[400px] w-[300px] rounded-md border p-5">
+
+        {/* message showcase according to api responses */}
         {message ? (
           <div
             className={`${
@@ -89,6 +116,8 @@ const ForgetPassword = () => {
         <h1 className="text-xl text-center font-semibold mb-5">
           Forget password
         </h1>
+
+        {/* reset password form  */}
         <div className="grid grid-cols-1 gap-2">
           <input
             type="text"
@@ -116,6 +145,8 @@ const ForgetPassword = () => {
           ) : null}
         </div>
         <div className="my-4">
+
+          {/* submit button  */}
           <Button onClick={handleSubmit}>
             {spin ? (
               <>
