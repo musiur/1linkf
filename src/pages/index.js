@@ -6,63 +6,25 @@
  */
 
 import Button from 'components/Button'
+import TickIcon from 'components/icons/TickIcon'
 import LinkChecker from 'components/LinkChecker'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import faqItems from "../../data/home/faqItems.json"
-import guideLine from "../../data/home/guideline.json"
+import faqItems from '../../data/home/faqItems.json'
+import guideLine from '../../data/home/guideline.json'
+import pricingData from '../../data/home/pricingData.json'
 
 // main function of this component
 export default function Home() {
-
   // router
   const Router = useRouter()
 
-  
-
-  const pricingData = [
-    {
-      id: 0,
-      title: 'Free',
-      subheading: [0, '$0.00'],
-      list: [
-        'Customize colors and style',
-        'Showcase one book',
-        'Unlimited links',
-      ],
-      btn_text: 'Sign up for free',
-      btn_link: '/signup',
-    },
-    {
-      id: 1,
-      title: 'Premium',
-      subheading: ['$6.99', '$3.99', 'US/month'],
-      list: [
-        'Customize colors and style',
-        'Showcase unlimited books',
-        'Add a banner picture',
-        'Unlimited links',
-        'Remove 1link icon',
-      ],
-      btn_text: 'Sign up with premium features',
-      btn_link: '/signup',
-    },
-    {
-      id: 2,
-      title: 'Professional',
-      subheading: 'Contuct us',
-      list: [
-        'Want to create pages for your clients?',
-        'Get in touch for a custom solution.',
-      ],
-      btn_text: 'contact us',
-      btn_link: '/contact-us',
-    },
-  ]
   return (
     <div className="bg-[#F9FAFB] max-w-[100vw] overflow-x-hidden">
       <div className="container section ">
+
+        {/* hero section  */}
         <div className="home__hero">
           <div className="home__hero__searchfield">
             <h1 className="home__hero__s_heading">
@@ -71,8 +33,12 @@ export default function Home() {
               will need to find <br />
               you and <span className="home__hero__s_h__span">your books</span>.
             </h1>
+
+            {/* link creator component  */}
             <LinkChecker />
           </div>
+
+          {/* right div  */}
           <div className="home__hero__image_section">
             <Image
               alt="card"
@@ -275,21 +241,4 @@ const FaqItem = ({ item }) => {
   )
 }
 
-const TickIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-6 h-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
-      />
-    </svg>
-  )
-}
+

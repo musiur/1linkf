@@ -1,0 +1,39 @@
+[
+    {
+      "id": 0,
+      "title": "Free",
+      "subheading": [0, "$0.00"],
+      "list": [
+        "Customize colors and style",
+        "Showcase one book",
+        "Unlimited links"
+      ],
+      "btn_text": "Sign up for free",
+      "btn_link": "/signup"
+    },
+    {
+      "id": 1,
+      "title": "Premium",
+      "subheading": ["$6.99", "$3.99", "US/month"],
+      "list": [
+        "Customize colors and style",
+        "Showcase unlimited books",
+        "Add a banner picture",
+        "Unlimited links",
+        "Remove 1link icon"
+      ],
+      "btn_text": "Sign up with premium features",
+      "btn_link": "/signup"
+    },
+    {
+      "id": 2,
+      "title": "Professional",
+      "subheading": "Contuct us",
+      "list": [
+        "Want to create pages for your clients?",
+        "Get in touch for a custom solution."
+      ],
+      "btn_text": "contact us",
+      "btn_link": "/contact-us"
+    }
+  ]
