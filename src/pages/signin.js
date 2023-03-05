@@ -1,8 +1,7 @@
 /**
  * author: musiur alam opu
  * title: sign in page
- * description: this page is for handling all sorts of actions for user login using credentials
- *              user credentials are username and password
+ * description: sign in handlers and global
  */
 
 import Button from 'components/Button'
