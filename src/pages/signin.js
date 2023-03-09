@@ -111,8 +111,6 @@ const SignIn = () => {
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
       CallAPI()
-    } else {
-      console.log(errorMessage)
     }
   }, [errorMessage])
 

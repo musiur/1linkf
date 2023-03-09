@@ -5,7 +5,6 @@ import { useContext } from 'react'
 
 const MyPage = () => {
   const { editordata, setEditordata } = useContext(EditorContext)
-  console.log(editordata)
   return (
     <Dashboard>
       <div className="flex flex-col items-center justify-center mt-10">

@@ -80,3 +80,14 @@ input:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+
+// animate on scroll
+.animate-hidden {
+  opacity: 0;
+  transition: All 2s ease-in-out;
+}
+
+.animate-show {
+  opacity: 1;
+}

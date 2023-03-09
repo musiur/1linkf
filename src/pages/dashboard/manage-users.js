@@ -24,7 +24,7 @@ const ManageUsers = () => {
         }
       )
       if (response.status === 200) {
-        // console.log(response.data.userList)
+        console.log(response.data.userList)
         setUsers(response.data.userList)
       }
       setShowSpinner(false)

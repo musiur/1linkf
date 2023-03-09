@@ -94,8 +94,6 @@ const ForgetPassword = () => {
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
       FetchAPI()
-    } else {
-      console.log(errorMessage)
     }
   }, [errorMessage])
 

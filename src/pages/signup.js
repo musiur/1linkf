@@ -32,7 +32,6 @@ const SignUp = () => {
   // input handler depending on onChange event
   const handleOnChange = (e) => {
     const { name, value } = e.target
-    console.log(name, value)
     setFormData({ ...formData, [name]: value }) // dynamic setting values to formdata
   }
 
@@ -105,8 +104,6 @@ const SignUp = () => {
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
       CallAPI()
-    } else {
-      console.log(errorMessage)
     }
   }, [errorMessage])
 

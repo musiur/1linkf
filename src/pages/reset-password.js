@@ -53,7 +53,6 @@ const ResetPassword = () => {
   const FetchAPI = async () => {
     try {
       setSpin(true)
-      console.log({ formData })
       const { username, token } = Router.query
 
       // api request
@@ -94,8 +93,6 @@ const ResetPassword = () => {
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
       FetchAPI()
-    } else {
-      console.log(errorMessage)
     }
   }, [errorMessage])
 
