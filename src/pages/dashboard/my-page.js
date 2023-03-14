@@ -9,8 +9,8 @@ import { useContext, useState } from 'react'
 const MyPage = () => {
   const { editordata, setEditordata } = useContext(EditorContext)
   
-  const tabs = ['Page', 'About', 'Blogs', 'Contact']
-  const [tab, setTab] = useState('About')
+  const tabs = ['Page', 'About', 'Blogs']
+  const [tab, setTab] = useState('Page')
   return (
     <Dashboard>
       <div className="flex flex-col items-center justify-center mt-10">
@@ -22,7 +22,7 @@ const MyPage = () => {
                 onClick={() => setTab(item)}
                 className={`${
                   item === tab
-                    ? 'bg-[#0891B2] shadow-md text-white hover:bg-[#0891b299]'
+                    ? 'bg-[#0891B2] shadow-md text-white hover:bg-[#0891b290]'
                     : ''
                 } px-3 py-1 rounded-md cursor-pointer hover:shadow-md hover:bg-gray-50`}
               >
@@ -49,8 +49,6 @@ const MyPage = () => {
           <About />
         ) : tab === 'Blogs' ? (
           <Blogs />
-        ) : tab === 'Contact' ? (
-          <Contact />
         ) : null}
       </div>
     </Dashboard>
