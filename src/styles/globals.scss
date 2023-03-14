@@ -57,7 +57,7 @@ input {
   @apply border;
 }
 
-input:focus {
+input:focus, select:focus {
   @apply outline-0 scale-[1.01] shadow;
 }
 

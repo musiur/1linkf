@@ -29,6 +29,28 @@ const SignIn = () => {
   const [message, setMessage] = useState(null)
   const [spinner, setSpinner] = useState(false)
 
+  const MakeAuthorProfile = async (username) => {
+    try {
+      const api = `${process.env.API_HOST}/api/author/create`
+      const data = {
+        username,
+        bio: 'Bio of ' + username,
+        blogs: [
+          {
+            id: 0,
+            title: 'Test Blog',
+            description: 'This blog is nothing to do',
+            link: 'https://youtube.com',
+          },
+        ],
+      }
+      const response = await axios.post(api, data)
+      console.log(response)
+    } catch (error) {
+      console.log('Error')
+    }
+  }
+
   // input handler depending on onChange event
   const handleOnChange = (e) => {
     const { name, value } = e.target
@@ -79,6 +101,7 @@ const SignIn = () => {
 
         // sending back to target location on the site
         const from = sessionStorage.getItem('from')
+        MakeAuthorProfile(response.data.username)
         if (from) {
           Router.push(from)
         } else {
@@ -164,7 +187,7 @@ const SignIn = () => {
             {spinner ? 'Processing' : 'Sign in'}
           </Button>
         </form>
-        
+
         <div className="flex items-center justify-center gap-3 mt-3">
           <p>{"Don't"} have an account?</p>
           <Link href="/signup" className="text-[#0891B2]">

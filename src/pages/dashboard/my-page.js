@@ -1,16 +1,44 @@
 import Dashboard from '@/pages/dashboard'
+import axios from 'axios'
 import EditorPreview from 'components/editor/EditorPreview'
-import About from 'components/editor/mypage/About'
-import Blogs from 'components/editor/mypage/Blogs'
-import Contact from 'components/editor/mypage/Contact'
+import AboutForm from 'components/editor/mypage/AboutForm'
+import BlogsForm from 'components/editor/mypage/BlogsForm'
 import { EditorContext } from 'context/EditorProvider'
+import { UserContext } from 'context/UserProvider'
 import { useContext, useState } from 'react'
 
 const MyPage = () => {
-  const { editordata, setEditordata } = useContext(EditorContext)
-  
+  // const { userdata } = useContext(UserContext)
+  const { editordata } = useContext(EditorContext)
+
   const tabs = ['Page', 'About', 'Blogs']
   const [tab, setTab] = useState('Page')
+
+  // const MakeAuthorProfile = async () => {
+  //   try {
+  //     const api = `${process.env.API_HOST}/api/author/create`
+  //     const data = {
+  //       username: userdata.username,
+  //       bio: 'Bio of ' + userdata.username,
+  //       blogs: [
+  //         {
+  //           id: 0,
+  //           title: 'Test Blog',
+  //           description: 'This blog is nothing to do',
+  //           link: 'https://youtube.com',
+  //         },
+  //       ],
+  //     }
+  //     const response = await axios.post(api, data)
+  //     console.log(response)
+  //   } catch (error) {
+  //     console.log('Error')
+  //   }
+  // }
+  // useEffect(() => {
+  //   if (userdata) {
+  //   }
+  // }, [userdata])
   return (
     <Dashboard>
       <div className="flex flex-col items-center justify-center mt-10">
@@ -22,7 +50,7 @@ const MyPage = () => {
                 onClick={() => setTab(item)}
                 className={`${
                   item === tab
-                    ? 'bg-[#0891B2] shadow-md text-white hover:bg-[#0891b290]'
+                    ? 'bg-[#0891B2] shadow-md text-white hover:bg-gray-600'
                     : ''
                 } px-3 py-1 rounded-md cursor-pointer hover:shadow-md hover:bg-gray-50`}
               >
@@ -46,9 +74,9 @@ const MyPage = () => {
             <EditorPreview />
           </div>
         ) : tab === 'About' ? (
-          <About />
+          <AboutForm />
         ) : tab === 'Blogs' ? (
-          <Blogs />
+          <BlogsForm />
         ) : null}
       </div>
     </Dashboard>
