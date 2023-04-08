@@ -8,7 +8,8 @@ const Layout = ({ children }) => {
 
     return (
         <ContextWrapper>
-            <Navbar />
+            {!Router.pathname.includes("author") ? <Navbar /> : null}
+            
             {children}
             {!Router.pathname.includes("dashboard") ? <Footer /> : null}
         </ContextWrapper>
