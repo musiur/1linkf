@@ -59,8 +59,8 @@ const HomePage = () => {
         <div className="flex flex-col gap-3 px-3 md:px-5 xl:px-32">
           <h3 className="text-xl lg:text-2xl font-semibold">Popular Blogs</h3>
           {blogs.map((item) => {
-            return <div key={item.id} className="cursor-pointer text-black hover:text-blue-400 hover:underline flex items-start justify-start gap-3">
-                <FontAwesomeIcon icon={faCheck} className="mt-[6px]"/>{item.title}</div>
+            return <p key={item.id} className="cursor-pointer text-black hover:text-blue-400 hover:underline flex items-start justify-start gap-3">
+                <FontAwesomeIcon icon={faCheck} className="mt-[6px]"/>{item.title}</p>
           })}
         </div>
       </div>

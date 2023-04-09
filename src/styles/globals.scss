@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
+
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -10,7 +13,12 @@
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
   scroll-behavior: smooth;
+}
+
+p{
+  font-family: 'Gideon Roman', cursive;
 }
 
 .container {
