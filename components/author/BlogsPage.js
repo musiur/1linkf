@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-const BlogsPage = () => {
+const BlogsPage = ({setCurrentTab}) => {
     const Blogs =[
         {
             id: 1, 
@@ -59,8 +59,8 @@ const BlogsPage = () => {
                   {blog.title}
                 </h3>
                 <p>{blog.description}</p>
-                <Link href={blog.detailsLink}>
-                  <button className="bg-blue-600 text-white px-4 pt-1 pb-[7px] rounded-lg inline">
+                <Link href="">
+                  <button className="bg-blue-600 text-white px-4 pt-1 pb-[7px] rounded-lg inline" onClick={() => setCurrentTab("blog")}>
                     Learn more
                   </button>
                 </Link>

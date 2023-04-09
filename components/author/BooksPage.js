@@ -71,7 +71,7 @@ const BooksPage = () => {
                 <p>{book.shortDescription}</p>
                 <Link href={book.detailsLink}>
                   <button className="bg-blue-600 text-white px-4 pt-1 pb-[7px] rounded-lg inline">
-                    Learn more
+                    Buy now
                   </button>
                 </Link>
               </div>
