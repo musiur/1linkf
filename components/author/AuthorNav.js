@@ -16,7 +16,7 @@ const AuthorNav = ({name, setCurrentTab}) => {
         },
     ]
     return (
-        <div className="flex items-center justify-between shadow-lg container sticky top-0 backdrop-blur-md">
+        <div className="flex items-center justify-between container sticky top-0 bg-white">
             <div className="text-xl lg:text-2xl font-medium cursor-pointer border-b border-white hover:border-black" onClick={() => setCurrentTab("home")}>{name}</div>
             <div className="flex items-center justify-between gap-5">
                 {
