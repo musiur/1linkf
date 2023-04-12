@@ -3,6 +3,7 @@ import axios from 'axios'
 import EditorPreview from 'components/editor/EditorPreview'
 import AboutForm from 'components/editor/mypage/AboutForm'
 import BlogsForm from 'components/editor/mypage/BlogsForm'
+import HomePageData from 'components/editor/mypage/HomePageData'
 import { EditorContext } from 'context/EditorProvider'
 import { UserContext } from 'context/UserProvider'
 import { useContext, useState } from 'react'
@@ -11,7 +12,7 @@ const MyPage = () => {
   // const { userdata } = useContext(UserContext)
   const { editordata } = useContext(EditorContext)
 
-  const tabs = ['Page', 'About', 'Blogs']
+  const tabs = ['Page', 'Home', 'Books', 'About', 'Blogs']
   const [tab, setTab] = useState('Page')
 
   // const MakeAuthorProfile = async () => {
@@ -39,6 +40,7 @@ const MyPage = () => {
   //   if (userdata) {
   //   }
   // }, [userdata])
+
   return (
     <Dashboard>
       <div className="flex flex-col items-center justify-center mt-10">
@@ -77,6 +79,8 @@ const MyPage = () => {
           <AboutForm />
         ) : tab === 'Blogs' ? (
           <BlogsForm />
+        ) : tab === 'Home' ? (
+          <HomePageData />
         ) : null}
       </div>
     </Dashboard>

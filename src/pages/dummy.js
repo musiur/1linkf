@@ -21,6 +21,7 @@
 // import Blogs from 'components/editor/mypage/Blogs'
 // import Contact from 'components/editor/mypage/Contact'
 
+
 // const LinkPath = () => {
 //   const Router = useRouter()
 //   const linkPath = Router.query.linkpath
@@ -356,7 +357,8 @@
 
 const Dummy = () => {
   return (
-    <div>Nothing</div>
+    <div>hkgkjhg
+    </div>
   )
 }
 

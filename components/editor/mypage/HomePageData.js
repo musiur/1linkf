@@ -1,22 +1,15 @@
-/**
- * author: musiur alam opu
- * title: forget password page
- * description: forget password handlers
- * flow: userinput (handleOnChange) -> input validation (handleOnSubmit) -> apifetching (CallAPI)
- */
-
-import axios from 'axios'
 import Button from 'components/Button'
-import Spinner from 'components/icons/Spinner'
-import NavFooter from 'layout/NavFooter'
 import { useEffect, useState } from 'react'
 
-// main function of this component
-const ForgetPassword = () => {
-  // form management states
-  const [formData, setFormData] = useState({ username: '', email: '' })
+const HomePageData = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    image: '',
+    authorTitle: "",
+    authorDescription: ""
+  })
   const [errorMessage, setErrorMessage] = useState(formData)
-
   // api feedback handlers
   const [spin, setSpin] = useState(false)
   const [message, setMessage] = useState(null)
@@ -54,23 +47,23 @@ const ForgetPassword = () => {
       setSpin(true)
 
       // current host name (example: location:3000 in development)
-      const host = window.location.host
+    //   const host = window.location.host
 
-      // api request
-      const api = `${process.env.API_HOST}/api/test/user/forget-password`
-      const response = await axios.post(api, { ...formData, host })
+    //   // api request
+    //   const api = `${process.env.API_HOST}/api/test/user/forget-password`
+    //   const response = await axios.post(api, { ...formData, host })
 
-      if (response.status === 200) {
-        setMessage({
-          type: true,
-          message: 'Verification link sent to your mail!',
-        })
-      } else {
-        setMessage({
-          type: false,
-          message: 'Something went wrong!',
-        })
-      }
+    //   if (response.status === 200) {
+    //     setMessage({
+    //       type: true,
+    //       message: 'Verification link sent to your mail!',
+    //     })
+    //   } else {
+    //     setMessage({
+    //       type: false,
+    //       message: 'Something went wrong!',
+    //     })
+    //   }
       setSpin(false)
 
       setTimeout(() => {
@@ -95,11 +88,10 @@ const ForgetPassword = () => {
       FetchAPI()
     }
   }, [errorMessage])
-
   return (
-    <NavFooter>
-      <div className="container section flex items-center justify-center gap-3 min-h-[80vh]">
-        <div className="max-w-[400px] w-[300px] rounded-md border p-5">
+    <div>
+      <div className="">
+        <div className="p-5">
           {/* message showcase according to api responses */}
           {message ? (
             <div
@@ -110,34 +102,74 @@ const ForgetPassword = () => {
               {message.message}
             </div>
           ) : null}
-          <h1 className="text-xl text-center font-semibold mb-5">
-            Forget password
-          </h1>
+          
 
           {/* reset password form  */}
           <div className="grid grid-cols-1 gap-2">
             <input
               type="text"
-              name="username"
+              name="title"
               onChange={handleOnChange}
-              placeholder="Username"
+              placeholder="title"
               className="rounded-md px-3 py-1"
             />
-            {errorMessage.username ? (
+            {errorMessage.title ? (
               <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
-                {errorMessage.username}
+                {errorMessage.title}
               </div>
             ) : null}
+            
             <input
-              type="email"
-              name="email"
+              type="text"
+              name="description"
               onChange={handleOnChange}
-              placeholder="Email to send verification link"
+              placeholder="description"
               className="rounded-md px-3 py-1"
             />
-            {errorMessage.email ? (
+            {errorMessage.description ? (
               <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
-                {errorMessage.email}
+                {errorMessage.description}
+              </div>
+            ) : null}
+
+            <input
+              type="text"
+              name="authorTitle"
+              onChange={handleOnChange}
+              placeholder="authorTitle"
+              className="rounded-md px-3 py-1"
+            />
+            {errorMessage.authorTitle ? (
+              <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
+                {errorMessage.authorTitle}
+              </div>
+            ) : null}
+
+            {/* <input
+              type="text"
+              name="authorDescription"
+              onChange={handleOnChange}
+              placeholder="authorDescription"
+              className="rounded-md px-3 py-1"
+            />
+            {errorMessage.authorDescription ? (
+              <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
+                {errorMessage.authorDescription}
+              </div>
+            ) : null} */}
+
+            
+
+            <input
+              type="file"
+              name="image"
+              onChange={handleOnChange}
+              placeholder="image"
+              className="rounded-md px-3 py-1"
+            />
+            {errorMessage.image ? (
+              <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
+                {errorMessage.image}
               </div>
             ) : null}
           </div>
@@ -155,8 +187,8 @@ const ForgetPassword = () => {
           </div>
         </div>
       </div>
-    </NavFooter>
+    </div>
   )
 }
 
-export default ForgetPassword
+export default HomePageData

@@ -103,3 +103,23 @@ input:focus, select:focus {
 .animate-show {
   opacity: 1;
 }
+
+// text editor
+.quill {
+  /* max-width: 800px; */
+  min-width: 100%;
+  /* margin-inline: auto; */
+}
+
+#htmlPluggedIn {
+  position: relative;
+  margin-inline: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+#htmlPluggedIn img {
+  max-width: 100%;
+  position: relative;
+}
+////////////
