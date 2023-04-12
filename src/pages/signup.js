@@ -11,6 +11,7 @@ import axios from 'axios'
 import Spinner from 'components/icons/Spinner'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import NavFooter from 'layout/NavFooter'
 
 // main function of this component
 const SignUp = () => {
@@ -108,7 +109,8 @@ const SignUp = () => {
   }, [errorMessage])
 
   return (
-    <div className="container section min-h-[80vh]">
+    <NavFooter>
+      <div className="container section min-h-[80vh]">
       <div className="max-w-[380px] p-5 rounded-md shadow-xl border m-auto">
         
         {/* message showcase according to api responses */}
@@ -171,6 +173,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+    </NavFooter>
   )
 }
 

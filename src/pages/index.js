@@ -14,6 +14,7 @@ import { useState } from 'react'
 import faqItems from '../../data/home/faqItems.json'
 import guideLine from '../../data/home/guideline.json'
 import pricingData from '../../data/home/pricingData.json'
+import NavFooter from 'layout/NavFooter'
 
 // main function of this component
 export default function Home() {
@@ -21,7 +22,8 @@ export default function Home() {
   const Router = useRouter()
 
   return (
-    <div className="bg-[#F9FAFB] max-w-[100vw] overflow-x-hidden">
+    <NavFooter>
+      <div className="bg-[#F9FAFB] max-w-[100vw] overflow-x-hidden">
       <div className="container section ">
         {/* hero section  */}
         <div className="home__hero">
@@ -215,6 +217,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </NavFooter>
   )
 }
 

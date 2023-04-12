@@ -1,4 +1,5 @@
 import { UserContext } from 'context/UserProvider'
+import NavFooter from 'layout/NavFooter'
 import Private from 'layout/Private'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -16,6 +17,7 @@ const Dashboard = ({ children }) => {
   const Router = useRouter()
   return (
     <Private>
+      <NavFooter>
       <div className="grid grid-cols-1 lg:grid-cols-12">
         <div className="col-span-2 bg-[#0891B2] p-5 min-h-auto lg:min-h-[90vh] h-full flex flex-row flex-wrap lg:flex-col gap-1 justify-start items-start text-white">
           {tabs.map((item) => {
@@ -39,6 +41,7 @@ const Dashboard = ({ children }) => {
           {children}
         </div>
       </div>
+      </NavFooter>
     </Private>
   )
 }

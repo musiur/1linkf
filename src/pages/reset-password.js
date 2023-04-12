@@ -8,6 +8,7 @@
 import axios from 'axios'
 import Button from 'components/Button'
 import Spinner from 'components/icons/Spinner'
+import NavFooter from 'layout/NavFooter'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
@@ -97,7 +98,8 @@ const ResetPassword = () => {
   }, [errorMessage])
 
   return (
-    <div className="container section flex items-center justify-center gap-3 min-h-[80vh]">
+    <NavFooter>
+<div className="container section flex items-center justify-center gap-3 min-h-[80vh]">
       <div className="max-w-[400px] w-[300px] rounded-md border p-5">
 
         {/* message showcase according to api responses */}
@@ -146,6 +148,7 @@ const ResetPassword = () => {
         </div>
       </div>
     </div>
+    </NavFooter>
   )
 }
 
