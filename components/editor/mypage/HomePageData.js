@@ -1,13 +1,18 @@
+import axios from 'axios'
 import Button from 'components/Button'
-import { useEffect, useState } from 'react'
+import UploadImage from 'components/UploadImage'
+import Spinner from 'components/icons/Spinner'
+import { UserContext } from 'context/UserProvider'
+import { useContext, useEffect, useState } from 'react'
 
 const HomePageData = () => {
+  const {userdata} = useContext(UserContext);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     image: '',
-    authorTitle: "",
-    authorDescription: ""
+    authorTitle: '',
+    authorDescription: '',
   })
   const [errorMessage, setErrorMessage] = useState(formData)
   // api feedback handlers
@@ -30,11 +35,19 @@ const HomePageData = () => {
   const validator = (data) => {
     let err = {}
 
-    if (!data.username.trim()) {
-      err.username = 'Username is required!'
+    if (!data.title.trim()) {
+      err.title = 'Title is required!'
     }
-    if (!data.email.trim()) {
-      err.email = 'Email is required!'
+    if (!data.description.trim()) {
+      err.description = 'Description is required!'
+    }
+
+    if (!data.authorTitle.trim()) {
+      err.authorTitle = 'Author title is required!'
+    }
+
+    if (!data.authorDescription.trim()) {
+      err.authorDescription = 'Author description is required!'
     }
 
     // returning error object
@@ -43,27 +56,32 @@ const HomePageData = () => {
 
   // api handler function for requesting for resetting password
   const FetchAPI = async () => {
+    console.log(formData)
     try {
       setSpin(true)
 
       // current host name (example: location:3000 in development)
-    //   const host = window.location.host
+      const host = window.location.host
 
-    //   // api request
-    //   const api = `${process.env.API_HOST}/api/test/user/forget-password`
-    //   const response = await axios.post(api, { ...formData, host })
+      const data = {...formData, username: userdata.username}
 
-    //   if (response.status === 200) {
-    //     setMessage({
-    //       type: true,
-    //       message: 'Verification link sent to your mail!',
-    //     })
-    //   } else {
-    //     setMessage({
-    //       type: false,
-    //       message: 'Something went wrong!',
-    //     })
-    //   }
+      console.log({data})
+      // api request
+      const api = `${process.env.API_HOST}/api/authorpage/create`
+      const response = await axios.post(api, { ...data, host })
+
+      console.log(response)
+      if (response.status === 200) {
+        setMessage({
+          type: true,
+          message: 'Author page data saved successfully!',
+        })
+      } else {
+        setMessage({
+          type: false,
+          message: 'Something went wrong!',
+        })
+      }
       setSpin(false)
 
       setTimeout(() => {
@@ -71,6 +89,7 @@ const HomePageData = () => {
       }, 5000)
     } catch (error) {
       // error response interaction
+      console.log(error)
       setSpin(false)
       setMessage({
         type: false,
@@ -88,9 +107,11 @@ const HomePageData = () => {
       FetchAPI()
     }
   }, [errorMessage])
+
+  console.log(userdata)
   return (
-    <div>
-      <div className="">
+    <div className="w-full">
+      <div className="max-w-[700px]">
         <div className="p-5">
           {/* message showcase according to api responses */}
           {message ? (
@@ -102,11 +123,14 @@ const HomePageData = () => {
               {message.message}
             </div>
           ) : null}
-          
 
           {/* reset password form  */}
           <div className="grid grid-cols-1 gap-2">
+            <label htmlFor="title" className="pt-5 font-semibold">
+              Page title
+            </label>
             <input
+              id="title"
               type="text"
               name="title"
               onChange={handleOnChange}
@@ -118,8 +142,12 @@ const HomePageData = () => {
                 {errorMessage.title}
               </div>
             ) : null}
-            
+
+            <label htmlFor="description" className="pt-5 font-semibold">
+              Description
+            </label>
             <input
+              id="description"
               type="text"
               name="description"
               onChange={handleOnChange}
@@ -132,7 +160,11 @@ const HomePageData = () => {
               </div>
             ) : null}
 
+            <label htmlFor="authorTitle" className="pt-5 font-semibold">
+              Author title
+            </label>
             <input
+              id="authorTitle"
               type="text"
               name="authorTitle"
               onChange={handleOnChange}
@@ -145,7 +177,11 @@ const HomePageData = () => {
               </div>
             ) : null}
 
-            {/* <input
+            <label htmlFor="authorDescription" className="pt-5 font-semibold">
+              Author description
+            </label>
+            <input
+              id="authorDescription"
               type="text"
               name="authorDescription"
               onChange={handleOnChange}
@@ -156,26 +192,21 @@ const HomePageData = () => {
               <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
                 {errorMessage.authorDescription}
               </div>
-            ) : null} */}
-
-            
-
-            <input
-              type="file"
-              name="image"
-              onChange={handleOnChange}
-              placeholder="image"
-              className="rounded-md px-3 py-1"
-            />
-            {errorMessage.image ? (
-              <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
-                {errorMessage.image}
-              </div>
             ) : null}
+            <div className="pt-5"></div>
+            <UploadImage
+              func={handleOnChange}
+              name="image"
+              label="Upload your banner picture"
+              defaultValue={formData.image}
+            />
           </div>
           <div className="my-4">
             {/* submit button  */}
-            <Button onClick={handleSubmit}>
+            <button
+              onClick={handleSubmit}
+              className="px-5 py-1 bg-[#0991b2] text-white rounded-md"
+            >
               {spin ? (
                 <>
                   <Spinner /> Sending
@@ -183,7 +214,7 @@ const HomePageData = () => {
               ) : (
                 'Send request'
               )}
-            </Button>
+            </button>
           </div>
         </div>
       </div>
