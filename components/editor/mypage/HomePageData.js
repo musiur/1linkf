@@ -6,7 +6,7 @@ import { UserContext } from 'context/UserProvider'
 import { useContext, useEffect, useState } from 'react'
 
 const HomePageData = () => {
-  const {userdata} = useContext(UserContext);
+  const { userdata } = useContext(UserContext)
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -15,6 +15,7 @@ const HomePageData = () => {
     authorDescription: '',
   })
   const [errorMessage, setErrorMessage] = useState(formData)
+  const [upOrCreate, setUpOrCreate] = useState('update')
   // api feedback handlers
   const [spin, setSpin] = useState(false)
   const [message, setMessage] = useState(null)
@@ -63,12 +64,17 @@ const HomePageData = () => {
       // current host name (example: location:3000 in development)
       const host = window.location.host
 
-      const data = {...formData, username: userdata.username}
+      const data = { ...formData, username: userdata.username }
 
-      console.log({data})
+      console.log({ data })
       // api request
-      const api = `${process.env.API_HOST}/api/authorpage/create`
-      const response = await axios.post(api, { ...data, host })
+      const api = `${process.env.API_HOST}/api/authorpage/${
+        upOrCreate === 'update' ? 'update' : 'create'
+      }`
+      const response =
+        upOrCreate === 'create'
+          ? await axios.post(api, { ...data, host })
+          : await axios.put(api, { ...data })
 
       console.log(response)
       if (response.status === 200) {
@@ -108,22 +114,29 @@ const HomePageData = () => {
     }
   }, [errorMessage])
 
-  console.log(userdata)
+  const fetchFormData = async () => {
+    try {
+      const api = `${process.env.API_HOST}/api/authorpage/${userdata.username}`
+      const response = await axios.get(api)
+      console.log(response)
+      if (response.status === 200) {
+        setFormData(response.data.result[0])
+      } else {
+        setUpOrCreate('create')
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  useEffect(() => {
+    fetchFormData()
+  }, [userdata.username])
+
+  console.log(formData)
   return (
     <div className="w-full">
       <div className="max-w-[700px]">
         <div className="p-5">
-          {/* message showcase according to api responses */}
-          {message ? (
-            <div
-              className={`${
-                message.type ? 'bg-green-600' : 'bg-red-600'
-              } rounded-md text-center text-white px-3 py-[3px] mb-5`}
-            >
-              {message.message}
-            </div>
-          ) : null}
-
           {/* reset password form  */}
           <div className="grid grid-cols-1 gap-2">
             <label htmlFor="title" className="pt-5 font-semibold">
@@ -136,6 +149,7 @@ const HomePageData = () => {
               onChange={handleOnChange}
               placeholder="title"
               className="rounded-md px-3 py-1"
+              defaultValue={formData?.title}
             />
             {errorMessage.title ? (
               <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
@@ -153,6 +167,7 @@ const HomePageData = () => {
               onChange={handleOnChange}
               placeholder="description"
               className="rounded-md px-3 py-1"
+              defaultValue={formData?.description}
             />
             {errorMessage.description ? (
               <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
@@ -170,6 +185,7 @@ const HomePageData = () => {
               onChange={handleOnChange}
               placeholder="authorTitle"
               className="rounded-md px-3 py-1"
+              defaultValue={formData?.authorTitle}
             />
             {errorMessage.authorTitle ? (
               <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
@@ -187,6 +203,7 @@ const HomePageData = () => {
               onChange={handleOnChange}
               placeholder="authorDescription"
               className="rounded-md px-3 py-1"
+              defaultValue={formData?.authorDescription}
             />
             {errorMessage.authorDescription ? (
               <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
@@ -198,9 +215,21 @@ const HomePageData = () => {
               func={handleOnChange}
               name="image"
               label="Upload your banner picture"
-              defaultValue={formData.image}
+              defaultValue={formData?.image}
             />
           </div>
+
+          {/* message showcase according to api responses */}
+          {message ? (
+            <div
+              className={`${
+                message.type ? 'bg-green-600' : 'bg-red-600'
+              } rounded-md text-center text-white px-3 py-[3px] mb-5 max-w-[250px]`}
+            >
+              {message.message}
+            </div>
+          ) : null}
+
           <div className="my-4">
             {/* submit button  */}
             <button
@@ -209,10 +238,12 @@ const HomePageData = () => {
             >
               {spin ? (
                 <>
-                  <Spinner /> Sending
+                  <Spinner /> {upOrCreate === 'update' ? 'Updating' : 'Saving'}
                 </>
+              ) : upOrCreate === 'update' ? (
+                'Update data'
               ) : (
-                'Send request'
+                'Save data'
               )}
             </button>
           </div>

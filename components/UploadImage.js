@@ -1,13 +1,12 @@
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import Avatar from './avatar.jpg'
 
-const UploadImage = ({ type, func, name, defaultValue, label }) => {
+const UploadImage = ({ type, func, name, defaultValue }) => {
   console.log({ defaultValue })
   const [postImage, setPostImage] = useState({
     myFile: defaultValue ? defaultValue : '',
   })
   const [imageName, setImageName] = useState('Upload picture')
+
   const handleFileUpload = async (e) => {
     const file = e.target.files[0]
     const base64 = await convertToBase64(file)
