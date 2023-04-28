@@ -89,7 +89,7 @@ const EditorPreview = () => {
                     <img
                       src={item.bookcover}
                       alt=""
-                      className="w-[120px] h-[160px] rounded-md border bg-white"
+                      className="min-w-[150px] min-h-[200px] w-[120px] h-[160px] rounded-md border bg-white"
                     />
                   </div>
                   <div>

@@ -6,6 +6,7 @@ import BlogsPage from 'components/author/BlogsPage'
 import BooksPage from 'components/author/BooksPage'
 import HomePage from 'components/author/HomePage'
 import { useState } from 'react'
+import Footer from 'components/Footer'
 
 const LinkPath = () => {
   const Router = useRouter()
@@ -25,6 +26,7 @@ const LinkPath = () => {
       ) : currentTab === 'blog' ? (
         <BlogPage setCurrentTab={setCurrentTab} />
       ) : null}
+      <Footer />
     </div>
   )
 }
