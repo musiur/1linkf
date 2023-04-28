@@ -13,9 +13,9 @@ const LinkPath = () => {
   const [currentTab, setCurrentTab] = useState('home')
   return (
     <div>
-      <AuthorNav name="James Clear" setCurrentTab={setCurrentTab} />
+      <AuthorNav name={linkpath ? linkpath : "John Doe"} setCurrentTab={setCurrentTab} />
       {currentTab === 'home' ? (
-        <HomePage />
+        <HomePage linkpath={linkpath} />
       ) : currentTab === 'books' ? (
         <BooksPage />
       ) : currentTab === 'blogs' ? (

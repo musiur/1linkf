@@ -21,6 +21,7 @@ const Navbar = () => {
     setUserdata({})
     // sessionStorage.removeItem("access_token");
     sessionStorage.clear()
+    localStorage.clear()
     Router.push('/')
   }
   return (

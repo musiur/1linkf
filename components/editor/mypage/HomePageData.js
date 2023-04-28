@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Button from 'components/Button'
 import UploadImage from 'components/UploadImage'
 import Spinner from 'components/icons/Spinner'
 import { UserContext } from 'context/UserProvider'
@@ -120,7 +119,11 @@ const HomePageData = () => {
       const response = await axios.get(api)
       console.log(response)
       if (response.status === 200) {
-        setFormData(response.data.result[0])
+        if (response.data.result.length) {
+          setFormData(response.data.result[0])
+        } else {
+          setUpOrCreate('create')
+        }
       } else {
         setUpOrCreate('create')
       }
@@ -211,12 +214,23 @@ const HomePageData = () => {
               </div>
             ) : null}
             <div className="pt-5"></div>
-            <UploadImage
-              func={handleOnChange}
-              name="image"
-              label="Upload your banner picture"
-              defaultValue={formData?.image}
-            />
+
+            {formData.image ? (
+              <UploadImage
+                func={handleOnChange}
+                name="image"
+                label="Upload your banner"
+                defaultValue={formData?.image}
+              />
+            ) : null}
+            {formData.image === '' ? (
+              <UploadImage
+                func={handleOnChange}
+                name="image"
+                label="Upload your banner"
+                defaultValue={formData?.image}
+              />
+            ) : null}
           </div>
 
           {/* message showcase according to api responses */}
