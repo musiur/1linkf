@@ -54,7 +54,31 @@ const HomePageData = () => {
     return err
   }
 
-  // api handler function for requesting for resetting password
+  const [pathname, setPathname] = useState(null)
+
+  // fetching pathname for the current username
+  const FetchPath = async () => {
+    try {
+      const api = `${process.env.API_HOST}/api/links/getpath/${userdata.username}`
+      const response = await axios.get(api)
+      console.log("FetchPath: ", response.data)
+      if (response.status === 200) {
+        setPathname(response.data)
+      } else {
+        setPathname(false)
+      }
+    } catch (err) {
+      setPathname(false)
+    }
+  }
+
+  useEffect(() => {
+    userdata.username && FetchPath()
+  }, [userdata.username])
+
+  console.log("Pathname", pathname)
+
+  // api handler function for requesting for saving author data
   const FetchAPI = async () => {
     console.log(formData)
     try {
@@ -62,8 +86,7 @@ const HomePageData = () => {
 
       // current host name (example: location:3000 in development)
       const host = window.location.host
-
-      const data = { ...formData, username: userdata.username }
+      const data = { ...formData, username: userdata.username, pathname }
 
       console.log({ data })
       // api request
@@ -73,7 +96,7 @@ const HomePageData = () => {
       const response =
         upOrCreate === 'create'
           ? await axios.post(api, { ...data, host })
-          : await axios.put(api, { ...data })
+          : await axios.put(api, { ...data, pathname })
 
       console.log(response)
       if (response.status === 200) {
@@ -109,18 +132,19 @@ const HomePageData = () => {
   // calling forget password api each time errorMessage changes
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
-      FetchAPI()
+      pathname ? FetchAPI() : setMessage('Pathname not found!')
     }
   }, [errorMessage])
 
   const fetchFormData = async () => {
     try {
-      const api = `${process.env.API_HOST}/api/authorpage/${userdata.username}`
+      const api = `${process.env.API_HOST}/api/authorpage/${pathname}`
       const response = await axios.get(api)
       console.log(response)
       if (response.status === 200) {
         if (response.data.result.length) {
           setFormData(response.data.result[0])
+          setUpOrCreate('update')
         } else {
           setUpOrCreate('create')
         }
@@ -132,8 +156,10 @@ const HomePageData = () => {
     }
   }
   useEffect(() => {
-    fetchFormData()
-  }, [userdata.username])
+    pathname ? fetchFormData() : setMessage('Pathname not found!')
+  }, [pathname])
+
+  console.log("Operation: ", upOrCreate)
 
   console.log(formData)
   return (
