@@ -70,7 +70,7 @@ const HomePage = ({ linkpath }) => {
                 : 'https://jamesclear.com/wp-content/uploads/2022/12/retina-atomic-habits-full-dots.png'
             }
             alt="img"
-            className="w-full p-5 md:w-[80%] lg:w-[50%] mx-auto"
+            className="w-full p-5 md:w-[80%] lg:w-[50%] mx-auto max-h-[600px]"
           />
         </div>
 
