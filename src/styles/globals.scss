@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 
 * {
@@ -10,16 +10,15 @@
   padding: 0;
   margin: 0;
 
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  // font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  //   "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+  //   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  font-family: 'Heebo', sans-serif;
   
   scroll-behavior: smooth;
 }
 
-p{
-  font-family: 'Gideon Roman', cursive;
-}
 
 .container {
   @apply max-w-[1700px] mx-auto p-5;

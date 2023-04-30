@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 const UploadImage = ({ type, func, name, defaultValue }) => {
-  console.log({ defaultValue })
+  // console.log({ defaultValue })
   const [postImage, setPostImage] = useState({
     myFile: defaultValue ? defaultValue : '',
   })
@@ -43,7 +43,7 @@ const UploadImage = ({ type, func, name, defaultValue }) => {
           label="Image"
           name="myFile"
           id="file-upload"
-          accept=".jpeg, .png. jpg"
+          accept=".jpeg, .png, .jpg, .webp"
           onChange={handleFileUpload}
           className="absolute top-0 left-0 w-full h-full border opacity-0 cursor-pointer"
         />
