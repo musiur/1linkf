@@ -12,7 +12,7 @@ const MyPage = () => {
   // const { userdata } = useContext(UserContext)
   const { editordata } = useContext(EditorContext)
 
-  const tabs = ['Page', 'Home', 'Books', 'About', 'Blogs']
+  const tabs = ['Page', 'Home', 'Books', 'Blogs', 'About']
   const [tab, setTab] = useState('Page')
 
   // const MakeAuthorProfile = async () => {
