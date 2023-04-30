@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import LoadingGif from '../assets/loading.svg'
 import { useContext } from 'react'
 import { LoadingContext } from 'context/LoadingProvider'
 import Image from 'next/image'
