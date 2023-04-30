@@ -1,13 +1,7 @@
-
-import ContextWrapper from "context/ContextWrapper";
+import ContextWrapper from 'context/ContextWrapper'
 
 const Layout = ({ children }) => {
-
-    return (
-        <ContextWrapper>
-            {children}
-        </ContextWrapper>
-    )
+  return <ContextWrapper>{children}</ContextWrapper>
 }
 
-export default Layout;
+export default Layout

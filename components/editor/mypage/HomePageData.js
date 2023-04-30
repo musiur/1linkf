@@ -1,11 +1,15 @@
 import axios from 'axios'
 import UploadImage from 'components/UploadImage'
 import Spinner from 'components/icons/Spinner'
+import { LoadingContext } from 'context/LoadingProvider'
+import { PathContext } from 'context/PathContext'
 import { UserContext } from 'context/UserProvider'
 import { useContext, useEffect, useState } from 'react'
 
 const HomePageData = () => {
+  const {pathname} = useContext(PathContext)
   const { userdata } = useContext(UserContext)
+  const { setLoading } = useContext(LoadingContext)
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -13,6 +17,7 @@ const HomePageData = () => {
     authorTitle: '',
     authorDescription: '',
   })
+  console.log("--------->", pathname, userdata)
   const [errorMessage, setErrorMessage] = useState(formData)
   const [upOrCreate, setUpOrCreate] = useState('update')
   // api feedback handlers
@@ -54,29 +59,28 @@ const HomePageData = () => {
     return err
   }
 
-  const [pathname, setPathname] = useState(null)
+  // const [pathname, setPathname] = useState(null)
 
-  // fetching pathname for the current username
-  const FetchPath = async () => {
-    try {
-      const api = `${process.env.API_HOST}/api/links/getpath/${userdata.username}`
-      const response = await axios.get(api)
-      console.log("FetchPath: ", response.data)
-      if (response.status === 200) {
-        setPathname(response.data)
-      } else {
-        setPathname(false)
-      }
-    } catch (err) {
-      setPathname(false)
-    }
-  }
+  // // fetching pathname for the current username
+  // const FetchPath = async () => {
+  //   try {
+  //     const api = `${process.env.API_HOST}/api/links/getpath/${userdata.username}`
+  //     const response = await axios.get(api)
+  //     console.log('FetchPath: ', response.data)
+  //     if (response.status === 200) {
+  //       setPathname(response.data)
+  //     } else {
+  //       setPathname(false)
+  //     }
+  //   } catch (err) {
+  //     setPathname(false)
+  //   }
+  // }
 
-  useEffect(() => {
-    userdata.username && FetchPath()
-  }, [userdata.username])
+  // useEffect(() => {
+  //   userdata.username && FetchPath()
+  // }, [userdata.username])
 
-  console.log("Pathname", pathname)
 
   // api handler function for requesting for saving author data
   const FetchAPI = async () => {
@@ -137,6 +141,7 @@ const HomePageData = () => {
   }, [errorMessage])
 
   const fetchFormData = async () => {
+    setLoading(true)
     try {
       const api = `${process.env.API_HOST}/api/authorpage/${pathname}`
       const response = await axios.get(api)
@@ -154,14 +159,12 @@ const HomePageData = () => {
     } catch (err) {
       console.log(err)
     }
+    setLoading(false)
   }
   useEffect(() => {
     pathname ? fetchFormData() : setMessage('Pathname not found!')
   }, [pathname])
 
-  console.log("Operation: ", upOrCreate)
-
-  console.log(formData)
   return (
     <div className="w-full">
       <div className="max-w-[700px]">
@@ -263,8 +266,8 @@ const HomePageData = () => {
           {message ? (
             <div
               className={`${
-                message.type ? 'bg-green-600' : 'bg-red-600'
-              } rounded-md text-center text-white px-3 py-[3px] mb-5 max-w-[250px]`}
+                message.type ? 'bg-green-400' : 'bg-red-400'
+              } rounded-md text-center text-white px-3 py-[3px] mb-5 max-w-[250px] fixed top-[100px] right-0 m-3 shadow-xl`}
             >
               {message.message}
             </div>

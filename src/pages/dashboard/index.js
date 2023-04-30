@@ -1,3 +1,4 @@
+import { PathContext } from 'context/PathContext'
 import { UserContext } from 'context/UserProvider'
 import NavFooter from 'layout/NavFooter'
 import Private from 'layout/Private'
@@ -7,7 +8,8 @@ import { useContext } from 'react'
 
 const Dashboard = ({ children }) => {
   const { userdata } = useContext(UserContext)
-  let tabs = ['Editor', 'Profile', 'My page']
+  const {pathname} = useContext(PathContext);
+  let tabs = pathname ? ['Editor', 'Profile', 'My page']: ['Editor', 'Profile']
   if (userdata?.roles?.includes('ROLE_ADMIN')) {
     tabs = ['Editor', 'Profile', 'My page', 'Manage users', 'Add moderator']
   }
