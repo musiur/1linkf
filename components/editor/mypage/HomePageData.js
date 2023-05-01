@@ -2,14 +2,16 @@ import axios from 'axios'
 import UploadImage from 'components/UploadImage'
 import Spinner from 'components/icons/Spinner'
 import { LoadingContext } from 'context/LoadingProvider'
-import { PathContext } from 'context/PathContext'
+import { PathContext } from 'context/PathProvider'
+import { PopContext } from 'context/PopProvider'
 import { UserContext } from 'context/UserProvider'
 import { useContext, useEffect, useState } from 'react'
 
 const HomePageData = () => {
-  const {pathname} = useContext(PathContext)
+  const { pathname } = useContext(PathContext)
   const { userdata } = useContext(UserContext)
   const { setLoading } = useContext(LoadingContext)
+  const { setMessage } = useContext(PopContext)
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -17,12 +19,10 @@ const HomePageData = () => {
     authorTitle: '',
     authorDescription: '',
   })
-  console.log("--------->", pathname, userdata)
+
   const [errorMessage, setErrorMessage] = useState(formData)
   const [upOrCreate, setUpOrCreate] = useState('update')
   // api feedback handlers
-  const [spin, setSpin] = useState(false)
-  const [message, setMessage] = useState(null)
 
   // input handler depending on onChange event
   const handleOnChange = (e) => {
@@ -59,40 +59,14 @@ const HomePageData = () => {
     return err
   }
 
-  // const [pathname, setPathname] = useState(null)
-
-  // // fetching pathname for the current username
-  // const FetchPath = async () => {
-  //   try {
-  //     const api = `${process.env.API_HOST}/api/links/getpath/${userdata.username}`
-  //     const response = await axios.get(api)
-  //     console.log('FetchPath: ', response.data)
-  //     if (response.status === 200) {
-  //       setPathname(response.data)
-  //     } else {
-  //       setPathname(false)
-  //     }
-  //   } catch (err) {
-  //     setPathname(false)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   userdata.username && FetchPath()
-  // }, [userdata.username])
-
-
   // api handler function for requesting for saving author data
   const FetchAPI = async () => {
-    console.log(formData)
+    setLoading(true)
     try {
-      setSpin(true)
-
       // current host name (example: location:3000 in development)
       const host = window.location.host
       const data = { ...formData, username: userdata.username, pathname }
 
-      console.log({ data })
       // api request
       const api = `${process.env.API_HOST}/api/authorpage/${
         upOrCreate === 'update' ? 'update' : 'create'
@@ -102,7 +76,6 @@ const HomePageData = () => {
           ? await axios.post(api, { ...data, host })
           : await axios.put(api, { ...data, pathname })
 
-      console.log(response)
       if (response.status === 200) {
         setMessage({
           type: true,
@@ -114,23 +87,15 @@ const HomePageData = () => {
           message: 'Something went wrong!',
         })
       }
-      setSpin(false)
-
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
     } catch (error) {
       // error response interaction
-      console.log(error)
-      setSpin(false)
       setMessage({
         type: false,
         message: 'Something went wrong!',
       })
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
     }
+
+    setLoading(false)
   }
 
   // calling forget password api each time errorMessage changes
@@ -145,7 +110,7 @@ const HomePageData = () => {
     try {
       const api = `${process.env.API_HOST}/api/authorpage/${pathname}`
       const response = await axios.get(api)
-      console.log(response)
+
       if (response.status === 200) {
         if (response.data.result.length) {
           setFormData(response.data.result[0])
@@ -157,7 +122,10 @@ const HomePageData = () => {
         setUpOrCreate('create')
       }
     } catch (err) {
-      console.log(err)
+      setMessage({
+        type: false,
+        message: 'Something went wrong!',
+      })
     }
     setLoading(false)
   }
@@ -262,32 +230,13 @@ const HomePageData = () => {
             ) : null}
           </div>
 
-          {/* message showcase according to api responses */}
-          {message ? (
-            <div
-              className={`${
-                message.type ? 'bg-green-400' : 'bg-red-400'
-              } rounded-md text-center text-white px-3 py-[3px] mb-5 max-w-[250px] fixed top-[100px] right-0 m-3 shadow-xl`}
-            >
-              {message.message}
-            </div>
-          ) : null}
-
           <div className="my-4">
             {/* submit button  */}
             <button
               onClick={handleSubmit}
               className="px-5 py-1 bg-[#0991b2] text-white rounded-md"
             >
-              {spin ? (
-                <>
-                  <Spinner /> {upOrCreate === 'update' ? 'Updating' : 'Saving'}
-                </>
-              ) : upOrCreate === 'update' ? (
-                'Update data'
-              ) : (
-                'Save data'
-              )}
+              {upOrCreate === 'update' ? 'Update data' : 'Save data'}
             </button>
           </div>
         </div>

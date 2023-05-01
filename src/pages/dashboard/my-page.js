@@ -1,11 +1,9 @@
 import Dashboard from '@/pages/dashboard'
-import axios from 'axios'
 import EditorPreview from 'components/editor/EditorPreview'
 import AboutForm from 'components/editor/mypage/AboutForm'
 import BlogsForm from 'components/editor/mypage/BlogsForm'
 import HomePageData from 'components/editor/mypage/HomePageData'
 import { EditorContext } from 'context/EditorProvider'
-import { UserContext } from 'context/UserProvider'
 import { useContext, useState } from 'react'
 
 const MyPage = () => {
@@ -66,7 +64,7 @@ const MyPage = () => {
             <div className="py-10">
               My Link:
               <a
-                href={`https://1linkf.vercel.app/` + editordata.headers.url}
+                href={`https://1link-f.vercel.app/` + editordata.headers.url}
                 target="_blank"
                 className="text-blue-600 px-3"
               >
