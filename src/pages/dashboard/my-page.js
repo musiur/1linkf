@@ -64,7 +64,7 @@ const MyPage = () => {
             <div className="py-10">
               My Link:
               <a
-                href={`https://1link-f.vercel.app/` + editordata.headers.url}
+                href={`https://1linkf.vercel.app/` + editordata.headers.url}
                 target="_blank"
                 className="text-blue-600 px-3"
               >
