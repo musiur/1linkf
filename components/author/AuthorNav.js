@@ -21,7 +21,7 @@ const AuthorNav = ({ name, setCurrentTab }) => {
     },
   ]
   return (
-    <div className="sticky top-0 bg-white">
+    <div className="sticky top-0 bg-white shadow-xl">
       <div className="container flex items-center justify-between">
         <div
           className="text-xl lg:text-2xl font-medium cursor-pointer border-b border-white hover:border-black"
@@ -33,7 +33,7 @@ const AuthorNav = ({ name, setCurrentTab }) => {
           {links.map((item) => {
             return (
               <div
-                key={item}
+                key={item.title}
                 onClick={() => {
                   if (item.title === '1link') {
                     Router.push('/')

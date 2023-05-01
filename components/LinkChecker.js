@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { EditorContext } from 'context/EditorProvider'
-import { PathContext } from 'context/PathContext'
+import { PathContext } from 'context/PathProvider'
 import { UserContext } from 'context/UserProvider'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'

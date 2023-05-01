@@ -19,7 +19,6 @@ const Navbar = () => {
 
   const SignOut = () => {
     setUserdata({})
-    // sessionStorage.removeItem("access_token");
     sessionStorage.clear()
     localStorage.clear()
     Router.push('/')

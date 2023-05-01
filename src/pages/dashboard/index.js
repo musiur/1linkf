@@ -1,4 +1,4 @@
-import { PathContext } from 'context/PathContext'
+import { PathContext } from 'context/PathProvider'
 import { UserContext } from 'context/UserProvider'
 import NavFooter from 'layout/NavFooter'
 import Private from 'layout/Private'

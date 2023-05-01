@@ -1,6 +1,7 @@
 import EditorProvider from './EditorProvider'
 import LoadingProvider from './LoadingProvider'
-import PathProvider from './PathContext'
+import PathProvider from './PathProvider'
+import PopProvider from './PopProvider'
 import UserProvider from './UserProvider'
 
 const ContextWrapper = ({ children }) => {
@@ -8,7 +9,9 @@ const ContextWrapper = ({ children }) => {
     <UserProvider>
       <PathProvider>
         <EditorProvider>
-          <LoadingProvider>{children}</LoadingProvider>
+          <PopProvider>
+            <LoadingProvider>{children}</LoadingProvider>
+          </PopProvider>
         </EditorProvider>
       </PathProvider>
     </UserProvider>
