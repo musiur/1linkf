@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { UserContext } from 'context/UserProvider'
 import { useRouter } from 'next/router'
 import NavFooter from 'layout/NavFooter'
-import { PathContext } from 'context/PathContext'
+import { PathContext } from 'context/PathProvider'
 
 // main function of this component
 const SignIn = () => {

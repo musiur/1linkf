@@ -2,7 +2,7 @@ import axios from 'axios'
 import Button from 'components/Button'
 import UploadImage from 'components/UploadImage'
 import { LoadingContext } from 'context/LoadingProvider'
-import { PathContext } from 'context/PathContext'
+import { PathContext } from 'context/PathProvider'
 import { UserContext } from 'context/UserProvider'
 import { useContext, useEffect, useState } from 'react'
 
@@ -73,9 +73,6 @@ const BlogsForm = () => {
 
   useEffect(() => {
     FetchBlogs()
-    setTimeout(() => {
-      setMessage(null)
-    }, 5000)
   }, [])
 
   return (
@@ -89,6 +86,12 @@ const BlogsForm = () => {
           {message.message}
         </span>
       ) : null}
+      <button
+        className="border-4 border-gray-400 rounded-lg flex items-center justify-center cursor-pointer px-5 py-2 hover:bg-gray-400 hover:text-white font-bold text-gray-400 shadow-md hover:shadow-xl mb-5"
+        onClick={() => setCreateForm(true)}
+      >
+        Add a new Blog
+      </button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
         {blogs.length
           ? [...blogs].reverse().map((item) => {
@@ -149,12 +152,6 @@ const BlogsForm = () => {
             _id={idToUpdate}
           />
         ) : null}
-        <div
-          className="border-4 border-gray-400 rounded-lg flex items-center justify-center cursor-pointer p-5 hover:bg-gray-400 hover:text-white font-bold text-gray-400 w-full h-[60px] shadow-md hover:shadow-xl"
-          onClick={() => setCreateForm(true)}
-        >
-          Add a new Blog
-        </div>
       </div>
     </div>
   )
