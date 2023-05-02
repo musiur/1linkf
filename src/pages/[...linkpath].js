@@ -11,6 +11,7 @@ import { UserContext } from 'context/UserProvider'
 import { LoadingContext } from 'context/LoadingProvider'
 import { PopContext } from 'context/PopProvider'
 import axios from 'axios'
+import BookPage from 'components/author/BookPage'
 
 const LinkPath = () => {
   const Router = useRouter()
@@ -18,6 +19,7 @@ const LinkPath = () => {
   const [currentTab, setCurrentTab] = useState('home')
   const { setUserdata } = useContext(UserContext)
   const [selectedBlog, setSelectedBlog] = useState(null)
+  const [selectedBook, setSelectedBook] = useState(null)
 
   const { setLoading } = useContext(LoadingContext)
   const { setMessage } = useContext(PopContext)
@@ -80,11 +82,38 @@ const LinkPath = () => {
         message: 'Something went wrong!',
       })
     }
+    // setLoading(false)
+  }
+
+  // blogs data
+  const [books, setBooks] = useState([])
+
+  const FetchBooks = async () => {
+    setLoading(true)
+    try {
+      const api = `${process.env.API_HOST}/api/books/${pathname[0]}`
+      const response = await axios.get(api)
+      console.log(response)
+      if (response.status === 200) {
+        setBooks(response.data.result)
+      } else {
+        setMessage({
+          type: false,
+          message: 'Something went wrong!',
+        })
+      }
+    } catch (error) {
+      setMessage({
+        type: false,
+        message: 'Something went wrong!',
+      })
+    }
     setLoading(false)
   }
 
   useEffect(() => {
     pagedata && FetchBlogs()
+    pagedata && FetchBooks()
   }, [pagedata])
 
   const SignOut = () => {
@@ -111,7 +140,11 @@ const LinkPath = () => {
           setCurrentTab={setCurrentTab}
         />
       ) : currentTab === 'books' ? (
-        <BooksPage />
+        <BooksPage
+          books={books}
+          setCurrentTab={setCurrentTab}
+          setSelectedBook={setSelectedBook}
+        />
       ) : currentTab === 'blogs' ? (
         <BlogsPage
           blogs={blogs}
@@ -124,6 +157,12 @@ const LinkPath = () => {
         <BlogPage
           setCurrentTab={setCurrentTab}
           selectedBlog={selectedBlog}
+          pagedata={pagedata}
+        />
+      ) : currentTab === 'book' ? (
+        <BookPage
+          setCurrentTab={setCurrentTab}
+          selectedBook={selectedBook}
           pagedata={pagedata}
         />
       ) : null}
