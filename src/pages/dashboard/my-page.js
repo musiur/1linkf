@@ -2,6 +2,7 @@ import Dashboard from '@/pages/dashboard'
 import EditorPreview from 'components/editor/EditorPreview'
 import AboutForm from 'components/editor/mypage/AboutForm'
 import BlogsForm from 'components/editor/mypage/BlogsForm'
+import BooksForm from 'components/editor/mypage/BooksForm'
 import HomePageData from 'components/editor/mypage/HomePageData'
 import { EditorContext } from 'context/EditorProvider'
 import { useContext, useState } from 'react'
@@ -64,7 +65,7 @@ const MyPage = () => {
             <div className="py-10">
               My Link:
               <a
-                href={`https://1link-f.vercel.app/` + editordata.headers.url}
+                href={`https://1linkf.vercel.app/` + editordata.headers.url}
                 target="_blank"
                 className="text-blue-600 px-3"
               >
@@ -79,6 +80,8 @@ const MyPage = () => {
           <BlogsForm />
         ) : tab === 'Home' ? (
           <HomePageData />
+        ) : tab === 'Books' ? (
+          <BooksForm />
         ) : null}
       </div>
     </Dashboard>
