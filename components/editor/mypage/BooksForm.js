@@ -6,24 +6,24 @@ import { PathContext } from 'context/PathProvider'
 import { UserContext } from 'context/UserProvider'
 import { useContext, useEffect, useState } from 'react'
 
-const BlogsForm = () => {
+const BooksForm = () => {
   const { setLoading } = useContext(LoadingContext)
   const { pathname } = useContext(PathContext)
   const { userdata } = useContext(UserContext)
-  const [blogs, setBlogs] = useState([])
+  const [books, setBooks] = useState([])
   const [message, setMessage] = useState(null)
   const [createForm, setCreateForm] = useState(false)
   const [updateForm, setUpdateForm] = useState(false)
   const [idToUpdate, setIdToUpdate] = useState(null)
 
-  const deleteBlog = async (_id) => {
+  const deleteBook = async (_id) => {
     setLoading(true)
     if (_id) {
       try {
-        const api = `${process.env.API_HOST}/api/blogs/delete/${_id}`
+        const api = `${process.env.API_HOST}/api/books/delete/${_id}`
         const response = await axios.delete(api)
         if (response.status === 200) {
-          setBlogs([...blogs.filter((item) => item._id !== _id)])
+          setBooks([...books.filter((item) => item._id !== _id)])
           setMessage({
             type: true,
             message: 'Deleted successfully!',
@@ -49,13 +49,13 @@ const BlogsForm = () => {
     setLoading(false)
   }
 
-  const FetchBlogs = async () => {
+  const FetchBooks = async () => {
     setLoading(true)
     try {
-      const api = `${process.env.API_HOST}/api/blogs/${userdata.username}/${pathname}`
+      const api = `${process.env.API_HOST}/api/books/${userdata.username}/${pathname}`
       const response = await axios.get(api)
       if (response.status === 200) {
-        setBlogs(response.data.result)
+        setBooks(response.data.result)
       } else {
         setMessage({
           type: false,
@@ -72,7 +72,7 @@ const BlogsForm = () => {
   }
 
   useEffect(() => {
-    FetchBlogs()
+    FetchBooks()
   }, [])
 
   return (
@@ -90,17 +90,17 @@ const BlogsForm = () => {
         className="border-4 border-gray-400 rounded-lg flex items-center justify-center cursor-pointer px-5 py-2 hover:bg-gray-400 hover:text-white font-bold text-gray-400 shadow-md hover:shadow-xl mb-5"
         onClick={() => setCreateForm(true)}
       >
-        Add a new Blog
+        Add a new Book
       </button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-        {blogs.length
-          ? [...blogs].reverse().map((item) => {
+        {books.length
+          ? [...books].reverse().map((item) => {
               return (
                 <div
                   key={item._id}
                   className="shadow-md rounded-lg border hover:shadow-xl bg-white"
                 >
-                  <img src={item.image} alt="" className="rounded-t-lg w-full max-h-[220px]" />
+                  <img src={item.image} alt="" className="rounded-t-lg w-full" />
                   <div className="p-3 lg:p-5">
                     <div className="grid grid-cols-1 gap-3 pb-5">
                       <h2 className="font-bold text-md lg:text-lg">
@@ -112,6 +112,11 @@ const BlogsForm = () => {
                       <p className="text-gray-400">
                         {item.shortDescription.slice(0, 200)}
                       </p>
+                      <a href={item.purchaseLink} target="_blank">
+                        <button className="border hover:shadow-md px-2 py-1 rounded-md break-all">
+                          Purchase: {item.purchaseLink.slice(0, 20)}...
+                        </button>
+                      </a>
                     </div>
                     <div className="flex items-center justify-end gap-5">
                       <button
@@ -125,7 +130,7 @@ const BlogsForm = () => {
                       </button>
                       <button
                         className="px-4 py-[5px] rounded-md  text-white hover:bg-red-300 bg-red-400"
-                        onClick={() => deleteBlog(item._id)}
+                        onClick={() => deleteBook(item._id)}
                       >
                         Delete
                       </button>
@@ -136,18 +141,18 @@ const BlogsForm = () => {
             })
           : null}
         {createForm ? (
-          <NewBlog
+          <NewBook
             setCreateForm={setCreateForm}
-            setBlogs={setBlogs}
-            blogs={blogs}
+            setBooks={setBooks}
+            books={books}
             setMessage={setMessage}
           />
         ) : null}
         {updateForm ? (
-          <UpdateBlog
+          <UpdateBook
             setUpdateForm={setUpdateForm}
-            setBlogs={setBlogs}
-            blogs={blogs}
+            setBooks={setBooks}
+            books={books}
             setMessage={setMessage}
             _id={idToUpdate}
           />
@@ -157,9 +162,9 @@ const BlogsForm = () => {
   )
 }
 
-export default BlogsForm
+export default BooksForm
 
-const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
+const NewBook = ({ setCreateForm, books, setBooks, setMessage }) => {
   const { pathname } = useContext(PathContext)
   const { userdata } = useContext(UserContext)
   const { setLoading } = useContext(LoadingContext)
@@ -169,6 +174,7 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
     shortDescription: '',
     image: '',
     details: '',
+    parchaseLink: '',
   }
   const [formData, setFormData] = useState(DefaultFormData)
   const [errorMessage, setErrorMessage] = useState(formData)
@@ -197,26 +203,29 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
     if (!data.details.trim()) {
       obj.details = 'Details is required!'
     }
+    if (!data.purchaseLink.trim()) {
+      obj.purchaseLink = 'Purchase link is required!'
+    }
 
     return obj
   }
 
-  const CreateBlogAPI = async () => {
+  const CreateBookAPI = async () => {
     setLoading(true)
     try {
-      const api = `${process.env.API_HOST}/api/blogs/create`
+      const api = `${process.env.API_HOST}/api/books/create`
       const response = await axios.post(api, {
         ...formData,
         username: userdata.username,
         pathname,
       })
       if (response.status === 200) {
-        const newBlog = { _id: response.data.result._id, ...formData }
+        const newBook = { _id: response.data.result._id, ...formData }
         setFormData(DefaultFormData)
-        setBlogs([...blogs, newBlog])
+        setBooks([...books, newBook])
         setMessage({
           type: true,
-          message: 'Blog created successfully!',
+          message: 'Book created successfully!',
         })
         setCreateForm(false)
       } else {
@@ -236,7 +245,7 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
   }
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
-      CreateBlogAPI()
+      CreateBookAPI()
       setTimeout(() => {
         setMessage(null)
       }, 5000)
@@ -247,10 +256,7 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
       className="fixed w-full h-[100vh] bg-[#00000030] left-0 top-0 overflow-y-scroll py-5"
       style={{ zIndex: '999999' }}
     >
-      <form
-        id="blogCreateForm"
-        className="relative grid grid-cols-1 gap-3 min-w-[310px] max-w-[500px] bg-white shadow-xl rounded p-3 lg:p-5 mx-auto"
-      >
+      <form className="relative grid grid-cols-1 gap-3 min-w-[310px] max-w-[500px] bg-white shadow-xl rounded p-3 lg:p-5 mx-auto">
         <div
           className="absolute top-0 right-0 w-[20px] h-[20px] cursor-pointer hover:text-red-400 border hover:border-red-400 rounded-full m-2 flex items-center justify-center"
           onClick={() => setCreateForm(false)}
@@ -258,7 +264,7 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
           X
         </div>
         <h1 className="text-lg lg:text-xl font-semibold lg:font-bold mb-5 text-center">
-          Create New Blog
+          Create New Book
         </h1>
         <div className="grid grid-cols-1 gap-1">
           <label htmlFor="title">Title</label>
@@ -324,6 +330,23 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
           ) : null}
         </div>
 
+        <div className="grid grid-cols-1 gap-1">
+          <label htmlFor="purchaseLink">Purchase Link</label>
+          <textarea
+            type="text"
+            name="purchaseLink"
+            onChange={handleOnChange}
+            id="purchaseLink"
+            className="px-2 py-1 rounded-md hover:shadow-md"
+            defaultValue={formData?.purchaseLink}
+          />
+          {errorMessage?.purchaseLink ? (
+            <span className="py-[4px] text-red-400">
+              {errorMessage.purchaseLink}
+            </span>
+          ) : null}
+        </div>
+
         <div>
           <UploadImage
             func={handleOnChange}
@@ -340,12 +363,12 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
   )
 }
 
-const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
+const UpdateBook = ({ setUpdateForm, books, setBooks, setMessage, _id }) => {
   const { pathname } = useContext(PathContext)
   const { userdata } = useContext(UserContext)
   const { setLoading } = useContext(LoadingContext)
   const [formData, setFormData] = useState(
-    blogs.filter((item) => item._id === _id)[0]
+    books.filter((item) => item._id === _id)[0]
   )
   const [errorMessage, setErrorMessage] = useState({})
   const [edited, setEdited] = useState(false)
@@ -379,10 +402,10 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
     return obj
   }
 
-  const UpdateBlogAPI = async () => {
+  const UpdateBookAPI = async () => {
     setLoading(true)
     try {
-      const api = `${process.env.API_HOST}/api/blogs/update`
+      const api = `${process.env.API_HOST}/api/books/update`
       const payload = {
         ...formData,
         username: userdata.username,
@@ -390,17 +413,17 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
       }
       const response = await axios.put(api, payload)
       if (response.status === 200) {
-        const tempBlogData = [...blogs]
-        for (let i = 0; i < tempBlogData.length; i++) {
-          if (tempBlogData[i]._id === _id) {
-            tempBlogData[i] = payload
+        const tempBookData = [...books]
+        for (let i = 0; i < tempBookData.length; i++) {
+          if (tempBookData[i]._id === _id) {
+            tempBookData[i] = payload
             break
           }
         }
-        setBlogs(tempBlogData)
+        setBooks(tempBookData)
         setMessage({
           type: true,
-          message: 'Blog updated successfully!',
+          message: 'Book updated successfully!',
         })
       } else {
         setMessage({
@@ -419,7 +442,7 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
   }
   useEffect(() => {
     if (edited && Object.keys(errorMessage).length === 0) {
-      UpdateBlogAPI()
+      UpdateBookAPI()
       setTimeout(() => {
         setMessage(null)
       }, 5000)
@@ -431,10 +454,7 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
       className="fixed w-full h-[100vh] bg-[#00000030] left-0 top-0 overflow-y-scroll py-5"
       style={{ zIndex: '9999' }}
     >
-      <form
-        id="blogCreateForm"
-        className="relative grid grid-cols-1 gap-3 min-w-[310px] max-w-[500px] bg-white shadow-xl rounded p-3 lg:p-5 mx-auto"
-      >
+      <form className="relative grid grid-cols-1 gap-3 min-w-[310px] max-w-[500px] bg-white shadow-xl rounded p-3 lg:p-5 mx-auto">
         <div
           className="absolute top-0 right-0 w-[20px] h-[20px] cursor-pointer hover:text-red-400 border hover:border-red-400 rounded-full m-2 flex items-center justify-center"
           onClick={() => setUpdateForm(false)}
@@ -442,7 +462,7 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
           X
         </div>
         <h1 className="text-lg lg:text-xl font-semibold lg:font-bold mb-5 text-center">
-          Update Blog
+          Update Book
         </h1>
         <div className="grid grid-cols-1 gap-1">
           <label htmlFor="title">Title</label>
@@ -504,6 +524,23 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
           {errorMessage?.details ? (
             <span className="py-[4px] text-red-400">
               {errorMessage.details}
+            </span>
+          ) : null}
+        </div>
+
+        <div className="grid grid-cols-1 gap-1">
+          <label htmlFor="purchaseLink">Purchase Link</label>
+          <textarea
+            type="text"
+            name="purchaseLink"
+            onChange={handleOnChange}
+            id="purchaseLink"
+            className="px-2 py-1 rounded-md hover:shadow-md"
+            defaultValue={formData?.purchaseLink}
+          />
+          {errorMessage?.purchaseLink ? (
+            <span className="py-[4px] text-red-400">
+              {errorMessage.purchaseLink}
             </span>
           ) : null}
         </div>
