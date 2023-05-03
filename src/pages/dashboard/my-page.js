@@ -74,9 +74,11 @@ const MyPage = () => {
             </div>
             <EditorPreview />
           </div>
-        ) : tab === 'About' ? (
-          <AboutForm />
-        ) : tab === 'Blogs' ? (
+        ) :
+        //  tab === 'About' ? (
+        //   <AboutForm />
+        // ) :
+         tab === 'Blogs' ? (
           <BlogsForm />
         ) : tab === 'Home' ? (
           <HomePageData />
