@@ -1,7 +1,11 @@
+
+import ParsedBlogDetails from './ParsedBlogDetails'
+
 const BlogPage = ({ setCurrentTab, selectedBlog, pagedata }) => {
   const { title, username, image, details } = selectedBlog
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 py-32 px-3 md:px-5 lg:px-10 xl:px-24 2xl:px-32 min-h-[90vh]">
+    <div className="px-3 md:px-5 lg:px-16 xl:px-36 2xl:px-48">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 py-32 px-3 md:px-5 lg:px-10 xl:px-24 2xl:px-32 min-h-[90vh]">
       <div className="col-span-2">
         <div className="pb-10">
           <div
@@ -19,7 +23,7 @@ const BlogPage = ({ setCurrentTab, selectedBlog, pagedata }) => {
         <div className="pb-10">
           <img src={image} alt="image" className="pb-10" />
 
-          {details}
+          <ParsedBlogDetails data={details}/>
         </div>
       </div>
       <div className="col-span-1 pb-5 pl-5 border-l">
@@ -31,6 +35,7 @@ const BlogPage = ({ setCurrentTab, selectedBlog, pagedata }) => {
           Click here to learn more →
         </button>
       </div>
+    </div>
     </div>
   )
 }

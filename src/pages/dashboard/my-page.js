@@ -1,6 +1,6 @@
 import Dashboard from '@/pages/dashboard'
 import EditorPreview from 'components/editor/EditorPreview'
-import AboutForm from 'components/editor/mypage/AboutForm'
+// import AboutForm from 'components/editor/mypage/AboutForm'
 import BlogsForm from 'components/editor/mypage/BlogsForm'
 import BooksForm from 'components/editor/mypage/BooksForm'
 import HomePageData from 'components/editor/mypage/HomePageData'

@@ -52,26 +52,28 @@ const HomePage = ({
                   : "I'm the author of the #1 New York Times bestseller, Atomic Habits, which has sold more than 10 million copies worldwide. My work has been featured in places like Time magazine, the New York Times, the Wall Street Journal and on CBS This Morning. Click here to learn more about me and my work."}
               </p>
             </div>
-            <div className="flex flex-col gap-3 px-3 md:px-5 xl:px-32">
-              <h3 className="text-xl lg:text-2xl font-semibold">
-                Popular Blogs
-              </h3>
-              {blogs.map((item) => {
-                return (
-                  <p
-                    key={item.id}
-                    className="cursor-pointer text-black hover:text-blue-400 hover:underline flex items-start justify-start gap-3"
-                    onClick={() => {
-                      setSelectedBlog(item)
-                      setCurrentTab('blog')
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faCheck} className="mt-[6px]" />
-                    {item.title}
-                  </p>
-                )
-              })}
-            </div>
+            {blogs.length ? (
+              <div className="flex flex-col gap-3 px-3 md:px-5 xl:px-32">
+                <h3 className="text-xl lg:text-2xl font-semibold">
+                  Popular Blogs
+                </h3>
+                {blogs.map((item) => {
+                  return (
+                    <p
+                      key={item._id}
+                      className="cursor-pointer text-black hover:text-blue-400 hover:underline flex items-start justify-start gap-3"
+                      onClick={() => {
+                        setSelectedBlog(item)
+                        setCurrentTab('blog')
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faCheck} className="mt-[6px]" />
+                      {item.title}
+                    </p>
+                  )
+                })}
+              </div>
+            ) : null}
           </div>
           <div className="py-10"></div>
           {books ? (
