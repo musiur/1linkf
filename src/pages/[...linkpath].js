@@ -139,6 +139,8 @@ const LinkPath = () => {
           blogs={blogs.slice(0, 5)}
           setSelectedBlog={setSelectedBlog}
           setCurrentTab={setCurrentTab}
+          books={books.slice(0, 4)}
+          setSelectedBook={setSelectedBook}
         />
       ) : currentTab === 'books' ? (
         <BooksPage
