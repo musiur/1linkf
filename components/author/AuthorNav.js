@@ -4,6 +4,10 @@ const AuthorNav = ({ name, setCurrentTab }) => {
   const Router = useRouter()
   const links = [
     {
+      title: "My Card",
+      link: "card"
+    },
+    {
       title: 'Books',
       link: 'books',
     },
