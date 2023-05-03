@@ -12,6 +12,7 @@ import { LoadingContext } from 'context/LoadingProvider'
 import { PopContext } from 'context/PopProvider'
 import axios from 'axios'
 import BookPage from 'components/author/BookPage'
+import MyCard from 'components/author/MyCard'
 
 const LinkPath = () => {
   const Router = useRouter()
@@ -165,6 +166,8 @@ const LinkPath = () => {
           selectedBook={selectedBook}
           pagedata={pagedata}
         />
+      ) : currentTab === 'card' ? (
+        <MyCard />
       ) : null}
       <Footer />
     </div>
