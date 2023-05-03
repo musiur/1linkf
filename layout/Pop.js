@@ -19,7 +19,7 @@ const Pop = ({ children }) => {
           className={`${
             message.type ? 'bg-green-400' : 'bg-red-400'
           } text-white rounded-md px-6 font-semibold py-2 fixed top-[100px] right-0  m-5 shadow-xl`}
-          style={{ zIndex: '999999' }}
+          style={{ zIndex: '99999999999' }}
         >
           {message.message}
         </span>

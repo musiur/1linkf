@@ -78,12 +78,19 @@ const LinkPath = () => {
         })
       }
     } catch (error) {
-      setMessage({
-        type: false,
-        message: 'Something went wrong!',
-      })
+      if(error.response.status === 404){
+        setMessage({
+          type: false,
+          message: 'No Blogs Found!',
+        })
+      }else{
+        setMessage({
+          type: false,
+          message: 'Something went wrong!',
+        })
+      }
     }
-    // setLoading(false)
+    FetchBooks()
   }
 
   // blogs data
@@ -104,17 +111,24 @@ const LinkPath = () => {
         })
       }
     } catch (error) {
-      setMessage({
-        type: false,
-        message: 'Something went wrong!',
-      })
+      if(error.response.status === 404){
+        setMessage({
+          type: false,
+          message: 'No Books Found!',
+        })
+      }else{
+        setMessage({
+          type: false,
+          message: 'Something went wrong!',
+        })
+      }
+      
     }
     setLoading(false)
   }
 
   useEffect(() => {
     pagedata && FetchBlogs()
-    pagedata && FetchBooks()
   }, [pagedata])
 
   const SignOut = () => {

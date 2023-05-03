@@ -5,6 +5,7 @@ import { LoadingContext } from 'context/LoadingProvider'
 import { PathContext } from 'context/PathProvider'
 import { UserContext } from 'context/UserProvider'
 import { useContext, useEffect, useState } from 'react'
+import BlogEditor from 'components/blog-editor/BlogEditor'
 
 const BlogsForm = () => {
   const { setLoading } = useContext(LoadingContext)
@@ -63,10 +64,18 @@ const BlogsForm = () => {
         })
       }
     } catch (error) {
-      setMessage({
-        type: false,
-        message: 'Something went wrong!',
-      })
+      // console.log(error.response.status)
+      if (error.response.status === 404) {
+        setMessage({
+          type: false,
+          message: 'No blogs Found!',
+        })
+      } else {
+        setMessage({
+          type: false,
+          message: 'Something went wrong!',
+        })
+      }
     }
     setLoading(false)
   }
@@ -100,7 +109,11 @@ const BlogsForm = () => {
                   key={item._id}
                   className="shadow-md rounded-lg border hover:shadow-xl bg-white"
                 >
-                  <img src={item.image} alt="" className="rounded-t-lg w-full max-h-[220px]" />
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="rounded-t-lg w-full max-h-[220px]"
+                  />
                   <div className="p-3 lg:p-5">
                     <div className="grid grid-cols-1 gap-3 pb-5">
                       <h2 className="font-bold text-md lg:text-lg">
@@ -175,6 +188,7 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
+    console.log({ name, value })
     setFormData({ ...formData, [name]: value })
   }
 
@@ -226,9 +240,10 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
         })
       }
     } catch (err) {
+      console.log(err)
       setMessage({
         type: false,
-        message: 'Something went wrong!',
+        message: err.response.data.message,
       })
     }
 
@@ -308,15 +323,8 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
         </div>
 
         <div className="grid grid-cols-1 gap-1">
-          <label htmlFor="details">Details</label>
-          <textarea
-            type="text"
-            name="details"
-            onChange={handleOnChange}
-            id="details"
-            className="px-2 py-1 rounded-md hover:shadow-md min-h-[200px]"
-            defaultValue={formData?.details}
-          />
+          <label htmlFor="shortDescription">Short Description</label>
+          <BlogEditor handleOnChange={handleOnChange} name="details" />
           {errorMessage?.details ? (
             <span className="py-[4px] text-red-400">
               {errorMessage.details}
@@ -331,6 +339,9 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
             label="Upload image"
             defaultValue={formData?.image}
           />
+          {errorMessage?.image ? (
+            <span className="py-[4px] text-red-400">{errorMessage.image}</span>
+          ) : null}
         </div>
         <div className="pt-5">
           <Button onClick={handleOnSubmit}>Create</Button>
@@ -411,7 +422,7 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
     } catch (err) {
       setMessage({
         type: false,
-        message: 'Something went wrong!',
+        message: err.response.data.message,
       })
     }
 
@@ -492,13 +503,9 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
         </div>
 
         <div className="grid grid-cols-1 gap-1">
-          <label htmlFor="details">Details</label>
-          <textarea
-            type="text"
+          <BlogEditor
+            handleOnChange={handleOnChange}
             name="details"
-            onChange={handleOnChange}
-            id="details"
-            className="px-2 py-1 rounded-md hover:shadow-md min-h-[200px]"
             defaultValue={formData?.details}
           />
           {errorMessage?.details ? (
@@ -515,6 +522,11 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
             label="Upload image"
             defaultValue={formData?.image}
           />
+          {errorMessage?.image ? (
+            <span className="py-[4px] text-red-400">
+              {errorMessage.details}
+            </span>
+          ) : null}
         </div>
         <div className="pt-5">
           <Button onClick={handleOnSubmit}>Update</Button>

@@ -63,10 +63,17 @@ const BooksForm = () => {
         })
       }
     } catch (error) {
-      setMessage({
-        type: false,
-        message: 'Something went wrong!',
-      })
+      if (error.response.status === 404) {
+        setMessage({
+          type: false,
+          message: 'No Books Found!',
+        })
+      } else {
+        setMessage({
+          type: false,
+          message: 'Something went wrong!',
+        })
+      }
     }
     setLoading(false)
   }
@@ -100,7 +107,11 @@ const BooksForm = () => {
                   key={item._id}
                   className="shadow-md rounded-lg border hover:shadow-xl bg-white"
                 >
-                  <img src={item.image} alt="" className="rounded-t-lg w-full" />
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="rounded-t-lg w-full"
+                  />
                   <div className="p-3 lg:p-5">
                     <div className="grid grid-cols-1 gap-3 pb-5">
                       <h2 className="font-bold text-md lg:text-lg">
