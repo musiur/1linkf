@@ -39,7 +39,7 @@ const BlogsPage = ({ blogs, setCurrentTab, setSelectedBlog }) => {
                 </div>
               )
             })
-          : null}
+          : <div className="text-center my-5">No Blogs Found!</div>}
       </div>
     </div>
   )

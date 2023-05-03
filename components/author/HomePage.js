@@ -1,7 +1,15 @@
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Books from './Books'
 
-const HomePage = ({ pagedata, blogs, setSelectedBlog, setCurrentTab }) => {
+const HomePage = ({
+  pagedata,
+  blogs,
+  setSelectedBlog,
+  setCurrentTab,
+  books,
+  setSelectedBook,
+}) => {
   return (
     <div className="min-h-[90vh]">
       {pagedata ? (
@@ -66,6 +74,13 @@ const HomePage = ({ pagedata, blogs, setSelectedBlog, setCurrentTab }) => {
             </div>
           </div>
           <div className="py-10"></div>
+          {books ? (
+            <Books
+              books={books}
+              setCurrentTab={setCurrentTab}
+              setSelectedBook={setSelectedBook}
+            />
+          ) : null}
         </div>
       ) : (
         <div className="container section text-center">No data found!</div>

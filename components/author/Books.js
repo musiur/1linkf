@@ -1,13 +1,6 @@
-const BooksPage = ({ books, setCurrentTab, setSelectedBook }) => {
-  return (
-    <div className="min-h-[90vh]">
-      <div className="px-auto py-16 bg-gray-100 ">
-        <div className="w-full md:w-[80%] lg:w-[50%] mx-auto text-center">
-          <h1 className="text-xl md:text-2xl lg:text-4xl font-bold text-center pb-10">
-            Books
-          </h1>
-        </div>
-      </div>
+const Books = ({ books, setCurrentTab, setSelectedBook }) => {
+  return books ? (
+    <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 section container">
         {books.length
           ? [...books].reverse().map((item) => {
@@ -48,10 +41,10 @@ const BooksPage = ({ books, setCurrentTab, setSelectedBook }) => {
                 </div>
               )
             })
-          : <div className="text-center my-5">No Books Found!</div>}
+          : null}
       </div>
     </div>
-  )
+  ) : null
 }
 
-export default BooksPage
+export default Books

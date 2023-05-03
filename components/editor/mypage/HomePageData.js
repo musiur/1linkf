@@ -160,7 +160,7 @@ const HomePageData = () => {
             <label htmlFor="description" className="pt-5 font-semibold">
               Description
             </label>
-            <input
+            <textarea
               id="description"
               type="text"
               name="description"
@@ -196,7 +196,7 @@ const HomePageData = () => {
             <label htmlFor="authorDescription" className="pt-5 font-semibold">
               Author description
             </label>
-            <input
+            <textarea
               id="authorDescription"
               type="text"
               name="authorDescription"
