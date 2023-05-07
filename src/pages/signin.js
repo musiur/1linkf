@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { UserContext } from 'context/UserProvider'
 import { useRouter } from 'next/router'
 import NavFooter from 'layout/NavFooter'
+import { PathContext } from 'context/PathProvider'
 
 // main function of this component
 const SignIn = () => {
@@ -21,6 +22,7 @@ const SignIn = () => {
 
   // contexts
   const { userdata, setUserdata } = useContext(UserContext)
+  const { pathname, setPathname } = useContext(PathContext)
 
   // form management states
   const [formData, setFormData] = useState({ username: '', password: '' })
@@ -79,6 +81,24 @@ const SignIn = () => {
     return obj
   }
 
+  // fetching pathname for the current username
+  const FetchPath = async (name) => {
+    try {
+      const api = `${process.env.API_HOST}/api/links/getpath/${name}`
+      const response = await axios.get(api)
+      if (response.status === 200) {
+        setPathname(response.data)
+      } else {
+        setPathname(null)
+      }
+    } catch (err) {
+      console.log(err)
+      setPathname(null)
+    }
+  }
+
+  console.log(pathname)
+
   // api handler function for sign in
   const CallAPI = async () => {
     try {
@@ -98,6 +118,7 @@ const SignIn = () => {
         sessionStorage.setItem('access_token', response.data.accessToken)
         sessionStorage.setItem('user_info', JSON.stringify(response.data))
         setUserdata(response.data)
+        FetchPath(response.data.username)
         document.getElementById('sign_up_form').reset()
 
         // sending back to target location on the site
@@ -141,63 +162,67 @@ const SignIn = () => {
   return (
     <NavFooter>
       <div className="container section min-h-[80vh]">
-      <div className="max-w-[380px] p-5 rounded-md shadow-xl border m-auto">
-        {/* message showcase according to api responses */}
-        {message ? (
-          <div
-            className={`${
-              message.type ? 'bg-green-400' : 'bg-red-600'
-            } text-white px-2 py-[4px] rounded-md mb-2 text-center`}
-          >
-            {message.message}
+        <div className="max-w-[380px] p-5 rounded-md shadow-xl border m-auto">
+          {/* message showcase according to api responses */}
+          {message ? (
+            <div
+              className={`${
+                message.type ? 'bg-green-400' : 'bg-red-600'
+              } text-white px-2 py-[4px] rounded-md mb-2 text-center`}
+            >
+              {message.message}
+            </div>
+          ) : null}
+          <h3 className="text-[1rem] font-bold text-[#0891B2] text-center">
+            Welcome to 1link
+          </h3>
+
+          {/* sing in form  */}
+          <form id="sign_up_form">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={handleOnChange}
+              id="username"
+            />
+            {errorMessage?.username ? (
+              <span>{errorMessage.username}</span>
+            ) : null}
+
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleOnChange}
+              id="password"
+            />
+            {errorMessage?.password ? (
+              <span>{errorMessage.password}</span>
+            ) : null}
+
+            {/* forget password link  */}
+            <Link href="/forget-password" className="mt-2 text-right">
+              Forget password?
+            </Link>
+
+            {/* submit button  */}
+            <Button onClick={handleOnSubmit} disable={spinner}>
+              {spinner ? <Spinner /> : null}
+              {spinner ? 'Processing' : 'Sign in'}
+            </Button>
+          </form>
+
+          <div className="flex items-center justify-center gap-3 mt-3">
+            <p>{"Don't"} have an account?</p>
+            <Link href="/signup" className="text-[#0891B2]">
+              Sign up
+            </Link>
           </div>
-        ) : null}
-        <h3 className="text-[1rem] font-bold text-[#0891B2] text-center">
-          Welcome to 1link
-        </h3>
-
-        {/* sing in form  */}
-        <form id="sign_up_form">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={handleOnChange}
-            id="username"
-          />
-          {errorMessage?.username ? <span>{errorMessage.username}</span> : null}
-
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleOnChange}
-            id="password"
-          />
-          {errorMessage?.password ? <span>{errorMessage.password}</span> : null}
-
-          {/* forget password link  */}
-          <Link href="/forget-password" className="mt-2 text-right">
-            Forget password?
-          </Link>
-
-          {/* submit button  */}
-          <Button onClick={handleOnSubmit} disable={spinner}>
-            {spinner ? <Spinner /> : null}
-            {spinner ? 'Processing' : 'Sign in'}
-          </Button>
-        </form>
-
-        <div className="flex items-center justify-center gap-3 mt-3">
-          <p>{"Don't"} have an account?</p>
-          <Link href="/signup" className="text-[#0891B2]">
-            Sign up
-          </Link>
         </div>
       </div>
-    </div>
     </NavFooter>
   )
 }

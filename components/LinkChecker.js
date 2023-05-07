@@ -1,15 +1,16 @@
 import axios from 'axios'
 import { EditorContext } from 'context/EditorProvider'
+import { PathContext } from 'context/PathProvider'
 import { UserContext } from 'context/UserProvider'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 const { default: Spinner } = require('./icons/Spinner')
 
 const LinkChecker = () => {
   const [linkAvailable, setLinkAvailable] = useState(false)
   const [spinLA, setSpinLA] = useState(false)
-  const [pathname, setPathname] = useState('')
+  const { pathname, setPathname } = useContext(PathContext)
   const { editordata, setEditordata } = useContext(EditorContext)
   const { userdata, setUserdata } = useContext(UserContext)
   const Router = useRouter()
@@ -33,10 +34,14 @@ const LinkChecker = () => {
 
   const onChangeHandler = (e) => {
     if (e.target.value) {
-      setPathname(e.target.value.split('/')[1])
-      checkAvailability(e.target.value.split('/')[1])
+      const tempPath = e.target.value.split('/')[1]
+      setPathname(tempPath)
     }
   }
+
+  useEffect(() => {
+    pathname && checkAvailability(pathname)
+  }, [pathname])
 
   const handleEditorDataPost = async () => {
     const POST_API = `${process.env.API_HOST}/api/editor/create`

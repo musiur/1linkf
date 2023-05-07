@@ -1,15 +1,21 @@
-
-import EditorProvider from "./EditorProvider";
-import UserProvider from "./UserProvider";
+import EditorProvider from './EditorProvider'
+import LoadingProvider from './LoadingProvider'
+import PathProvider from './PathProvider'
+import PopProvider from './PopProvider'
+import UserProvider from './UserProvider'
 
 const ContextWrapper = ({ children }) => {
-    return (
-        <UserProvider>
-            <EditorProvider>
-                {children}
-            </EditorProvider>
-        </UserProvider>
-    )
+  return (
+    <UserProvider>
+      <PathProvider>
+        <EditorProvider>
+          <PopProvider>
+            <LoadingProvider>{children}</LoadingProvider>
+          </PopProvider>
+        </EditorProvider>
+      </PathProvider>
+    </UserProvider>
+  )
 }
 
 export default ContextWrapper

@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { UserContext } from 'context/UserProvider'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Blogs = () => {
   const [userdata, setUserdata] = useState(null)

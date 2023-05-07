@@ -1,12 +1,17 @@
 import axios from 'axios'
-import Button from 'components/Button'
 import UploadImage from 'components/UploadImage'
 import Spinner from 'components/icons/Spinner'
+import { LoadingContext } from 'context/LoadingProvider'
+import { PathContext } from 'context/PathProvider'
+import { PopContext } from 'context/PopProvider'
 import { UserContext } from 'context/UserProvider'
 import { useContext, useEffect, useState } from 'react'
 
 const HomePageData = () => {
+  const { pathname } = useContext(PathContext)
   const { userdata } = useContext(UserContext)
+  const { setLoading } = useContext(LoadingContext)
+  const { setMessage } = useContext(PopContext)
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -14,11 +19,10 @@ const HomePageData = () => {
     authorTitle: '',
     authorDescription: '',
   })
+
   const [errorMessage, setErrorMessage] = useState(formData)
   const [upOrCreate, setUpOrCreate] = useState('update')
   // api feedback handlers
-  const [spin, setSpin] = useState(false)
-  const [message, setMessage] = useState(null)
 
   // input handler depending on onChange event
   const handleOnChange = (e) => {
@@ -55,18 +59,14 @@ const HomePageData = () => {
     return err
   }
 
-  // api handler function for requesting for resetting password
+  // api handler function for requesting for saving author data
   const FetchAPI = async () => {
-    console.log(formData)
+    setLoading(true)
     try {
-      setSpin(true)
-
       // current host name (example: location:3000 in development)
       const host = window.location.host
+      const data = { ...formData, username: userdata.username, pathname }
 
-      const data = { ...formData, username: userdata.username }
-
-      console.log({ data })
       // api request
       const api = `${process.env.API_HOST}/api/authorpage/${
         upOrCreate === 'update' ? 'update' : 'create'
@@ -74,9 +74,8 @@ const HomePageData = () => {
       const response =
         upOrCreate === 'create'
           ? await axios.post(api, { ...data, host })
-          : await axios.put(api, { ...data })
+          : await axios.put(api, { ...data, pathname })
 
-      console.log(response)
       if (response.status === 200) {
         setMessage({
           type: true,
@@ -88,51 +87,52 @@ const HomePageData = () => {
           message: 'Something went wrong!',
         })
       }
-      setSpin(false)
-
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
     } catch (error) {
       // error response interaction
-      console.log(error)
-      setSpin(false)
       setMessage({
         type: false,
         message: 'Something went wrong!',
       })
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
     }
+
+    setLoading(false)
   }
 
   // calling forget password api each time errorMessage changes
   useEffect(() => {
     if (Object.keys(errorMessage).length === 0) {
-      FetchAPI()
+      pathname ? FetchAPI() : setMessage('Pathname not found!')
     }
   }, [errorMessage])
 
   const fetchFormData = async () => {
+    setLoading(true)
     try {
-      const api = `${process.env.API_HOST}/api/authorpage/${userdata.username}`
+      const api = `${process.env.API_HOST}/api/authorpage/${pathname}`
       const response = await axios.get(api)
-      console.log(response)
+
       if (response.status === 200) {
-        setFormData(response.data.result[0])
+        if (response.data.result.length) {
+          setFormData(response.data.result[0])
+          setUpOrCreate('update')
+        } else {
+          setUpOrCreate('create')
+        }
       } else {
         setUpOrCreate('create')
       }
     } catch (err) {
-      console.log(err)
+      setMessage({
+        type: false,
+        message: 'Something went wrong!',
+      })
     }
+    setLoading(false)
   }
   useEffect(() => {
-    fetchFormData()
-  }, [userdata.username])
+    pathname ? fetchFormData() : setMessage('Pathname not found!')
+  }, [pathname])
 
-  console.log(formData)
   return (
     <div className="w-full">
       <div className="max-w-[700px]">
@@ -160,7 +160,7 @@ const HomePageData = () => {
             <label htmlFor="description" className="pt-5 font-semibold">
               Description
             </label>
-            <input
+            <textarea
               id="description"
               type="text"
               name="description"
@@ -196,7 +196,7 @@ const HomePageData = () => {
             <label htmlFor="authorDescription" className="pt-5 font-semibold">
               Author description
             </label>
-            <input
+            <textarea
               id="authorDescription"
               type="text"
               name="authorDescription"
@@ -211,24 +211,24 @@ const HomePageData = () => {
               </div>
             ) : null}
             <div className="pt-5"></div>
-            <UploadImage
-              func={handleOnChange}
-              name="image"
-              label="Upload your banner picture"
-              defaultValue={formData?.image}
-            />
-          </div>
 
-          {/* message showcase according to api responses */}
-          {message ? (
-            <div
-              className={`${
-                message.type ? 'bg-green-600' : 'bg-red-600'
-              } rounded-md text-center text-white px-3 py-[3px] mb-5 max-w-[250px]`}
-            >
-              {message.message}
-            </div>
-          ) : null}
+            {formData.image ? (
+              <UploadImage
+                func={handleOnChange}
+                name="image"
+                label="Upload your banner"
+                defaultValue={formData?.image}
+              />
+            ) : null}
+            {formData.image === '' ? (
+              <UploadImage
+                func={handleOnChange}
+                name="image"
+                label="Upload your banner"
+                defaultValue={formData?.image}
+              />
+            ) : null}
+          </div>
 
           <div className="my-4">
             {/* submit button  */}
@@ -236,15 +236,7 @@ const HomePageData = () => {
               onClick={handleSubmit}
               className="px-5 py-1 bg-[#0991b2] text-white rounded-md"
             >
-              {spin ? (
-                <>
-                  <Spinner /> {upOrCreate === 'update' ? 'Updating' : 'Saving'}
-                </>
-              ) : upOrCreate === 'update' ? (
-                'Update data'
-              ) : (
-                'Save data'
-              )}
+              {upOrCreate === 'update' ? 'Update data' : 'Save data'}
             </button>
           </div>
         </div>

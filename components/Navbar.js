@@ -19,15 +19,15 @@ const Navbar = () => {
 
   const SignOut = () => {
     setUserdata({})
-    // sessionStorage.removeItem("access_token");
     sessionStorage.clear()
+    localStorage.clear()
     Router.push('/')
   }
   return (
     <div style={{ zIndex: '9999' }} className="sticky top-0">
       <ul
-        className={`flex flex-col md:hidden items-center justify-start gap-7 text-[18px] text-[#0891B2] shadow-lg  ${
-          openMenu ? 'translate-x-0 h-auto py-8' : '-translate-x-[100%] h-0 p-0'
+        className={`fixed top-0 right-0 w-full h-full flex flex-col md:hidden items-center justify-start gap-7 text-[18px] text-[#0891B2] shadow-lg  ${
+          openMenu ? 'translate-x-0 py-8' : '-translate-x-[100%] p-0'
         } transition easin-in-out duration-300 z-0 bg-[#F9FAFB]`}
       >
         <li className="cursor-pointer">

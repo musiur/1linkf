@@ -4,13 +4,13 @@ const { default: Footer } = require('components/Footer')
 const { default: Navbar } = require('components/Navbar')
 
 const NavFooter = ({ children }) => {
-  const Router = useRouter();
+  const Router = useRouter()
 
   return (
     <>
       <Navbar />
       {children}
-      {!Router.pathname.includes("dashboard") ? <Footer /> : null}
+      {!Router.pathname.includes('dashboard') ? <Footer /> : null}
     </>
   )
 }

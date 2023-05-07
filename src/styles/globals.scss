@@ -2,23 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  
-  scroll-behavior: smooth;
-}
+  // font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  //   "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+  //   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-p{
-  font-family: 'Gideon Roman', cursive;
+  font-family: 'Heebo', sans-serif;
+
+  scroll-behavior: smooth;
 }
 
 .container {
@@ -33,7 +30,8 @@ p{
   @apply grid grid-cols-1 gap-1;
 }
 
-#sign_up_form input, textarea {
+#sign_up_form input,
+textarea {
   @apply border px-3 py-1 rounded-md;
 }
 
@@ -56,7 +54,6 @@ p{
   @apply mt-4;
 }
 
-
 #sign_up_form span {
   @apply bg-red-100 text-red-600 px-2 py-[2px] rounded-md inline-block;
 }
@@ -65,10 +62,10 @@ input {
   @apply border;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   @apply outline-0 scale-[1.01] shadow;
 }
-
 
 // scrollbar style
 
@@ -92,7 +89,6 @@ input:focus, select:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
 
 // animate on scroll
 .animate-hidden {
@@ -122,4 +118,23 @@ input:focus, select:focus {
   max-width: 100%;
   position: relative;
 }
-////////////
+
+// parsedBlogDetails
+
+.parsedBlogDetails {
+  h1 {
+    @apply text-lg md:text-xl lg:text-2xl xl:text-3xl mt-10 mb-2;
+  }
+
+  h2 {
+    @apply text-base md:text-lg lg:text-xl xl:text-2xl mt-10 mb-2;
+  }
+
+  p {
+    @apply text-sm md:text-base xl:text-xl text-gray-600 my-2;
+  }
+
+  img {
+    @apply mt-10 mb-20;
+  }
+}

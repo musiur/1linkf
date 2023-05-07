@@ -1,18 +1,17 @@
 import Dashboard from '@/pages/dashboard'
-import axios from 'axios'
 import EditorPreview from 'components/editor/EditorPreview'
-import AboutForm from 'components/editor/mypage/AboutForm'
+// import AboutForm from 'components/editor/mypage/AboutForm'
 import BlogsForm from 'components/editor/mypage/BlogsForm'
+import BooksForm from 'components/editor/mypage/BooksForm'
 import HomePageData from 'components/editor/mypage/HomePageData'
 import { EditorContext } from 'context/EditorProvider'
-import { UserContext } from 'context/UserProvider'
 import { useContext, useState } from 'react'
 
 const MyPage = () => {
   // const { userdata } = useContext(UserContext)
   const { editordata } = useContext(EditorContext)
 
-  const tabs = ['Page', 'Home', 'Books', 'About', 'Blogs']
+  const tabs = ['Page', 'Home', 'Books', 'Blogs']
   const [tab, setTab] = useState('Page')
 
   // const MakeAuthorProfile = async () => {
@@ -75,12 +74,16 @@ const MyPage = () => {
             </div>
             <EditorPreview />
           </div>
-        ) : tab === 'About' ? (
-          <AboutForm />
-        ) : tab === 'Blogs' ? (
+        ) :
+        //  tab === 'About' ? (
+        //   <AboutForm />
+        // ) :
+         tab === 'Blogs' ? (
           <BlogsForm />
         ) : tab === 'Home' ? (
           <HomePageData />
+        ) : tab === 'Books' ? (
+          <BooksForm />
         ) : null}
       </div>
     </Dashboard>

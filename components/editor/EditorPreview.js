@@ -38,7 +38,7 @@ const EditorPreview = () => {
   console.log(editordata)
   return (
     <div
-      className={`min-h-[800px] rounded-xl shadow-xl border bg-white w-full lg:w-auto p-5`}
+      className={`min-h-[800px] rounded-xl shadow-xl border bg-white w-full lg:w-auto p-5 max-w-[500px] mr-auto`}
       style={{ background: gcolor }}
     >
       <div>
@@ -89,7 +89,7 @@ const EditorPreview = () => {
                     <img
                       src={item.bookcover}
                       alt=""
-                      className="w-[120px] h-[160px] rounded-md border bg-white"
+                      className="min-w-[150px] min-h-[200px] w-[120px] h-[160px] rounded-md border bg-white"
                     />
                   </div>
                   <div>
@@ -107,10 +107,7 @@ const EditorPreview = () => {
                         {item.bookbuttons.map((btn) => {
                           const btnStyle = {
                             ...editordata.appearance.buttonConfig
-                              .buttonStyleFor,
-                            // background:
-                            //   editordata.appearance.buttonConfig
-                            //     .buttonBackground,
+                              .buttonStyleFor
                           }
                           return (
                             <div key={btn.id}>
@@ -191,7 +188,11 @@ const EditorPreview = () => {
       </div>
       {editordata.headers.hide1link ? null : (
         <div className="flex items-center justify-center py-10">
-          <a href="https://1link.st" target="_blank" className="px-3 py-1 bg-white text-black font-bold">
+          <a
+            href="https://1link.st"
+            target="_blank"
+            className="px-3 py-1 bg-white text-black font-bold"
+          >
             1link
           </a>
         </div>
@@ -226,6 +227,8 @@ const SelectIcon = (label) => {
     icon = faPaypal
   } else if (label === 'Google Play') {
     icon = faGooglePlay
+  } else if (label === 'TikTok') {
+    icon = faTiktok
   }
   return icon
 }
