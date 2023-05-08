@@ -1,14 +1,13 @@
 import LinkChecker from 'components/LinkChecker'
 import UploadImage from 'components/UploadImage'
 import { EditorContext } from 'context/EditorProvider'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 const Header = () => {
   const { editordata, setEditordata } = useContext(EditorContext)
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
-    console.log({ name: value })
     setEditordata({
       ...editordata,
       ['headers']: { ...editordata.headers, [name]: value },
