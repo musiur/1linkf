@@ -87,6 +87,7 @@ const SignIn = () => {
       const api = `${process.env.API_HOST}/api/links/getpath/${name}`
       const response = await axios.get(api)
       if (response.status === 200) {
+        sessionStorage.setItem('pathname', response.data)
         setPathname(response.data)
       } else {
         setPathname(null)

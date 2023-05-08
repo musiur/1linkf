@@ -30,9 +30,10 @@ const Editor = () => {
         editorData: { ...editordata },
         username: userdata.username,
       })
-      console.log(response)
+
       if (response.status === 200) {
         setSaveState('Saved')
+        sessionStorage.setItem('editordata', JSON.stringify({ editordata }))
       }
       setTimeout(() => {
         setSaveState(null)
@@ -57,12 +58,6 @@ const Editor = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (sessionStorage) {
-  //     handleEditorDataPost()
-  //   }
-  // }, [editordata])
-
   const FetchEditorDataFromDatabase = async () => {
     try {
       const API_LINK = `${process.env.API_HOST}/api/editor/` + userdata.username
@@ -70,6 +65,10 @@ const Editor = () => {
       console.log(response)
       if (response.status === 200) {
         setEditordata({ ...response.data.result[0].editorData })
+        sessionStorage.setItem(
+          'editordata',
+          JSON.stringify({ ...response.data.result[0].editorData })
+        )
         setShowFullEditor(true)
       }
     } catch (error) {

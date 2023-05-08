@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Button from 'components/Button'
 import UploadImage from 'components/UploadImage'
+import BlogEditor from 'components/blog-editor/BlogEditor'
 import { LoadingContext } from 'context/LoadingProvider'
 import { PathContext } from 'context/PathProvider'
 import { UserContext } from 'context/UserProvider'
@@ -185,7 +186,7 @@ const NewBook = ({ setCreateForm, books, setBooks, setMessage }) => {
     shortDescription: '',
     image: '',
     details: '',
-    parchaseLink: '',
+    purchaseLink: '',
   }
   const [formData, setFormData] = useState(DefaultFormData)
   const [errorMessage, setErrorMessage] = useState(formData)
@@ -216,6 +217,9 @@ const NewBook = ({ setCreateForm, books, setBooks, setMessage }) => {
     }
     if (!data.purchaseLink.trim()) {
       obj.purchaseLink = 'Purchase link is required!'
+    }
+    if (!data.image.trim()) {
+      obj.image = 'Image is required!'
     }
 
     return obj
@@ -325,13 +329,9 @@ const NewBook = ({ setCreateForm, books, setBooks, setMessage }) => {
         </div>
 
         <div className="grid grid-cols-1 gap-1">
-          <label htmlFor="details">Details</label>
-          <textarea
-            type="text"
+          <BlogEditor
+            handleOnChange={handleOnChange}
             name="details"
-            onChange={handleOnChange}
-            id="details"
-            className="px-2 py-1 rounded-md hover:shadow-md min-h-[200px]"
             defaultValue={formData?.details}
           />
           {errorMessage?.details ? (
@@ -365,6 +365,9 @@ const NewBook = ({ setCreateForm, books, setBooks, setMessage }) => {
             label="Upload image"
             defaultValue={formData?.image}
           />
+          {errorMessage?.image ? (
+            <span className="py-[4px] text-red-400">{errorMessage.image}</span>
+          ) : null}
         </div>
         <div className="pt-5">
           <Button onClick={handleOnSubmit}>Create</Button>
@@ -408,6 +411,9 @@ const UpdateBook = ({ setUpdateForm, books, setBooks, setMessage, _id }) => {
     }
     if (!data.details.trim()) {
       obj.details = 'Details is required!'
+    }
+    if (!data.image.trim()) {
+      obj.image = 'Image is required!'
     }
 
     return obj
@@ -523,13 +529,9 @@ const UpdateBook = ({ setUpdateForm, books, setBooks, setMessage, _id }) => {
         </div>
 
         <div className="grid grid-cols-1 gap-1">
-          <label htmlFor="details">Details</label>
-          <textarea
-            type="text"
+          <BlogEditor
+            handleOnChange={handleOnChange}
             name="details"
-            onChange={handleOnChange}
-            id="details"
-            className="px-2 py-1 rounded-md hover:shadow-md min-h-[200px]"
             defaultValue={formData?.details}
           />
           {errorMessage?.details ? (
@@ -563,6 +565,9 @@ const UpdateBook = ({ setUpdateForm, books, setBooks, setMessage, _id }) => {
             label="Upload image"
             defaultValue={formData?.image}
           />
+          {errorMessage?.image ? (
+            <span className="py-[4px] text-red-400">{errorMessage.image}</span>
+          ) : null}
         </div>
         <div className="pt-5">
           <Button onClick={handleOnSubmit}>Update</Button>

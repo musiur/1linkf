@@ -17,7 +17,7 @@ import {
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 
 const EditorPreview = () => {
-  const { editordata, setEditordata } = useContext(EditorContext)
+  const { editordata } = useContext(EditorContext)
   const [gcolor, setGcolor] = useState()
   useEffect(() => {
     const gradientColor = editordata.appearance.background
@@ -35,7 +35,7 @@ const EditorPreview = () => {
       )
     }
   }, [editordata])
-  console.log(editordata)
+  
   return (
     <div
       className={`min-h-[800px] rounded-xl shadow-xl border bg-white w-full lg:w-auto p-5 max-w-[500px] mr-auto`}

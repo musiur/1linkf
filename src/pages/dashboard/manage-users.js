@@ -92,7 +92,11 @@ const ManageUsers = () => {
         {deleteModal ? (
           <div className="absolute top-0 left-0 w-full h-full bg-[#00000050] flex items-start justify-center pt-10">
             <div className="sticky top-[130px] bg-white p-5 rounded-md border-2 border-red-400 min-w-[310px]">
-              <DeleteForm userdata={{ ...selected, setDeleteModal }} />
+              <DeleteForm
+                userdata={{ ...selected, setDeleteModal }}
+                users={users}
+                setUsers={setUsers}
+              />
             </div>
           </div>
         ) : null}
@@ -244,7 +248,7 @@ const UpdateForm = ({ userdata }) => {
   )
 }
 
-const DeleteForm = ({ userdata }) => {
+const DeleteForm = ({ userdata, users, setUsers }) => {
   const [formData, setFormData] = useState({ username: '' })
   const [errorMessage, setErrorMessage] = useState({})
   const [spinner, setSpinner] = useState(false)
@@ -292,7 +296,8 @@ const DeleteForm = ({ userdata }) => {
             type: true,
             message: response.data.message,
           })
-          document.getElementById('sign_up_form').reset()
+          // document.getElementById('sign_up_form').reset()
+          setUsers([...users.filter((user) => user._id !== userdata._id)])
           userdata.setDeleteModal(false)
         } else {
           setMessage({

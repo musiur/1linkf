@@ -55,6 +55,10 @@ const HomePageData = () => {
       err.authorDescription = 'Author description is required!'
     }
 
+    if (!data.image.trim()) {
+      err.image = 'Image is required!'
+    }
+
     // returning error object
     return err
   }
@@ -152,9 +156,9 @@ const HomePageData = () => {
               defaultValue={formData?.title}
             />
             {errorMessage.title ? (
-              <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
+              <span className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
                 {errorMessage.title}
-              </div>
+              </span>
             ) : null}
 
             <label htmlFor="description" className="pt-5 font-semibold">
@@ -170,9 +174,9 @@ const HomePageData = () => {
               defaultValue={formData?.description}
             />
             {errorMessage.description ? (
-              <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
+              <span className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
                 {errorMessage.description}
-              </div>
+              </span>
             ) : null}
 
             <label htmlFor="authorTitle" className="pt-5 font-semibold">
@@ -188,9 +192,9 @@ const HomePageData = () => {
               defaultValue={formData?.authorTitle}
             />
             {errorMessage.authorTitle ? (
-              <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
+              <span className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
                 {errorMessage.authorTitle}
-              </div>
+              </span>
             ) : null}
 
             <label htmlFor="authorDescription" className="pt-5 font-semibold">
@@ -206,9 +210,9 @@ const HomePageData = () => {
               defaultValue={formData?.authorDescription}
             />
             {errorMessage.authorDescription ? (
-              <div className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
+              <span className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
                 {errorMessage.authorDescription}
-              </div>
+              </span>
             ) : null}
             <div className="pt-5"></div>
 
@@ -227,6 +231,11 @@ const HomePageData = () => {
                 label="Upload your banner"
                 defaultValue={formData?.image}
               />
+            ) : null}
+            {errorMessage.image ? (
+              <span className="px-3 py-[3px] bg-red-50 text-red-600 border border-red-400 rounded-md">
+                {errorMessage.image}
+              </span>
             ) : null}
           </div>
 

@@ -6,13 +6,14 @@ import { PathContext } from 'context/PathProvider'
 import { UserContext } from 'context/UserProvider'
 import { useContext, useEffect, useState } from 'react'
 import BlogEditor from 'components/blog-editor/BlogEditor'
+import { PopContext } from 'context/PopProvider'
 
 const BlogsForm = () => {
   const { setLoading } = useContext(LoadingContext)
   const { pathname } = useContext(PathContext)
   const { userdata } = useContext(UserContext)
   const [blogs, setBlogs] = useState([])
-  const [message, setMessage] = useState(null)
+  const { setMessage } = useContext(PopContext)
   const [createForm, setCreateForm] = useState(false)
   const [updateForm, setUpdateForm] = useState(false)
   const [idToUpdate, setIdToUpdate] = useState(null)
@@ -64,7 +65,6 @@ const BlogsForm = () => {
         })
       }
     } catch (error) {
-      // console.log(error.response.status)
       if (error.response.status === 404) {
         setMessage({
           type: false,
@@ -81,20 +81,11 @@ const BlogsForm = () => {
   }
 
   useEffect(() => {
-    FetchBlogs()
-  }, [])
+    pathname && FetchBlogs()
+  }, [pathname])
 
   return (
     <div className="container section">
-      {message ? (
-        <span
-          className={`${
-            message.type ? 'bg-green-400' : 'bg-red-400'
-          } text-white rounded-md px-6 font-semibold py-2 fixed top-[100px] right-0 m-5 z-10 shadow-xl`}
-        >
-          {message.message}
-        </span>
-      ) : null}
       <button
         className="border-4 border-gray-400 rounded-lg flex items-center justify-center cursor-pointer px-5 py-2 hover:bg-gray-400 hover:text-white font-bold text-gray-400 shadow-md hover:shadow-xl mb-5"
         onClick={() => setCreateForm(true)}
@@ -188,7 +179,6 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target
-    console.log({ name, value })
     setFormData({ ...formData, [name]: value })
   }
 
@@ -210,6 +200,10 @@ const NewBlog = ({ setCreateForm, blogs, setBlogs, setMessage }) => {
     }
     if (!data.details.trim()) {
       obj.details = 'Details is required!'
+    }
+
+    if (!data.image.trim()) {
+      obj.image = 'Image is required!'
     }
 
     return obj
@@ -386,6 +380,9 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
     if (!data.details.trim()) {
       obj.details = 'Details is required!'
     }
+    if (!data.image.trim()) {
+      obj.image = 'Image is required!'
+    }
 
     return obj
   }
@@ -523,9 +520,7 @@ const UpdateBlog = ({ setUpdateForm, blogs, setBlogs, setMessage, _id }) => {
             defaultValue={formData?.image}
           />
           {errorMessage?.image ? (
-            <span className="py-[4px] text-red-400">
-              {errorMessage.details}
-            </span>
+            <span className="py-[4px] text-red-400">{errorMessage.image}</span>
           ) : null}
         </div>
         <div className="pt-5">
