@@ -1,44 +1,13 @@
 import Dashboard from '@/pages/dashboard'
-import EditorPreview from 'components/editor/EditorPreview'
 // import AboutForm from 'components/editor/mypage/AboutForm'
 import BlogsForm from 'components/editor/mypage/BlogsForm'
 import BooksForm from 'components/editor/mypage/BooksForm'
 import HomePageData from 'components/editor/mypage/HomePageData'
-import { EditorContext } from 'context/EditorProvider'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 const MyPage = () => {
-  // const { userdata } = useContext(UserContext)
-  const { editordata } = useContext(EditorContext)
-
-  const tabs = ['Card', 'Home', 'Books', 'Blogs']
-  const [tab, setTab] = useState('Card')
-
-  // const MakeAuthorProfile = async () => {
-  //   try {
-  //     const api = `${process.env.API_HOST}/api/author/create`
-  //     const data = {
-  //       username: userdata.username,
-  //       bio: 'Bio of ' + userdata.username,
-  //       blogs: [
-  //         {
-  //           id: 0,
-  //           title: 'Test Blog',
-  //           description: 'This blog is nothing to do',
-  //           link: 'https://youtube.com',
-  //         },
-  //       ],
-  //     }
-  //     const response = await axios.post(api, data)
-  //     console.log(response)
-  //   } catch (error) {
-  //     console.log('Error')
-  //   }
-  // }
-  // useEffect(() => {
-  //   if (userdata) {
-  //   }
-  // }, [userdata])
+  const tabs = ['Home', 'Books', 'Blogs']
+  const [tab, setTab] = useState('Home')
 
   return (
     <Dashboard>
@@ -60,31 +29,30 @@ const MyPage = () => {
             )
           })}
         </div>
-        {tab === 'Card' ? (
-          <div>
-            <div className="py-10">
-              My Link:
-              <a
-                href={`https://1linkf.vercel.app/` + editordata.headers.url}
-                target="_blank"
-                className="text-blue-600 px-3"
-              >
-                Visit
-              </a>
-            </div>
-            <EditorPreview />
-          </div>
-        ) :
-        //  tab === 'About' ? (
-        //   <AboutForm />
-        // ) :
-         tab === 'Blogs' ? (
-          <BlogsForm />
-        ) : tab === 'Home' ? (
-          <HomePageData />
-        ) : tab === 'Books' ? (
-          <BooksForm />
-        ) : null}
+        {
+          // tab === 'Card' ? (
+          //   <div>
+          //     <div className="py-10">
+          //       My Link:
+          //       <a
+          //         href={`https://1linkf.vercel.app/` + editordata.headers.url}
+          //         target="_blank"
+          //         className="text-blue-600 px-3"
+          //       >
+          //         Visit
+          //       </a>
+          //     </div>
+          //     {editordata ? <EditorPreview /> : 'No data found!'}
+          //   </div>
+          // ) :
+          tab === 'Blogs' ? (
+            <BlogsForm />
+          ) : tab === 'Home' ? (
+            <HomePageData />
+          ) : tab === 'Books' ? (
+            <BooksForm />
+          ) : null
+        }
       </div>
     </Dashboard>
   )

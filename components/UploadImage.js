@@ -14,6 +14,12 @@ const UploadImage = ({ type, func, name, defaultValue }) => {
     setImageName(file.name)
   }
 
+  const removeImage = (e) => {
+    e.preventDefault()
+    setPostImage({ ...postImage, myFile: '' })
+    setImageName('Upload picture')
+  }
+
   useEffect(() => {
     func({
       target: {
@@ -29,7 +35,7 @@ const UploadImage = ({ type, func, name, defaultValue }) => {
       : ' w-[200px] h-auto rounded-md'
   } border-2 border-blue-200`
   return (
-    <div>
+    <div className="p-2 border rounded-md bg-white">
       {postImage.myFile ? (
         <img src={postImage.myFile} alt="" className={imageStyle} />
       ) : null}
@@ -48,6 +54,14 @@ const UploadImage = ({ type, func, name, defaultValue }) => {
           className="absolute top-0 left-0 w-full h-full border opacity-0 cursor-pointer"
         />
       </div>
+      {postImage.File || defaultValue ? (
+        <button
+          onClick={(e) => removeImage(e)}
+          className="px-2 py-[3px] rounded-md bg-red-600 text-white my-3"
+        >
+          Remove Image
+        </button>
+      ) : null}
     </div>
   )
 }
