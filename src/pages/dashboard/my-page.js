@@ -11,8 +11,8 @@ const MyPage = () => {
   // const { userdata } = useContext(UserContext)
   const { editordata } = useContext(EditorContext)
 
-  const tabs = ['Page', 'Home', 'Books', 'Blogs']
-  const [tab, setTab] = useState('Page')
+  const tabs = ['Card', 'Home', 'Books', 'Blogs']
+  const [tab, setTab] = useState('Card')
 
   // const MakeAuthorProfile = async () => {
   //   try {
@@ -60,7 +60,7 @@ const MyPage = () => {
             )
           })}
         </div>
-        {tab === 'Page' ? (
+        {tab === 'Card' ? (
           <div>
             <div className="py-10">
               My Link:
