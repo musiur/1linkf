@@ -9,9 +9,11 @@ const PathProvider = ({ children }) => {
     if (sessionStorage.getItem('pathname')) {
       const path = sessionStorage.getItem('pathname')
       setPathname(path)
-    } else {
-      sessionStorage.setItem('pathname', pathname)
     }
+  }, [])
+
+  useEffect(() => {
+    sessionStorage.setItem('pathname', pathname)
   }, [pathname])
   return (
     <PathContext.Provider value={{ pathname, setPathname }}>

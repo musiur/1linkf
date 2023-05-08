@@ -1,3 +1,5 @@
+import ParsedBlogDetails from './ParsedBlogDetails'
+
 const BookPage = ({ setCurrentTab, selectedBook, pagedata }) => {
   const { title, username, image, details, purchaseLink } = selectedBook
   return (
@@ -20,7 +22,9 @@ const BookPage = ({ setCurrentTab, selectedBook, pagedata }) => {
             Purchase
           </button>
         </a>
-        <div className="pb-10">{details}</div>
+        <div className="pb-10">
+          <ParsedBlogDetails data={details} />
+        </div>
       </div>
       <div className="col-span-1 pb-5 pl-5 border-l">
         <img src={image} alt="image" className="pb-10 w-[316px]" />

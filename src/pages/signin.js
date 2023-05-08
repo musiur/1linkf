@@ -32,27 +32,27 @@ const SignIn = () => {
   const [message, setMessage] = useState(null)
   const [spinner, setSpinner] = useState(false)
 
-  const MakeAuthorProfile = async (username) => {
-    try {
-      const api = `${process.env.API_HOST}/api/author/create`
-      const data = {
-        username,
-        bio: 'Bio of ' + username,
-        blogs: [
-          {
-            id: 0,
-            title: 'Test Blog',
-            description: 'This blog is nothing to do',
-            link: 'https://youtube.com',
-          },
-        ],
-      }
-      const response = await axios.post(api, data)
-      console.log(response)
-    } catch (error) {
-      console.log('Error')
-    }
-  }
+  // const MakeAuthorProfile = async (username) => {
+  //   try {
+  //     const api = `${process.env.API_HOST}/api/author/create`
+  //     const data = {
+  //       username,
+  //       bio: 'Bio of ' + username,
+  //       blogs: [
+  //         {
+  //           id: 0,
+  //           title: 'Test Blog',
+  //           description: 'This blog is nothing to do',
+  //           link: 'https://youtube.com',
+  //         },
+  //       ],
+  //     }
+  //     const response = await axios.post(api, data)
+  //     console.log(response)
+  //   } catch (error) {
+  //     console.log('Error')
+  //   }
+  // }
 
   // input handler depending on onChange event
   const handleOnChange = (e) => {
@@ -90,11 +90,11 @@ const SignIn = () => {
         sessionStorage.setItem('pathname', response.data)
         setPathname(response.data)
       } else {
-        setPathname(null)
+        setPathname("")
       }
     } catch (err) {
       console.log(err)
-      setPathname(null)
+      setPathname("")
     }
   }
 
@@ -124,7 +124,7 @@ const SignIn = () => {
 
         // sending back to target location on the site
         const from = sessionStorage.getItem('from')
-        MakeAuthorProfile(response.data.username)
+        // MakeAuthorProfile(response.data.username)
         if (from) {
           Router.push(from)
         } else {

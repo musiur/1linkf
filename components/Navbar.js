@@ -6,11 +6,15 @@ import Button from './Button'
 import CloseIcon from './icons/CloseIcon'
 import MenuIcon from './icons/MenuIcon'
 import UserIcon from './icons/UserIcon'
+import { EditorContext } from 'context/EditorProvider'
+import { PathContext } from 'context/PathProvider'
 
 const Navbar = () => {
   const Router = useRouter()
   const [openMenu, setOpenMenu] = useState(false)
   const { userdata, setUserdata } = useContext(UserContext)
+  const { setEditordata } = useContext(EditorContext)
+  const { setPathname } = useContext(PathContext)
   const [openSubmenu, setOpenSubmenu] = useState(false)
 
   useEffect(() => {
@@ -19,6 +23,46 @@ const Navbar = () => {
 
   const SignOut = () => {
     setUserdata({})
+    setEditordata({
+      headers: {
+        name: 'Your name',
+        outline:
+          'A short description of yourself, of anything you want to say!',
+        hide1link: false,
+      },
+      socialLinks: [],
+      links: [],
+      books: [],
+      appearance: {
+        background: [
+          {
+            id: 1,
+            color: '#8FC6FD',
+          },
+          {
+            id: 2,
+            color: '#D9ECFF',
+          },
+          {
+            id: 3,
+            color: '#0A85FF',
+          },
+        ],
+        buttonConfig: {
+          buttonBackground: '#125FAD',
+          buttonStyle: { i: 1, j: 3 },
+          buttonStyleFor: {
+            background: '#125FAD',
+            border: '1px solid ' + '#125FAD',
+            color: 'white',
+          },
+          buttonRoundness: 'rounded-l-full',
+          buttonRoundnessFor: 3,
+        },
+        iconStyle: '#125FAD',
+      },
+    })
+    setPathname('')
     sessionStorage.clear()
     localStorage.clear()
     Router.push('/')

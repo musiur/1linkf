@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { EditorContext } from 'context/EditorProvider'
+import { LoadingContext } from 'context/LoadingProvider'
 import { PathContext } from 'context/PathProvider'
+import { PopContext } from 'context/PopProvider'
 import { UserContext } from 'context/UserProvider'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
@@ -13,6 +15,8 @@ const LinkChecker = () => {
   const { pathname, setPathname } = useContext(PathContext)
   const { editordata, setEditordata } = useContext(EditorContext)
   const { userdata, setUserdata } = useContext(UserContext)
+  const {setLoading} = useContext(LoadingContext);
+  const {setMessage} = useContext(PopContext);
   const Router = useRouter()
 
   const checkAvailability = async (pathName) => {
@@ -77,6 +81,7 @@ const LinkChecker = () => {
   }
 
   const CreateLink = async () => {
+    setLoading(true)
     if (!userdata.username) {
       Router.push('/dashboard/editor')
     }
@@ -94,6 +99,10 @@ const LinkChecker = () => {
         )
         console.log(response)
         if (response.status === 200) {
+          setMessage({
+            type: true,
+            message: "Link creation successful!"
+          })
           let tempED = { ...editordata }
           tempED.headers.url = pathname
           setEditordata(tempED)
@@ -104,6 +113,7 @@ const LinkChecker = () => {
         console.log(error)
       }
     }
+    setLoading(false)
   }
   return (
     <div>
