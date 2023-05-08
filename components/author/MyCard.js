@@ -116,16 +116,29 @@ const MyCard = () => {
           >
             <div>
               <div className="max-w-[600px] min-w-[310px] m-auto">
-                <img
-                  src={editordata.headers.profilePicture}
-                  alt=""
-                  className="w-[100px] h-[100px] rounded-full m-auto"
-                />
+                {editordata.headers.bannerPicture ? (
+                  <img
+                    src={editordata.headers.bannerPicture}
+                    alt=""
+                    className="w-full rounded-md m-auto z-1"
+                  />
+                ) : null}
+                <div
+                  className={`w-[120px] h-[120px] rounded-full m-auto ${
+                    editordata.headers.bannerPicture ? '-mt-[70px]' : ''
+                  }`}
+                >
+                  <img
+                    src={editordata.headers.profilePicture}
+                    alt=""
+                    className="w-full h-full rounded-full"
+                  />
+                </div>
                 <p className="mt-5 mb-2 text-xl font-bold text-center">
                   {editordata.headers.name}
                 </p>
                 <p className="my-2 text-center break-all">
-                {editordata.headers.outline}
+                  {editordata.headers.outline}
                 </p>
 
                 <div className="my-5">

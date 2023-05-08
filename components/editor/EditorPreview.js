@@ -35,18 +35,32 @@ const EditorPreview = () => {
       )
     }
   }, [editordata])
-  
+
   return (
     <div
       className={`min-h-[800px] rounded-xl shadow-xl border bg-white w-full lg:w-auto p-5 max-w-[500px] mr-auto`}
       style={{ background: gcolor }}
     >
       <div>
-        <img
-          src={editordata.headers.profilePicture}
-          alt=""
-          className="w-[100px] h-[100px] rounded-full m-auto"
-        />
+        {editordata.headers.bannerPicture ? (
+          <img
+            src={editordata.headers.bannerPicture}
+            alt=""
+            className="w-full rounded-md m-auto z-1"
+          />
+        ) : null}
+        <div
+          className={`w-[120px] h-[120px] rounded-full m-auto ${
+            editordata.headers.bannerPicture ? '-mt-[70px]' : ''
+          }`}
+        >
+          <img
+            src={editordata.headers.profilePicture}
+            alt=""
+            className="w-full h-full rounded-full"
+          />
+        </div>
+
         <p className="mt-5 mb-2 text-xl font-bold text-center">
           {editordata.headers.name}
         </p>
@@ -107,7 +121,7 @@ const EditorPreview = () => {
                         {item.bookbuttons.map((btn) => {
                           const btnStyle = {
                             ...editordata.appearance.buttonConfig
-                              .buttonStyleFor
+                              .buttonStyleFor,
                           }
                           return (
                             <div key={btn.id}>
