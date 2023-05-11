@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { PopContext } from 'context/PopProvider'
+import { useContext, useEffect, useState } from 'react'
 
 const UploadImage = ({ type, func, name, defaultValue }) => {
+  const { setMessage } = useContext(PopContext)
   // console.log({ defaultValue })
   const [postImage, setPostImage] = useState({
     myFile: defaultValue ? defaultValue : '',
@@ -9,9 +11,17 @@ const UploadImage = ({ type, func, name, defaultValue }) => {
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0]
-    const base64 = await convertToBase64(file)
-    setPostImage({ ...postImage, myFile: base64 })
-    setImageName(file.name)
+
+    if (file.size < 10 * 1024 * 1024) {
+      const base64 = await convertToBase64(file)
+      setPostImage({ ...postImage, myFile: base64 })
+      setImageName(file.name)
+    } else {
+      setMessage({
+        type: false,
+        message: `File size can't be more than 10 MB!`,
+      })
+    }
   }
 
   const removeImage = (e) => {

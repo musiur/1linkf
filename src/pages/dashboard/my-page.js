@@ -30,21 +30,6 @@ const MyPage = () => {
           })}
         </div>
         {
-          // tab === 'Card' ? (
-          //   <div>
-          //     <div className="py-10">
-          //       My Link:
-          //       <a
-          //         href={`https://1linkf.vercel.app/` + editordata.headers.url}
-          //         target="_blank"
-          //         className="text-blue-600 px-3"
-          //       >
-          //         Visit
-          //       </a>
-          //     </div>
-          //     {editordata ? <EditorPreview /> : 'No data found!'}
-          //   </div>
-          // ) :
           tab === 'Blogs' ? (
             <BlogsForm />
           ) : tab === 'Home' ? (
