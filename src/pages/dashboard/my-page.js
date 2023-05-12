@@ -1,4 +1,5 @@
 import Dashboard from '@/pages/dashboard'
+import Freebie from 'components/author/Freebie'
 // import AboutForm from 'components/editor/mypage/AboutForm'
 import BlogsForm from 'components/editor/mypage/BlogsForm'
 import BooksForm from 'components/editor/mypage/BooksForm'
@@ -6,13 +7,13 @@ import HomePageData from 'components/editor/mypage/HomePageData'
 import { useState } from 'react'
 
 const MyPage = () => {
-  const tabs = ['Home', 'Books', 'Blogs']
+  const tabs = ['Home', 'Books', 'Blogs', "Freebie"]
   const [tab, setTab] = useState('Home')
 
   return (
     <Dashboard>
       <div className="flex flex-col items-center justify-center mt-10">
-        <div className="flex items-center justify-center shadow rounded-md">
+        <div className="flex items-center justify-center shadow rounded-md border border-white bg-white">
           {tabs.map((item) => {
             return (
               <div
@@ -30,27 +31,14 @@ const MyPage = () => {
           })}
         </div>
         {
-          // tab === 'Card' ? (
-          //   <div>
-          //     <div className="py-10">
-          //       My Link:
-          //       <a
-          //         href={`https://1linkf.vercel.app/` + editordata.headers.url}
-          //         target="_blank"
-          //         className="text-blue-600 px-3"
-          //       >
-          //         Visit
-          //       </a>
-          //     </div>
-          //     {editordata ? <EditorPreview /> : 'No data found!'}
-          //   </div>
-          // ) :
           tab === 'Blogs' ? (
             <BlogsForm />
           ) : tab === 'Home' ? (
             <HomePageData />
           ) : tab === 'Books' ? (
             <BooksForm />
+          ) : tab === 'Freebie' ? (
+            <Freebie />
           ) : null
         }
       </div>
