@@ -12,14 +12,14 @@ const UploadImage = ({ type, func, name, defaultValue }) => {
   const handleFileUpload = async (e) => {
     const file = e.target.files[0]
 
-    if (file.size < 10 * 1024 * 1024) {
+    if (file.size < 5 * 1024 * 1024) {
       const base64 = await convertToBase64(file)
       setPostImage({ ...postImage, myFile: base64 })
       setImageName(file.name)
     } else {
       setMessage({
         type: false,
-        message: `File size can't be more than 10 MB!`,
+        message: `File size can't be more than 5 MB!`,
       })
     }
   }

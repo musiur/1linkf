@@ -1,6 +1,5 @@
 import axios from 'axios'
 import UploadImage from 'components/UploadImage'
-import Spinner from 'components/icons/Spinner'
 import { LoadingContext } from 'context/LoadingProvider'
 import { PathContext } from 'context/PathProvider'
 import { PopContext } from 'context/PopProvider'
@@ -139,7 +138,7 @@ const HomePageData = () => {
 
   return (
     <div className="w-full">
-      <div className="max-w-[700px]">
+      <div className="max-w-[700px] mx-auto">
         <div className="p-5">
           {/* reset password form  */}
           <div className="grid grid-cols-1 gap-2">
