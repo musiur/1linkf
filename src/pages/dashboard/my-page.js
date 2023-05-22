@@ -1,5 +1,5 @@
 import Dashboard from '@/pages/dashboard'
-import Freebie from 'components/author/Freebie'
+import Freebie from 'components/editor/mypage/Freebie'
 // import AboutForm from 'components/editor/mypage/AboutForm'
 import BlogsForm from 'components/editor/mypage/BlogsForm'
 import BooksForm from 'components/editor/mypage/BooksForm'

@@ -27,7 +27,7 @@ const Pop = ({ children }) => {
       {loading ? (
         <div
           className="flex items-center justify-center fixed left-0 top-0 w-full h-[100vh]"
-          style={{ zIndex: '99999999' }}
+          style={{ zIndex: '99999999', background: "#00000050" }}
         >
           <Image
             src="/static/loading.svg"
